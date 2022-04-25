@@ -1,21 +1,25 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.dao;
 
 import TAWapp.entity.Usuario;
+import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author casti
  */
-@jakarta.ejb.Stateless
+@Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {
 
-    @PersistenceContext(unitName = "ProyectoTAWPU")
+    @PersistenceContext(unitName = "PROYECTOTAWPU")
     private EntityManager em;
 
     @Override
@@ -25,6 +29,23 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     public UsuarioFacade() {
         super(Usuario.class);
+    }
+    
+    
+    public Usuario comprobarUsuario (String strusuario, String strclave) {
+        Query q;
+  
+        String querry = "select u from Usuario u where u.nombre =";
+        querry += "'" + strusuario +"' and u.password =";
+        querry += "'" + strclave +"'";
+        q = this.getEntityManager().createQuery(querry);
+
+        List<Usuario> lista = q.getResultList();
+        if (lista == null || lista.isEmpty()) {
+            return null;
+        } else {
+            return lista.get(0);
+        }        
     }
     
 }

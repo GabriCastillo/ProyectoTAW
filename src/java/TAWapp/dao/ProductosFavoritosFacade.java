@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author casti
  */
-@jakarta.ejb.Stateless
+@javax.ejb.Stateless
 public class ProductosFavoritosFacade extends AbstractFacade<ProductosFavoritos> {
 
     @PersistenceContext(unitName = "ProyectoTAWPU")

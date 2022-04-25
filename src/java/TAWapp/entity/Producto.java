@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.entity;
 
@@ -22,6 +23,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -33,14 +36,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "PRODUCTO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p"),
-    @NamedQuery(name = "Producto.findByIdproducto", query = "SELECT p FROM Producto p WHERE p.idproducto = :idproducto"),
-    @NamedQuery(name = "Producto.findByTitulo", query = "SELECT p FROM Producto p WHERE p.titulo = :titulo"),
-    @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion"),
-    @NamedQuery(name = "Producto.findByUrlImagen", query = "SELECT p FROM Producto p WHERE p.urlImagen = :urlImagen"),
-    @NamedQuery(name = "Producto.findByComprado", query = "SELECT p FROM Producto p WHERE p.comprado = :comprado"),
-    @NamedQuery(name = "Producto.findByFechaAbierto", query = "SELECT p FROM Producto p WHERE p.fechaAbierto = :fechaAbierto"),
-    @NamedQuery(name = "Producto.findByFechaCerrado", query = "SELECT p FROM Producto p WHERE p.fechaCerrado = :fechaCerrado")})
+    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p")
+    , @NamedQuery(name = "Producto.findByIdproducto", query = "SELECT p FROM Producto p WHERE p.idproducto = :idproducto")
+    , @NamedQuery(name = "Producto.findByTitulo", query = "SELECT p FROM Producto p WHERE p.titulo = :titulo")
+    , @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")
+    , @NamedQuery(name = "Producto.findByUrlImagen", query = "SELECT p FROM Producto p WHERE p.urlImagen = :urlImagen")
+    , @NamedQuery(name = "Producto.findByComprado", query = "SELECT p FROM Producto p WHERE p.comprado = :comprado")
+    , @NamedQuery(name = "Producto.findByFechaAbierto", query = "SELECT p FROM Producto p WHERE p.fechaAbierto = :fechaAbierto")
+    , @NamedQuery(name = "Producto.findByFechaCerrado", query = "SELECT p FROM Producto p WHERE p.fechaCerrado = :fechaCerrado")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,15 +53,22 @@ public class Producto implements Serializable {
     @Column(name = "IDPRODUCTO")
     private Integer idproducto;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "TITULO")
     private String titulo;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "DESCRIPCION")
     private String descripcion;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "URL_IMAGEN")
     private String urlImagen;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "COMPRADO")
     private Boolean comprado;
     @Column(name = "FECHA_ABIERTO")

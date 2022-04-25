@@ -3,7 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/proyecto/Ebai/ProyectoTaw/web/index.html</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/dao/EstadisticaHasCompradorProductoFacade.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/dao/CompradorProductoFacade.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/servlet/LogoutServlet.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/servlet/UsuarioServlet.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/dao/EstadisticaHasProductosFavoritosFacade.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/servlet/LoginServlet.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/servlet/TAWappServlet.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/dao/RolFacade.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/servlet/UsuarioGuardarServlet.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/servlet/UsuarioNuevoEditarServlet.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/dao/EstadisticaFacade.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/dao/ProductoFacade.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/dao/UsuarioFacade.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/servlet/UsuarioBorrarServlet.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/dao/ProductosFavoritosFacade.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/ProyectoTAW/src/java/TAWapp/dao/CategoriaFacade.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,20 +1,27 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -24,23 +31,32 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "COMPRADOR_PRODUCTO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CompradorProducto.findAll", query = "SELECT c FROM CompradorProducto c"),
-    @NamedQuery(name = "CompradorProducto.findByIdcompra", query = "SELECT c FROM CompradorProducto c WHERE c.idcompra = :idcompra"),
-    @NamedQuery(name = "CompradorProducto.findByPrecioSalida", query = "SELECT c FROM CompradorProducto c WHERE c.precioSalida = :precioSalida"),
-    @NamedQuery(name = "CompradorProducto.findByPrecioCompra", query = "SELECT c FROM CompradorProducto c WHERE c.precioCompra = :precioCompra")})
+    @NamedQuery(name = "CompradorProducto.findAll", query = "SELECT c FROM CompradorProducto c")
+    , @NamedQuery(name = "CompradorProducto.findByIdcompra", query = "SELECT c FROM CompradorProducto c WHERE c.idcompra = :idcompra")
+    , @NamedQuery(name = "CompradorProducto.findByPrecioSalida", query = "SELECT c FROM CompradorProducto c WHERE c.precioSalida = :precioSalida")
+    , @NamedQuery(name = "CompradorProducto.findByPrecioCompra", query = "SELECT c FROM CompradorProducto c WHERE c.precioCompra = :precioCompra")})
 public class CompradorProducto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "IDCOMPRA")
     private String idcompra;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "PRECIO_SALIDA")
     private int precioSalida;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "PRECIO_COMPRA")
     private int precioCompra;
+    @JoinTable(name = "ESTADISTICA_HAS_COMPRADOR_PRODUCTO", joinColumns = {
+        @JoinColumn(name = "COMPRADOR_PRODUCTO_IDCOMPRA", referencedColumnName = "IDCOMPRA")}, inverseJoinColumns = {
+        @JoinColumn(name = "ESTADISTICA_IDESTADISTICA", referencedColumnName = "IDESTADISTICA")})
+    @ManyToMany
+    private List<Estadistica> estadisticaList;
     @JoinColumn(name = "PRODUCTO_IDPRODUCTO", referencedColumnName = "IDPRODUCTO")
     @ManyToOne(optional = false)
     private Producto productoIdproducto;
@@ -83,6 +99,15 @@ public class CompradorProducto implements Serializable {
 
     public void setPrecioCompra(int precioCompra) {
         this.precioCompra = precioCompra;
+    }
+
+    @XmlTransient
+    public List<Estadistica> getEstadisticaList() {
+        return estadisticaList;
+    }
+
+    public void setEstadisticaList(List<Estadistica> estadisticaList) {
+        this.estadisticaList = estadisticaList;
     }
 
     public Producto getProductoIdproducto() {

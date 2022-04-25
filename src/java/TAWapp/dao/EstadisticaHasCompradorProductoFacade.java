@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author casti
  */
-@jakarta.ejb.Stateless
+@javax.ejb.Stateless
 public class EstadisticaHasCompradorProductoFacade extends AbstractFacade<EstadisticaHasCompradorProducto> {
 
     @PersistenceContext(unitName = "ProyectoTAWPU")
