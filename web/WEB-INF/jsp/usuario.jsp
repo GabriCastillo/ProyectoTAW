@@ -6,7 +6,6 @@
 
 <%@page import="TAWapp.entity.Usuario"%>
 <%@page import="TAWapp.entity.Producto"%>
-//<%@page import="TAWapp.entity.MicroMarket"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <%
-        List<MicroMarket> listaSuper = (List)request.getAttribute("productos");
+        List<Producto> productos = (List)request.getAttribute("productos");
       //  List<DiscountCode> listaDescuentos = (List)request.getAttribute("descuentos");
 
         Usuario usuario = (Usuario)request.getAttribute("usuario");
@@ -24,7 +23,7 @@
     <body>
         <jsp:include page="/WEB-INF/jsp/cabecera.jsp" />           
         <h1>Datos del usuario</h1>
-        <form method="POST" action="CustomerGuardarServlet">
+        <form method="POST" action="UsuarioGuardarServlet">
             <input type="hidden" name="id" value="<%= usuario==null? "": usuario.getIdusuario() %>" />
             Nombre: <input type="text" size="30" name="nombre" value="<%= usuario==null? "": usuario.getNombre() %>" /> <br/>
             Apellido: <input type="text" size="30" name="domicilio1" value="<%= usuario==null? "": usuario.getApellido() %>" /> 

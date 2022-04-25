@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByCiudadResidencia", query = "SELECT u FROM Usuario u WHERE u.ciudadResidencia = :ciudadResidencia")
     , @NamedQuery(name = "Usuario.findByEdad", query = "SELECT u FROM Usuario u WHERE u.edad = :edad")
     , @NamedQuery(name = "Usuario.findBySexo", query = "SELECT u FROM Usuario u WHERE u.sexo = :sexo")
-    ,@NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")})
+    , @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -81,8 +81,11 @@ public class Usuario implements Serializable {
     private String sexo;
     @Basic(optional = false)
     @NotNull
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioAnalista")
-    private List<Estadistica> estadisticaList;
+    @Size(min = 1, max = 45)
+    @Column(name = "PASSWORD")
+    private String password;
+   // @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioAnalista")
+   // private List<Estadistica> estadisticaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioVendedor")
     private List<Producto> productoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
@@ -92,8 +95,7 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "ROL_IDROL", referencedColumnName = "ID_ROL")
     @ManyToOne(optional = false)
     private Rol rolIdrol;
-    @Column(name = "PASSWORD")
-    private String password;
+    
 
     public String getPassword() {
         return password;
@@ -177,7 +179,7 @@ public class Usuario implements Serializable {
         this.sexo = sexo;
     }
 
-
+/*
     @XmlTransient
     public List<Estadistica> getEstadisticaList() {
         return estadisticaList;
@@ -186,7 +188,7 @@ public class Usuario implements Serializable {
     public void setEstadisticaList(List<Estadistica> estadisticaList) {
         this.estadisticaList = estadisticaList;
     }
-
+*/
     @XmlTransient
     public List<Producto> getProductoList() {
         return productoList;

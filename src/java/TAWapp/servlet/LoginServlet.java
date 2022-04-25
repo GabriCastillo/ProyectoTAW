@@ -22,8 +22,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-    @EJB UsuarioFacade usuarioFacade;
-    
+    @EJB
+    UsuarioFacade usuarioFacade;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,23 +36,25 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
-        
+
         String usuario = request.getParameter("usuario");
-        String clave = request.getParameter("clave");        
-        
-        Usuario admin = this.usuarioFacade.comprobarUsuario(usuario, clave);
-        
-        if (admin == null) {
+        String clave = request.getParameter("clave");
+
+        Usuario user = this.usuarioFacade.comprobarUsuario(usuario, clave);
+
+        if (user == null) {
             String strError = "El usuario o la clave son incorrectos";
             request.setAttribute("error", strError);
-            request.getRequestDispatcher("login.jsp").forward(request, response);                
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
+            // if(user.getRolIdrol().getIdRol()==1){
             HttpSession session = request.getSession();
-            session.setAttribute("usuario", admin);
-            response.sendRedirect(request.getContextPath() + "/UsuarioServlet");                
+            session.setAttribute("usuario", user);
+            response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
+            //  }
+
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

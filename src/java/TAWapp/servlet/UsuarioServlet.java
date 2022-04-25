@@ -21,7 +21,7 @@ import java.util.List;
  * @author casti
  */
 @WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
-public class UsuarioServlet extends HttpServlet {
+public class UsuarioServlet extends TAWappServlet {
 @EJB UsuarioFacade usuarioFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,11 +34,21 @@ public class UsuarioServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        List<Usuario> usuarios = this.usuarioFacade.findAll();
-        
-        request.setAttribute("usuarios", usuarios);
-        request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp").forward(request, response);   
+        if (super.comprobarSession(request, response)) {
+            
+            String filtroNombre = request.getParameter("filtroNombre");
+            List<Usuario> usuarios = null;
+
+            if (filtroNombre == null || filtroNombre.isEmpty()) {
+                usuarios = this.usuarioFacade.findAll();        
+            } else {
+                usuarios = this.usuarioFacade.findByNombre(filtroNombre);
+            }
+
+
+            request.setAttribute("usuarios", usuarios);
+            request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp").forward(request, response);        
+        }  
     }
              
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
