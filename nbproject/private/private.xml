@@ -3,21 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/LogoutServlet.java</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/cabecera.jsp</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/UsuarioServlet.java</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/UsuarioBorrarServlet.java</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/usuarios.jsp</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/usuario.jsp</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/usuario.jsp</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/web.xml</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/index.html</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/UsuarioGuardarServlet.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/entity/Usuario.java</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/TAWappServlet.java</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/UsuarioNuevoEditarServlet.java</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/login.jsp</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/UsuarioServlet.java</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/usuarios.jsp</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/LoginServlet.java</file>
         </group>
     </open-files>
 </project-private>

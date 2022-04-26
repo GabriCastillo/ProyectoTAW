@@ -50,7 +50,12 @@ public class LoginServlet extends HttpServlet {
             // if(user.getRolIdrol().getIdRol()==1){
             HttpSession session = request.getSession();
             session.setAttribute("usuario", user);
-            response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
+            if(user.getRolIdrol().getIdRol()==1){
+                response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
+            }else{
+                response.sendRedirect(request.getContextPath() + "/NewServlet");
+            }
+            
             //  }
 
         }

@@ -44,6 +44,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")})
 public class Usuario implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioAnalista")
+    private List<Estadistica> estadisticaList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -247,6 +250,15 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "TAWapp.entity.Usuario[ idusuario=" + idusuario + " ]";
+    }
+
+    @XmlTransient
+    public List<Estadistica> getEstadisticaList() {
+        return estadisticaList;
+    }
+
+    public void setEstadisticaList(List<Estadistica> estadisticaList) {
+        this.estadisticaList = estadisticaList;
     }
     
 }

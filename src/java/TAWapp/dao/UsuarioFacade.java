@@ -7,6 +7,7 @@ package TAWapp.dao;
 
 import TAWapp.entity.Usuario;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -15,7 +16,7 @@ import javax.persistence.Query;
  *
  * @author casti
  */
-@javax.ejb.Stateless
+@Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     @PersistenceContext(unitName = "PROYECTOTAWPU")
@@ -30,15 +31,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         super(Usuario.class);
     }
     
-    
-     public List<Usuario> findByNombre (String nombre) {
-        Query q;
-        q = this.getEntityManager().createQuery("select u from Usuario u where u.nombre like :nombre");
-        q.setParameter("nombre", '%' + nombre +'%');
-        return q.getResultList();
-    }
-    
-     public Usuario comprobarUsuario (String strusuario, String strclave) {
+    public Usuario comprobarUsuario (String strusuario, String strclave) {
         Query q;
         
         q = this.getEntityManager().createQuery("select u from Usuario u where u.nombre = :usuario and"
@@ -52,5 +45,11 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
             return lista.get(0);
         }        
     }
-     
+    
+    public List<Usuario> findByNombre (String nombre) {
+        Query q;
+        q = this.getEntityManager().createQuery("select u from Usuario where u.nombre like :nombre");
+        q.setParameter("nombre", '%' + nombre +'%');
+        return q.getResultList();
+    }
 }

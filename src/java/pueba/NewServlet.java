@@ -1,33 +1,29 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package TAWapp.servlet;
+package pueba;
 
 import TAWapp.dao.RolFacade;
 import TAWapp.dao.UsuarioFacade;
 import TAWapp.entity.Rol;
-import TAWapp.entity.Usuario;
-import javax.ejb.EJB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
  * @author casti
  */
-@WebServlet(name = "UsuarioNuevoEditarServlet", urlPatterns = {"/UsuarioNuevoEditarServlet"})
-public class UsuarioNuevoEditarServlet extends TAWappServlet {
-
-    @EJB
-    UsuarioFacade usuarioFacade;
-    @EJB
+@WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
+public class NewServlet extends HttpServlet {
+     @EJB
     RolFacade rolFacade;
 
     /**
@@ -41,21 +37,24 @@ public class UsuarioNuevoEditarServlet extends TAWappServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        if (super.comprobarSession(request, response)) {
-            List<Rol> listaRoles = this.rolFacade.findAll();
-
-            request.setAttribute("roles", listaRoles);
-
-            String str = request.getParameter("id");
-            if (str != null) {
-                Usuario usuario = this.usuarioFacade.find(Integer.parseInt(str));
-                request.setAttribute("usuario", usuario);
-            }
-
-            request.getRequestDispatcher("/WEB-INF/jsp/usuario.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet NewServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet NewServlet at " + request.getContextPath() + "</h1>");
+          //  out.println("<h2>" + r.getNombre()+"</h2>");
+            out.println("</body>");
+            out.println("</html>");
+           
+        }catch(Exception e){
+            e.printStackTrace();
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

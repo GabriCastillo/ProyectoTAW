@@ -4,6 +4,7 @@
     Author     : guzman
 --%>
 
+<%@page import="TAWapp.entity.Rol"%>
 <%@page import="TAWapp.entity.Usuario"%>
 <%@page import="TAWapp.entity.Producto"%>
 <%@page import="java.util.List"%>
@@ -15,9 +16,7 @@
         <title>JSP Page</title>
     </head>
     <%
-        List<Producto> productos = (List)request.getAttribute("productos");
-      //  List<DiscountCode> listaDescuentos = (List)request.getAttribute("descuentos");
-
+        List<Rol> roless = (List<Rol>)request.getAttribute("roles");
         Usuario usuario = (Usuario)request.getAttribute("usuario");
     %>    
     <body>
@@ -25,45 +24,31 @@
         <h1>Datos del usuario</h1>
         <form method="POST" action="UsuarioGuardarServlet">
             <input type="hidden" name="id" value="<%= usuario==null? "": usuario.getIdusuario() %>" />
-            Nombre: <input type="text" size="30" name="nombre" value="<%= usuario==null? "": usuario.getNombre() %>" /> <br/>
-            Apellido: <input type="text" size="30" name="domicilio1" value="<%= usuario==null? "": usuario.getApellido() %>" /> 
-            Domicilio:<input type="text" size="40" name="email" value="<%= usuario==null? "": usuario.getDomicilio() %>" /> <br/>
-            Ciudad: <input type="text" size="25" name="ciudad" value="<%= usuario==null? "": usuario.getCiudadResidencia() %>" /> <br/>
-            Edad: <input type="text" size="2" name="estado" value="<%= usuario==null? "": usuario.getEdad() %>" /> <br/>
-            Sexo: <input type="text" size="12" name="telefono" value="<%= usuario==null? "": usuario.getSexo() %>" /> <br/>            
-   <%--        
-            Supermercado: 
-            <select name="supermercado">
+            Nombre: <input type="text" size="45" name="nombre" value="<%= usuario==null? "": usuario.getNombre() %>" /> <br/>
+            Apellido: <input type="text" size="45" name="apellido" value="<%= usuario==null? "": usuario.getApellido() %>" /> <br/>
+            Domicilio:<input type="text" size="45" name="domicilio" value="<%= usuario==null? "": usuario.getDomicilio() %>" /> 
+            Ciudad: <input type="text" size="45" name="ciudad" value="<%= usuario==null? "": usuario.getCiudadResidencia() %>" /> <br/>
+            Edad: <input type="text" size="45" name="edad" value="<%= usuario==null? "": usuario.getEdad() %>" /> <br/>
+            Sexo: <input type="text" size="45" name="sexo" value="<%= usuario==null? "": usuario.getSexo() %>" /> <br/> 
+            Contraseña: <input type="text" size="45" name="password" value="<%= usuario==null? "": usuario.getPassword() %>" /> <br/> 
+            
+            Rol: 
+            <select name="rol">
             <% 
-                for (MicroMarket mm:listaSuper) {
+                for (Rol r:roless) {
                     String selected = "";
-                    if (usuario != null && usuario.getZip().getZipCode().equals(mm.getZipCode())) {
+                    if (usuario != null && usuario.getRolIdrol().equals(r)) {
                         selected = "selected";
                     }
             %>
-            <option <%= selected %> value="<%= mm.getZipCode() %>"><%= mm.getZipCode() %></option>
-                
+            <option <%= selected %> value="<%= r %>"><%= r.getNombre() %></option>    
             <% 
                 }
-            %>                
-            </select><br/>
-            Codigo de descuento: 
-            <select name="descuento">
-            <% 
-                for (DiscountCode dc: listaDescuentos) {
-                    String selected = "";
-                    if (usuario != null && 
-                         usuario.getDiscountCode().getDiscountCode().equals(dc.getDiscountCode())) {
-                         selected = "selected";
-                    }
-            %>
-            <option <%= selected %> value="<%= dc.getDiscountCode() %>"><%= dc.getRate() %></option>
-                
-            <% 
-                }
-            %>                
-            </select><br/>
-   --%>         
+            %> 
+            
+            </select>
+         
+         <br/>
             <input type="submit" value="Enviar" />
         </form>
     </body>

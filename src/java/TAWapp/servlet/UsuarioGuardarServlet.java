@@ -23,16 +23,12 @@ import javax.servlet.http.HttpServletResponse;
  * @author casti
  */
 @WebServlet(name = "UsuarioGuardarServlet", urlPatterns = {"/UsuarioGuardarServlet"})
-public class UsuarioGuardarServlet extends HttpServlet {
+public class UsuarioGuardarServlet extends TAWappServlet {
 
     @EJB
     UsuarioFacade usuarioFacade;
     @EJB
     RolFacade rolFacade;
-    @EJB
-    EstadisticaFacade estadisitcaFacade;
-    @EJB
-    ProductoFacade productoFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,79 +41,51 @@ public class UsuarioGuardarServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (super.comprobarSession(request, response)) {
+            String strId, str;
+            Usuario usuario;
+            strId = request.getParameter("id");
 
-        String strId, str;
-        Usuario usuario;
+            if (strId == null || strId.isEmpty()) {    // Crear nuevo usuario
+                usuario = new Usuario();
+            } else {                               // Editar usuario
+               usuario = this.usuarioFacade.find(Integer.parseInt(strId));
+            }
 
-        strId = request.getParameter("id");
+            str = request.getParameter("nombre");
+            usuario.setNombre(str);
 
-        if (strId == null || strId.isEmpty()) {    // Crear nuevo usuario
-            usuario = new Usuario();
-        } else {                               // Editar usuario
-            usuario = this.usuarioFacade.find(Integer.parseInt(strId));
-        }
+            str = request.getParameter("apellido");
+            usuario.setApellido(str);
 
-        str = request.getParameter("nombre");
-        usuario.setNombre(str);
+            str = request.getParameter("domicilio");
+            usuario.setDomicilio(str);
 
-        str = request.getParameter("apellido");
-        usuario.setApellido(str);
+            str = request.getParameter("ciudad");
+            usuario.setCiudadResidencia(str);
 
-        str = request.getParameter("domicilio");
-        usuario.setDomicilio(str);
+            str = request.getParameter("edad");
+            usuario.setEdad(Integer.parseInt(str));
 
-        str = request.getParameter("ciudad");
-        usuario.setCiudadResidencia(str);
+            str = request.getParameter("sexo");
+            usuario.setSexo(str);
 
-        str = request.getParameter("edad");
-        usuario.setEdad(Integer.parseInt(str));
+            str = request.getParameter("rol");
 
-        str = request.getParameter("sexo");
-        usuario.setSexo(str);
-
-        str = request.getParameter("rol");
-        Rol rol = this.rolFacade.find(str);
-        usuario.setRolIdrol(rol);
-
-    
-        
-       /* 
-        switch(rol.getIdRol()){
-            case 0: //Admin
-                
-                break;
             
-            case 1: //Comprador
-                
-                break;
-                
-            case 2: //Vendedor
-                
-                break;
-                        
-            case 3: //Analista
-                
-                break;
-                        
-            case 4: //Marketing
-                
-                break;
+            
+            Rol r = this.rolFacade.find(str);
+            usuario.setRolIdrol(r);
+
+
+            if (strId == null || strId.isEmpty()) {    // Crear nuevo usuario
+                this.usuarioFacade.create(usuario);
+            } else {                                   // Editar usuario
+                this.usuarioFacade.edit(usuario);
+            }
+
+            response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
         }
-        
-        */
-        
-        
-
-        if (strId == null || strId.isEmpty()) {    // Crear nuevo usuario
-            usuarioFacade.create(usuario);
-        } else {                                   // Editar usuario
-            usuarioFacade.edit(usuario);
-        }
-        
-        
-
-        response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

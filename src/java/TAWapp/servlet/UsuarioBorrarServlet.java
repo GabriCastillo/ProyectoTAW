@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author casti
  */
-@WebServlet(name = "UsuarioNuevoEditarServlet", urlPatterns = {"/UsuarioNuevoEditarServlet"})
-public class UsuarioBorrarServlet extends HttpServlet {
+@WebServlet(name = "UsuarioBorrarServlet", urlPatterns = {"/UsuarioBorrarServlet"})
+public class UsuarioBorrarServlet extends TAWappServlet {
 
     @EJB UsuarioFacade usuarioFacade;
     /**
@@ -35,6 +35,7 @@ public class UsuarioBorrarServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        if (super.comprobarSession(request, response)) { 
         String str = request.getParameter("id");
         
         Usuario usuario = this.usuarioFacade.find(Integer.parseInt(str));
@@ -42,7 +43,7 @@ public class UsuarioBorrarServlet extends HttpServlet {
         this.usuarioFacade.remove(usuario);
 
         response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
-   
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

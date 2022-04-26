@@ -5,6 +5,7 @@
  */
 package TAWapp.entity;
 
+import TAWapp.entity.EstadisticaHasCompradorProducto;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -19,6 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -35,6 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Estadistica.findAll", query = "SELECT e FROM Estadistica e")
     , @NamedQuery(name = "Estadistica.findByIdestadistica", query = "SELECT e FROM Estadistica e WHERE e.idestadistica = :idestadistica")})
 public class Estadistica implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadistica")
+    private List<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -114,5 +119,15 @@ public class Estadistica implements Serializable {
     public String toString() {
         return "TAWapp.entity.Estadistica[ idestadistica=" + idestadistica + " ]";
     }
+
+    @XmlTransient
+    public List<EstadisticaHasCompradorProducto> getEstadisticaHasCompradorProductoList() {
+        return estadisticaHasCompradorProductoList;
+    }
+
+    public void setEstadisticaHasCompradorProductoList(List<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoList) {
+        this.estadisticaHasCompradorProductoList = estadisticaHasCompradorProductoList;
+    }
+
     
 }
