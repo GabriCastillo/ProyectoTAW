@@ -5,11 +5,9 @@
         <group>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/usuario.jsp</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/UsuarioGuardarServlet.java</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/entity/Usuario.java</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/TAWappServlet.java</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/UsuarioNuevoEditarServlet.java</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/UsuarioServlet.java</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/usuarios.jsp</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/LoginServlet.java</file>
         </group>
     </open-files>
 </project-private>

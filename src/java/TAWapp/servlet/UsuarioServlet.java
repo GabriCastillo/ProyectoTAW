@@ -4,14 +4,13 @@
  */
 package TAWapp.servlet;
 
+import TAWapp.service.UsuarioService;
 import TAWapp.dao.UsuarioFacade;
 import TAWapp.entity.Usuario;
 import javax.ejb.EJB;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.List;
  */
 @WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
 public class UsuarioServlet extends TAWappServlet {
-@EJB UsuarioFacade usuarioFacade;
+@EJB UsuarioService usuarioService;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,14 +36,7 @@ public class UsuarioServlet extends TAWappServlet {
         if (super.comprobarSession(request, response)) {
             
             String filtroNombre = request.getParameter("filtroNombre");
-            List<Usuario> usuarios = null;
-
-            if (filtroNombre == null || filtroNombre.isEmpty()) {
-                usuarios = this.usuarioFacade.findAll();        
-            } else {
-                usuarios = this.usuarioFacade.findByNombre(filtroNombre);
-            }
-
+            List<Usuario> usuarios = this.usuarioService.listarUsuarios(filtroNombre);;
 
             request.setAttribute("usuarios", usuarios);
             request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp").forward(request, response);        

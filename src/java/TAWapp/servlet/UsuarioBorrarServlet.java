@@ -4,6 +4,7 @@
  */
 package TAWapp.servlet;
 
+import TAWapp.service.UsuarioService;
 import TAWapp.dao.UsuarioFacade;
 import TAWapp.entity.Usuario;
 import javax.ejb.EJB;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "UsuarioBorrarServlet", urlPatterns = {"/UsuarioBorrarServlet"})
 public class UsuarioBorrarServlet extends TAWappServlet {
 
-    @EJB UsuarioFacade usuarioFacade;
+    @EJB UsuarioService usuarioService;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,10 +38,9 @@ public class UsuarioBorrarServlet extends TAWappServlet {
         
         if (super.comprobarSession(request, response)) { 
         String str = request.getParameter("id");
+   
         
-        Usuario usuario = this.usuarioFacade.find(Integer.parseInt(str));
-        
-        this.usuarioFacade.remove(usuario);
+        this.usuarioService.borrarUsuario(Integer.parseInt(str));
 
         response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
         }

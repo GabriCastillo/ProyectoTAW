@@ -4,16 +4,14 @@
  */
 package TAWapp.servlet;
 
-import TAWapp.dao.RolFacade;
-import TAWapp.dao.UsuarioFacade;
+import TAWapp.service.RolService;
+import TAWapp.service.UsuarioService;
 import TAWapp.entity.Rol;
 import TAWapp.entity.Usuario;
 import javax.ejb.EJB;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -25,10 +23,8 @@ import java.util.List;
 @WebServlet(name = "UsuarioNuevoEditarServlet", urlPatterns = {"/UsuarioNuevoEditarServlet"})
 public class UsuarioNuevoEditarServlet extends TAWappServlet {
 
-    @EJB
-    UsuarioFacade usuarioFacade;
-    @EJB
-    RolFacade rolFacade;
+    @EJB UsuarioService usuarioService;
+    @EJB RolService rolService;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,13 +39,13 @@ public class UsuarioNuevoEditarServlet extends TAWappServlet {
             throws ServletException, IOException {
 
         if (super.comprobarSession(request, response)) {
-            List<Rol> listaRoles = this.rolFacade.findAll();
+            List<Rol> listaRoles = this.rolService.listarRoles();
 
             request.setAttribute("roles", listaRoles);
 
             String str = request.getParameter("id");
             if (str != null) {
-                Usuario usuario = this.usuarioFacade.find(Integer.parseInt(str));
+                Usuario usuario = this.usuarioService.buscarUsuario(Integer.parseInt(str));
                 request.setAttribute("usuario", usuario);
             }
 

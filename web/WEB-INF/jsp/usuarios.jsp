@@ -21,7 +21,18 @@
             Nombre: <input type="text" name="filtroNombre" value="" />
             <input type="submit" value="Filtrar" />
         </form>
+        
+        <%
+            List<Usuario> usuarios = (List)request.getAttribute("usuarios");
+            if (usuarios == null || usuarios.isEmpty()) {
+        %>
 
+         <h2>No hay usuarios</h2>
+        
+        <%                
+            } else {
+        %>  
+        
         <table border="1">
             <tr>
                 <th>Nombre</th>
@@ -35,7 +46,6 @@
                 <th></th>                                                                     
             </tr>
             <%
-                List<Usuario> usuarios = (List) request.getAttribute("usuarios");
                 for (Usuario usuario : usuarios) {
             %>    
             <tr>
@@ -54,6 +64,9 @@
                 }
             %>
         </table>
+        <%
+            }
+        %>
         <a href="UsuarioNuevoEditarServlet">Crear nuevo usuario ... </a>
 
     </body>

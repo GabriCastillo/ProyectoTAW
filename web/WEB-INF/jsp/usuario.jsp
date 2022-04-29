@@ -16,7 +16,7 @@
         <title>JSP Page</title>
     </head>
     <%
-        List<Rol> roless = (List<Rol>)request.getAttribute("roles");
+        List<Rol> listaRoles = (List)request.getAttribute("roles");
         Usuario usuario = (Usuario)request.getAttribute("usuario");
     %>    
     <body>
@@ -35,13 +35,13 @@
             Rol: 
             <select name="rol">
             <% 
-                for (Rol r:roless) {
+                for (Rol r: listaRoles) {
                     String selected = "";
                     if (usuario != null && usuario.getRolIdrol().equals(r)) {
                         selected = "selected";
                     }
             %>
-            <option <%= selected %> value="<%= r %>"><%= r.getNombre() %></option>    
+            <option <%= selected %> value="<%= String.valueOf(r.getIdRol()) %>"><%= r.getNombre() %></option>    
             <% 
                 }
             %> 

@@ -4,8 +4,7 @@
  */
 package TAWapp.servlet;
 
-import TAWapp.dao.EstadisticaFacade;
-import TAWapp.dao.ProductoFacade;
+import TAWapp.service.UsuarioService;
 import TAWapp.dao.RolFacade;
 import TAWapp.dao.UsuarioFacade;
 import TAWapp.entity.Rol;
@@ -14,7 +13,6 @@ import javax.ejb.EJB;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UsuarioGuardarServlet extends TAWappServlet {
 
     @EJB
-    UsuarioFacade usuarioFacade;
+    UsuarioService usuarioService;
     @EJB
     RolFacade rolFacade;
 
@@ -42,46 +40,25 @@ public class UsuarioGuardarServlet extends TAWappServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (super.comprobarSession(request, response)) {
-            String strId, str;
-            Usuario usuario;
-            strId = request.getParameter("id");
+            
+            
+            String nombre = request.getParameter("nombre");
+            String apellido = request.getParameter("apellido");
+            String domicilio = request.getParameter("domicilio");
+            String ciudad = request.getParameter("ciudad");
+            int edad = Integer.parseInt(request.getParameter("edad"));
+            String sexo = request.getParameter("sexo");
+            String contraseña = request.getParameter("password");
+            int rol = Integer.parseInt(request.getParameter("rol"));
 
+            String strId = request.getParameter("id");
+            
             if (strId == null || strId.isEmpty()) {    // Crear nuevo usuario
-                usuario = new Usuario();
+                usuarioService.crearUsuario(nombre,  apellido,  domicilio,  ciudad, 
+                               edad,  sexo,  contraseña,  rol);
             } else {                               // Editar usuario
-               usuario = this.usuarioFacade.find(Integer.parseInt(strId));
-            }
-
-            str = request.getParameter("nombre");
-            usuario.setNombre(str);
-
-            str = request.getParameter("apellido");
-            usuario.setApellido(str);
-
-            str = request.getParameter("domicilio");
-            usuario.setDomicilio(str);
-
-            str = request.getParameter("ciudad");
-            usuario.setCiudadResidencia(str);
-
-            str = request.getParameter("edad");
-            usuario.setEdad(Integer.parseInt(str));
-
-            str = request.getParameter("sexo");
-            usuario.setSexo(str);
-
-            str = request.getParameter("rol");
-
-            
-            
-            Rol r = this.rolFacade.find(str);
-            usuario.setRolIdrol(r);
-
-
-            if (strId == null || strId.isEmpty()) {    // Crear nuevo usuario
-                this.usuarioFacade.create(usuario);
-            } else {                                   // Editar usuario
-                this.usuarioFacade.edit(usuario);
+               usuarioService.modificarUsuario(Integer.parseInt(strId),nombre,  apellido,  domicilio,  ciudad, 
+                               edad,  sexo,  contraseña,  rol);
             }
 
             response.sendRedirect(request.getContextPath() + "/UsuarioServlet");

@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
         if (user == null) {
             String strError = "El usuario o la clave son incorrectos";
             request.setAttribute("error", strError);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("").forward(request, response);
         } else {
             // if(user.getRolIdrol().getIdRol()==1){
             HttpSession session = request.getSession();
