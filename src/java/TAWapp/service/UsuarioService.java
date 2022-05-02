@@ -7,8 +7,10 @@ package TAWapp.service;
 
 import TAWapp.dao.RolFacade;
 import TAWapp.dao.UsuarioFacade;
+import TAWapp.dto.UsuarioDTO;
 import TAWapp.entity.Rol;
 import TAWapp.entity.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -24,12 +26,25 @@ public class UsuarioService {
       @EJB UsuarioFacade usuarioFacade;
       @EJB RolFacade rolFacade;
       
-    public Usuario comprobarCredenciales (String user, String password) {
-        return this.usuarioFacade.comprobarUsuario(user, password);
+    public UsuarioDTO comprobarCredenciales (String user, String password) {
+        Usuario usuario = this.usuarioFacade.comprobarUsuario(user, password);
+        return usuario.toDTO();
     }
     
-    public List<Usuario> listarUsuarios (String filtroNombre) {
-        List<Usuario> usuarios = null;
+    private List<UsuarioDTO> listaEntityADTO (List<Usuario> lista) {
+        List<UsuarioDTO> listaDTO = null;
+        if (lista != null) {
+            listaDTO = new ArrayList<>();
+            for (Usuario cliente:lista) {
+                listaDTO.add(cliente.toDTO());
+            }
+        }
+        return listaDTO;
+    }
+    
+    
+    public List<UsuarioDTO> listarUsuarios (String filtroNombre) {
+        List<Usuario> usuarios;
 
         if (filtroNombre == null || filtroNombre.isEmpty()) {
             usuarios = this.usuarioFacade.findAll();        
@@ -37,17 +52,18 @@ public class UsuarioService {
             usuarios = this.usuarioFacade.findByNombre(filtroNombre);
         }
         
-        return usuarios;                
+        return this.listaEntityADTO(usuarios);                
     } 
     
-    public Usuario buscarUsuario (Integer id) {
-        return this.usuarioFacade.find(id);
+    public UsuarioDTO buscarUsuario(Integer id) {
+        Usuario cliente = this.usuarioFacade.find(id);
+        return cliente.toDTO();
     }
     
     public void borrarUsuario (Integer id) {
-        Usuario customer = this.usuarioFacade.find(id);
+        Usuario user = this.usuarioFacade.find(id);
 
-        this.usuarioFacade.remove(customer);        
+        this.usuarioFacade.remove(user);      
     }
     
     

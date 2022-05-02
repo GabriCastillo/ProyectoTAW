@@ -6,6 +6,7 @@ package TAWapp.servlet;
 
 import TAWapp.service.UsuarioService;
 import TAWapp.dao.UsuarioFacade;
+import TAWapp.dto.UsuarioDTO;
 import TAWapp.entity.Usuario;
 import javax.ejb.EJB;
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class UsuarioServlet extends TAWappServlet {
         if (super.comprobarSession(request, response)) {
             
             String filtroNombre = request.getParameter("filtroNombre");
-            List<Usuario> usuarios = this.usuarioService.listarUsuarios(filtroNombre);;
+            List<UsuarioDTO> usuarios = this.usuarioService.listarUsuarios(filtroNombre);;
 
             request.setAttribute("usuarios", usuarios);
             request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp").forward(request, response);        

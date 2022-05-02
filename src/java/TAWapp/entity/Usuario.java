@@ -5,8 +5,10 @@
  */
 package TAWapp.entity;
 
+import TAWapp.dto.UsuarioDTO;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -260,5 +262,21 @@ public class Usuario implements Serializable {
     public void setEstadisticaList(List<Estadistica> estadisticaList) {
         this.estadisticaList = estadisticaList;
     }
+    
+     public UsuarioDTO toDTO () {    
+        UsuarioDTO dto = new UsuarioDTO();
+        dto.setIdusuario(idusuario);   
+        dto.setRolIdrol(rolIdrol.toDTO());
+        dto.setNombre(nombre);
+        dto.setPassword(password);
+        dto.setApellido(apellido);
+        dto.setCiudadResidencia(ciudadResidencia);
+        dto.setDomicilio(domicilio);
+        dto.setEdad(edad);
+        dto.setSexo(sexo);
+        
+                
+        return dto;        
+    }  
     
 }

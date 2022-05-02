@@ -6,9 +6,12 @@
 package TAWapp.dao;
 
 import TAWapp.entity.Producto;
+import TAWapp.entity.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +32,10 @@ public class ProductoFacade extends AbstractFacade<Producto> {
         super(Producto.class);
     }
     
+    public List<Producto> findByTitulo (String titulo) {
+        Query q;
+        q = this.getEntityManager().createQuery("select p from Producto where p.titulo like :titulo");
+        q.setParameter("titulo", '%' + titulo +'%');
+        return q.getResultList();
+    }
 }

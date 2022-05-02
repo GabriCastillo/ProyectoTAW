@@ -4,6 +4,8 @@
  */
 package TAWapp.servlet;
 
+import TAWapp.dto.RolDTO;
+import TAWapp.dto.UsuarioDTO;
 import TAWapp.service.RolService;
 import TAWapp.service.UsuarioService;
 import TAWapp.entity.Rol;
@@ -39,13 +41,13 @@ public class UsuarioNuevoEditarServlet extends TAWappServlet {
             throws ServletException, IOException {
 
         if (super.comprobarSession(request, response)) {
-            List<Rol> listaRoles = this.rolService.listarRoles();
+            List<RolDTO> listaRoles = this.rolService.listarRoles();
 
             request.setAttribute("roles", listaRoles);
 
             String str = request.getParameter("id");
             if (str != null) {
-                Usuario usuario = this.usuarioService.buscarUsuario(Integer.parseInt(str));
+                UsuarioDTO usuario = this.usuarioService.buscarUsuario(Integer.parseInt(str));
                 request.setAttribute("usuario", usuario);
             }
 

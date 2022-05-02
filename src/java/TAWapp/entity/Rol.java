@@ -5,6 +5,7 @@
  */
 package TAWapp.entity;
 
+import TAWapp.dto.RolDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -111,5 +112,14 @@ public class Rol implements Serializable {
     public String toString() {
         return "TAWapp.entity.Rol[ idRol=" + idRol + " ]";
     }
+    
+    public RolDTO toDTO () {    
+        RolDTO dto = new RolDTO();
+        
+        dto.setIdRol(idRol);
+        dto.setNombre(nombre);
+                
+        return dto;        
+    }  
     
 }

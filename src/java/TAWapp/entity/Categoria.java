@@ -5,6 +5,7 @@
  */
 package TAWapp.entity;
 
+import TAWapp.dto.CategoriaDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -111,5 +112,14 @@ public class Categoria implements Serializable {
     public String toString() {
         return "TAWapp.entity.Categoria[ idCategoria=" + idCategoria + " ]";
     }
+    
+    public CategoriaDTO toDTO () {    
+        CategoriaDTO dto = new CategoriaDTO();
+        
+        dto.setIdCategoria(idCategoria);
+        dto.setTipo(tipo);
+                
+        return dto;        
+    }  
     
 }

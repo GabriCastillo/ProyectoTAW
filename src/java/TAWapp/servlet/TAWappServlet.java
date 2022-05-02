@@ -4,6 +4,7 @@
  */
 package TAWapp.servlet;
 
+import TAWapp.dto.UsuarioDTO;
 import TAWapp.entity.Usuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -40,7 +41,7 @@ public abstract class TAWappServlet extends HttpServlet {
     protected boolean comprobarSession (HttpServletRequest request, HttpServletResponse response) 
                 throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Usuario admin = (Usuario)session.getAttribute("usuario");
+        UsuarioDTO admin = (UsuarioDTO)session.getAttribute("usuario");
         if (admin == null) {
             response.sendRedirect(request.getContextPath());
             return false;

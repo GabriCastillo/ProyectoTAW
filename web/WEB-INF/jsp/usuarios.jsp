@@ -4,6 +4,7 @@
     Author     : guzman
 --%>
 
+<%@page import="TAWapp.dto.UsuarioDTO"%>
 <%@page import="TAWapp.entity.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,7 +24,7 @@
         </form>
         
         <%
-            List<Usuario> usuarios = (List)request.getAttribute("usuarios");
+            List<UsuarioDTO> usuarios = (List)request.getAttribute("usuarios");
             if (usuarios == null || usuarios.isEmpty()) {
         %>
 
@@ -46,7 +47,7 @@
                 <th></th>                                                                     
             </tr>
             <%
-                for (Usuario usuario : usuarios) {
+                for (UsuarioDTO usuario : usuarios) {
             %>    
             <tr>
                 <td><%= usuario.getNombre()%></td>

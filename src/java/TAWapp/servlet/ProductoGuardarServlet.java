@@ -1,32 +1,30 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.servlet;
 
-import TAWapp.dao.UsuarioFacade;
-import TAWapp.dto.UsuarioDTO;
-import TAWapp.entity.Usuario;
-import TAWapp.service.UsuarioService;
-import javax.ejb.EJB;
+import TAWapp.service.CategoriaService;
+import TAWapp.service.ProductoService;
 import java.io.IOException;
+import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author casti
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "ProductoGuardarServlet", urlPatterns = {"/ProductoGuardarServlet"})
+public class ProductoGuardarServlet extends TAWappServlet {
 
-    @EJB
-    UsuarioService usuarioService;
-
+    @EJB ProductoService productoService;
+    @EJB CategoriaService categoriaService;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,30 +36,26 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String usuario = request.getParameter("usuario");
-        String clave = request.getParameter("clave");
-
-        UsuarioDTO user = this.usuarioService.comprobarCredenciales(usuario, clave);
-
-        if (user == null) {
-            String strError = "El usuario o la clave son incorrectos";
-            request.setAttribute("error", strError);
-            request.getRequestDispatcher("").forward(request, response);
-        } else {
-            // if(user.getRolIdrol().getIdRol()==1){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", user);
-            if(user.getRolIdrol().getIdRol()==1){
-                response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
-            }else{
-                response.sendRedirect(request.getContextPath() + "/NewServlet");
-            }
+        
+        if (super.comprobarSession(request, response)) {
             
-            //  }
+            
+            String Titulo = request.getParameter("titulo");
+            String descripcion = request.getParameter("descripcion");
+            String URL = request.getParameter("url");
+            int categoria = Integer.parseInt(request.getParameter("categoria"));
+            int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+     
+            String strId = request.getParameter("id");
+            
+            if (strId == null || strId.isEmpty()) {    // Crear nuevo producto
+                productoService.crearProducto(Titulo,  descripcion,  URL,  categoria, idUsuario);
+            } else {                               // Editar producto
+               productoService.modificarProducto(Integer.parseInt(strId),Titulo,  descripcion,  URL,  categoria, idUsuario);
+            }
 
+            response.sendRedirect(request.getContextPath() + "/ProductoServlet");
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

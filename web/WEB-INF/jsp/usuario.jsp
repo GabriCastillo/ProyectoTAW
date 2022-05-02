@@ -4,9 +4,8 @@
     Author     : guzman
 --%>
 
-<%@page import="TAWapp.entity.Rol"%>
-<%@page import="TAWapp.entity.Usuario"%>
-<%@page import="TAWapp.entity.Producto"%>
+<%@page import="TAWapp.dto.UsuarioDTO"%>
+<%@page import="TAWapp.dto.RolDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,8 +15,8 @@
         <title>JSP Page</title>
     </head>
     <%
-        List<Rol> listaRoles = (List)request.getAttribute("roles");
-        Usuario usuario = (Usuario)request.getAttribute("usuario");
+        List<RolDTO> listaRoles = (List)request.getAttribute("roles");
+        UsuarioDTO usuario = (UsuarioDTO)request.getAttribute("usuario");
     %>    
     <body>
         <jsp:include page="/WEB-INF/jsp/cabecera.jsp" />           
@@ -35,7 +34,7 @@
             Rol: 
             <select name="rol">
             <% 
-                for (Rol r: listaRoles) {
+                for (RolDTO r: listaRoles) {
                     String selected = "";
                     if (usuario != null && usuario.getRolIdrol().equals(r)) {
                         selected = "selected";
