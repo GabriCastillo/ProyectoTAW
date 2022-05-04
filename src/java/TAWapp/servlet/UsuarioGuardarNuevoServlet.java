@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  * @author casti
  */
 @WebServlet(name = "UsuarioGuardarNuevoServlet", urlPatterns = {"/UsuarioGuardarNuevoServlet"})
-public class UsuarioGuardarNuevoServlet extends HttpServlet {
+public class UsuarioGuardarNuevoServlet extends TAWappServlet {
 
     @EJB
     UsuarioService usuarioService;
@@ -65,11 +65,13 @@ public class UsuarioGuardarNuevoServlet extends HttpServlet {
         if (encontrado) {
             String strError = "El usuario ya existe";
             request.setAttribute("error", strError);
-            request.getRequestDispatcher("/WEB-INF/jsp/SignIn.jsp").forward(request, response);
+            
+            response.sendRedirect(request.getContextPath() + "/RegistroUsuarioServlet");                            
         } else if (!clave.equals(claveRepetida)) {
             String strError = "Las contraseñas no coinciden";
             request.setAttribute("error", strError);
-            request.getRequestDispatcher("/WEB-INF/jsp/SignIn.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/RegistroUsuarioServlet");                            
+            
         } else {
             this.usuarioService.crearUsuario(nombre,apellido,domicilio,ciudad,edad,sexo, clave,rol);
    

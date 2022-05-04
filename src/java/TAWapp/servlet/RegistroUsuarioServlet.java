@@ -50,35 +50,7 @@ public class RegistroUsuarioServlet extends TAWappServlet {
 
         request.getRequestDispatcher("/WEB-INF/jsp/usuarioNuevo.jsp").forward(request, response);
 
-        /*
-        String usuario = request.getParameter("usuario");
-        String clave = request.getParameter("clave");        
-        String claveRepetida = request.getParameter("claveRepetida");
-              
-        List<UsuarioDTO> listaUsers = this.us.listarUsuarios("");
-        Boolean encontrado = false;
-        int i=0;
-        while(!encontrado && i<listaUsers.size()){ 
-            encontrado = listaUsers.get(i).getNombre().equals(usuario);
-            i++;
-        }
         
-        if(encontrado){
-            String strError = "El usuario ya existe";
-            request.setAttribute("error", strError);
-            request.getRequestDispatcher("SignIn.jsp").forward(request, response);
-        }else if(!clave.equals(claveRepetida)){
-            String strError = "Las contraseñas no coinciden";
-            request.setAttribute("error", strError);
-            request.getRequestDispatcher("SignIn.jsp").forward(request, response);
-        }else{
-            UsuarioDTO user = this.us.crearUsuario(usuario,clave);
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", user);
-            response.sendRedirect(request.getContextPath() + "/UsuarioServlet");                            
-
-        }
-         */
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
