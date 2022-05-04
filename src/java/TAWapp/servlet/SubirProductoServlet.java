@@ -6,11 +6,8 @@
 package TAWapp.servlet;
 
 import TAWapp.dto.ProductoDTO;
-import TAWapp.dto.UsuarioDTO;
 import TAWapp.service.ProductoService;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;

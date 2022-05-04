@@ -9,7 +9,6 @@ import TAWapp.dao.RolFacade;
 import TAWapp.dto.UsuarioDTO;
 import TAWapp.service.UsuarioService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -42,51 +41,10 @@ public class UsuarioGuardarNuevoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        String usuario = request.getParameter("nombre");
-        String clave = request.getParameter("password");        
-        String claveRepetida = request.getParameter("password2");
-              
-        List<UsuarioDTO> listaUsers = this.usuarioService.listarUsuarios("");
-        Boolean encontrado = false;
-        int i=0;
-        while(!encontrado && i<listaUsers.size()){ 
-            encontrado = listaUsers.get(i).getNombre().equals(usuario);
-            i++;
-        }
-        
-        if(encontrado){
-            String strError = "El usuario ya existe";
-            request.setAttribute("error", strError);
-            request.getRequestDispatcher("SignIn.jsp").forward(request, response);
-        }else if(!clave.equals(claveRepetida)){
-            String strError = "Las contraseñas no coinciden";
-            request.setAttribute("error", strError);
-            request.getRequestDispatcher("SignIn.jsp").forward(request, response);
-        }else{
-            UsuarioDTO user = this.usuarioService.crearUsuario(usuario,clave);
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", user);
-            response.sendRedirect(request.getContextPath() + "/UsuarioServlet");                            
 
-        }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        String clave = request.getParameter("password");
+        String claveRepetida = request.getParameter("password2");
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String domicilio = request.getParameter("domicilio");
@@ -95,15 +53,33 @@ public class UsuarioGuardarNuevoServlet extends HttpServlet {
         String sexo = request.getParameter("sexo");
         String contraseña = request.getParameter("password");
         int rol = Integer.parseInt(request.getParameter("rol"));
-
-        String strId = request.getParameter("id");
-
-            // Crear nuevo usuario
-            usuarioService.crearUsuario(nombre, apellido, domicilio, ciudad,
-                    edad, sexo, contraseña, rol);
         
-        request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
-       // response.sendRedirect(request.getContextPath() + "/WEB-INF/jsp/login.jsp");
+        List<UsuarioDTO> listaUsers = this.usuarioService.listarUsuarios("");
+        Boolean encontrado = false;
+        int i = 0;
+        while (!encontrado && i < listaUsers.size()) {
+            encontrado = listaUsers.get(i).getNombre().equals(nombre);
+            i++;
+        }
+
+        if (encontrado) {
+            String strError = "El usuario ya existe";
+            request.setAttribute("error", strError);
+            request.getRequestDispatcher("/WEB-INF/jsp/SignIn.jsp").forward(request, response);
+        } else if (!clave.equals(claveRepetida)) {
+            String strError = "Las contraseñas no coinciden";
+            request.setAttribute("error", strError);
+            request.getRequestDispatcher("/WEB-INF/jsp/SignIn.jsp").forward(request, response);
+        } else {
+            this.usuarioService.crearUsuario(nombre,apellido,domicilio,ciudad,edad,sexo, clave,rol);
+   
+
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+
+        }
+
+        
+        // response.sendRedirect(request.getContextPath() + "/WEB-INF/jsp/login.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -5,7 +5,6 @@
 package TAWapp.servlet;
 
 import TAWapp.dto.UsuarioDTO;
-import TAWapp.entity.Usuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

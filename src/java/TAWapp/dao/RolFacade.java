@@ -6,7 +6,6 @@
 package TAWapp.dao;
 
 import TAWapp.entity.Rol;
-import TAWapp.entity.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

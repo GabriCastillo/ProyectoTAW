@@ -4,9 +4,7 @@
  */
 package TAWapp.servlet;
 
-import TAWapp.dao.UsuarioFacade;
 import TAWapp.dto.UsuarioDTO;
-import TAWapp.entity.Usuario;
 import TAWapp.service.UsuarioService;
 import javax.ejb.EJB;
 import java.io.IOException;

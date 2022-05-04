@@ -7,16 +7,12 @@ package TAWapp.service;
 
 import TAWapp.dao.CategoriaFacade;
 import TAWapp.dao.ProductoFacade;
-import TAWapp.dao.RolFacade;
-import TAWapp.dao.ProductoFacade;
 import TAWapp.dao.UsuarioFacade;
 import TAWapp.dto.ProductoDTO;
 import TAWapp.entity.Categoria;
-import TAWapp.entity.Rol;
 import TAWapp.entity.Producto;
 import TAWapp.entity.Usuario;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

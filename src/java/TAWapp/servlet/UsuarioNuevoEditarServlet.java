@@ -8,8 +8,6 @@ import TAWapp.dto.RolDTO;
 import TAWapp.dto.UsuarioDTO;
 import TAWapp.service.RolService;
 import TAWapp.service.UsuarioService;
-import TAWapp.entity.Rol;
-import TAWapp.entity.Usuario;
 import javax.ejb.EJB;
 import java.io.IOException;
 import javax.servlet.ServletException;
