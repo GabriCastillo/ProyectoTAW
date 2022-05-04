@@ -107,4 +107,17 @@ public class UsuarioService {
         this.usuarioFacade.edit(usuario);
     }
     
+     public UsuarioDTO crearUsuario(String usuario, String clave) {
+        Usuario user = new Usuario();
+
+        this.rellenarCliente(user,usuario,clave);
+
+        this.usuarioFacade.create(user);
+        return user.toDTO();
+    }
+
+    private void rellenarCliente(Usuario user, String usuario, String clave) {
+        user.setNombre(usuario);
+        user.setPassword(clave);
+    }
 }

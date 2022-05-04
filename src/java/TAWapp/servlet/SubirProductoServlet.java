@@ -1,32 +1,33 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.servlet;
 
-import TAWapp.service.UsuarioService;
-import TAWapp.dao.UsuarioFacade;
+import TAWapp.dto.ProductoDTO;
 import TAWapp.dto.UsuarioDTO;
-import TAWapp.entity.Usuario;
-import javax.ejb.EJB;
+import TAWapp.service.ProductoService;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import javax.servlet.http.HttpSession;
+
 
 /**
  *
- * @author casti
+ * @author RaulDF
  */
-@WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
-public class UsuarioServlet extends TAWappServlet {
-
-    @EJB
-    UsuarioService usuarioService;
-
+@WebServlet(name = "SubirProductoServlet", urlPatterns = {"/SubirProductoServlet"})
+public class SubirProductoServlet extends HttpServlet {
+    @EJB ProductoService ps;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,23 +39,25 @@ public class UsuarioServlet extends TAWappServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (super.comprobarSession(request, response)) {
-            HttpSession session = request.getSession();
-            UsuarioDTO user = (UsuarioDTO) session.getAttribute("usuario");
-            session.setAttribute("usuario", user);
-            request.setAttribute("usuario", user);
-
-            if (user.getRolIdrol().getIdRol() == 1) {
-                String filtroNombre = request.getParameter("filtroNombre");
-                List<UsuarioDTO> usuarios = this.usuarioService.listarUsuarios(filtroNombre);
-
-                request.setAttribute("usuarios", usuarios);
-                request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp").forward(request, response);
-            } else {
-                request.getRequestDispatcher("/WEB-INF/jsp/iniciado.jsp").forward(request, response);
-            }
-
-        }
+        String titulo = (String)request.getParameter("titulo");
+        String descripcion = (String)request.getParameter("descripcion");
+        Integer precioInicial =Integer.parseInt(request.getParameter("precioInicial")) ;
+        Integer precioLimite = Integer.parseInt(request.getParameter("precioLimite"));
+        String c = (String)request.getParameter("categoria");
+        int categoria = Integer.parseInt(c);
+        String imagen = (String)request.getParameter("imagen");
+        String fechaLimite = (String)request.getParameter("fechaLimite");
+        String i = (String) request.getParameter("id");
+        int user = Integer.parseInt(i);
+        this.ps.crearProducto(titulo, descripcion,imagen,categoria,user);
+        
+        List<ProductoDTO> productos = ps.listarProductos(titulo);
+        ProductoDTO producto = productos.get(0);
+        //Subasta tambien se crea
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("producto", producto);
+        response.sendRedirect(request.getContextPath()+"/VenderServlet");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

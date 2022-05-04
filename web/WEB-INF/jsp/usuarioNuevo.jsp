@@ -1,31 +1,110 @@
 <%-- 
-    Document   : cabecera
-    Created on : 30 mar. 2022, 11:56:49
-    Author     : guzman
+    Document   : usuarioNuevo
+    Created on : 04-may-2022, 17:01:07
+    Author     : casti
 --%>
 
 <%@page import="TAWapp.dto.UsuarioDTO"%>
-<%@page import="TAWapp.entity.Usuario"%>
+<%@page import="TAWapp.dto.RolDTO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%
-    UsuarioDTO admin = (UsuarioDTO)session.getAttribute("usuario");
-    if (admin == null) {
-        response.sendRedirect(request.getContextPath());
-    }
-%>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <%
+        List<RolDTO> listaRoles = (List) request.getAttribute("roles");
+
+    %>    
+    <body>
+
+        
+        <section id="formulario2">        
+            <h1 id="titulo">Datos del Usuario</h1>
+            <form method="POST" action="UsuarioGuardarNuevoServlet">
+                <div style="display:flex">
+                    <div class="izqBox" style="width: 50%;margin-bottom: 15px">
+                        <input type="hidden" name="id"  />
+
+                        <div class="input-container ic1">
+                            <input id="nombre" class="input" type="text" name="nombre" placeholder=" " />
+                            <div class="cut"></div>
+                            <label for="nombre" class="placeholder">Nombre</label>
+                        </div>                   
+                        <div class="input-container ic2" >
+                            <input id="apellido" class="input" type="text" name="apellido" placeholder=" " />
+                            <div class="cut2"></div>
+                            <label for="apellido" class="placeholder">Apellido</label>
+                        </div>
+                        <div class="input-container ic2">
+                            <input id="domicilio" class="input" type="text" name="domicilio" placeholder=" "  /> 
+                            <div class="cut2"></div>
+                            <label for="domicilio" class="placeholder">Domicilio</label>
+                        </div>
+
+                        <div class="input-container ic2" >
+                            <input id="ciudad" class="input" type="text" name="ciudad" placeholder=" "  />
+                            <div class="cut2"></div>
+                            <label for="ciudad" class="placeholder">Ciudad</label>
+                        </div>
 
 
- <body>
-        <header>       <ul>
-                <li><a class="active" href="UsuarioServlet">Home</a></li>
-                <li><a href="UsuarioServlet">Listado de usuarios</a></li>
-                <li><a href="ProductoServlet">Listado de productos</a></li>
-                <li style="float:right"><a href="LogoutServlet">Cerrar Sesion</a></li>
-                <li style="float:right"><a><%= admin.getNombre()%></a></li>
-        </header>
- </body>
- 
+                    </div>
+
+                    <div class="dBox">
+                        <div class="input-container ic1" >
+                            <input id="edad" class="input" type="text" name="edad" placeholder=" "  /> 
+                            <div class="cut2"></div>
+                            <label for="edad" class="placeholder">Edad</label>
+                        </div>
+                        <div class="input-container ic2" >
+                            <input id="sexo" class="input"  type="text" name="sexo" placeholder=" "  />
+                            <div class="cut3"></div>
+                            <label for="sexo" class="placeholder">Sexo</label>
+                        </div>
+                        <div class="input-container ic2" >
+                            <input id="password" class="input" type="text" name="password" placeholder=" "  />
+                            <div class="cut2"></div>
+                            <label for="password" class="placeholder">Contraseña</label>
+                        </div>
+                        
+                         <div class="input-container ic2" >
+                            <input id="password2" class="input" type="text" name="password2" placeholder=" "  />
+                            <div class="cut2"></div>
+                            <label for="password2" class="placeholder">Repetir Contraseña</label>
+                        </div>
+
+                        <div class="input-container ic2">
+
+                            <select id="rol" class="input" name="rol" placeholder=" ">
+                                <%
+                                    for (RolDTO r : listaRoles) {
+                                        String selected = "";
+                                       
+                                %>
+                                <option <%= selected%> value="<%= String.valueOf(r.getIdRol())%>"><%= r.getNombre()%></option>    
+                                <%
+                                    }
+                                %> 
+                            </select>
+                            <div class="cut2"></div>
+                            <label for="rol" class="placeholder">Rol</label>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div style="text-align:center"><input id="btn" type="submit" value="Añadir Usuario" /></div>
+
+            </form>
+        </section>
+    </body>
+</html>
+
 <style>
     *{
         box-sizing: border-box;

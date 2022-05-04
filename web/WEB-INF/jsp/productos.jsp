@@ -15,55 +15,61 @@
     </head>
     <jsp:include page="/WEB-INF/jsp/cabecera.jsp" />        
 
-        <h1>Listado de productos</h1>
-        <form method="post" action="UsuarioServlet">
-            Titulo: <input type="text" name="filtroTitulo" value="" />
-            <input type="submit" value="Filtrar" />
-        </form>
-        
+    <h1>Listado de productos</h1>
+
+    <form method="post" action="ProductoServlet">
+        Titulo: <input type="text" name="filtroTitulo" value="" />
+        <input type="submit" value="Filtrar" />
+    </form>
+    </br>
+
+
+    <%
+        List<ProductoDTO> productos = (List) request.getAttribute("productos");
+        if (productos == null || productos.isEmpty()) {
+    %>
+
+    <h2>No hay productos</h2>
+
+    <%
+    } else {
+    %>  
+
+    <table border="1">
+        <tr>
+            <th>Titulo</th>
+            <th>Descripcion</th>                
+            <th>Imagen</th>                                
+            <th>Categoria</th>    
+            <th>Propietario</th>
+            <th></th>                                                     
+            <th></th>                                                                     
+        </tr>
         <%
-            List<ProductoDTO> productos = (List)request.getAttribute("productos");
-            if (productos == null || productos.isEmpty()) {
-        %>
+            for (ProductoDTO producto : productos) {
 
-         <h2>No hay productos</h2>
-        
-        <%                
-            } else {
-        %>  
-        
-        <table border="1">
-            <tr>
-                <th>Titulo</th>
-                <th>Descripcion</th>                
-                <th>Imagen</th>                                
-                <th>Categoria</th>    
-                <th>Propietario</th>
-                <th></th>                                                     
-                <th></th>                                                                     
-            </tr>
-            <%
-                for (ProductoDTO producto : productos) {
-                    
-            %>    
-            <tr>
-                <td><%= producto.getTitulo()%></td>
-                <td><%= producto.getDescripcion()%></td>            
-                <td><%= producto.getImagen()%></td>                                 
-                <td><%= producto.getCategoriaIdcategoria().getTipo()%></td>
-                <td><%= producto.getUsuarioVendedor().getNombre()%></td>  
-                <td><a href="ProductoBorrarServlet?id=<%= producto.getIdproducto()%>">Borrar</a></td> 
-                <td><a href="ProductoNuevoEditarServlet?id=<%= producto.getIdproducto()%>">Editar</a></td>            
-            </tr>
+        %>    
+        <tr>
+            <td><%= producto.getTitulo()%></td>
+            <td><%= producto.getDescripcion()%></td>            
+            <td><%= producto.getImagen()%></td>                                 
+            <td><%= producto.getCategoriaIdcategoria().getTipo()%></td>
+            <td><%= producto.getUsuarioVendedor().getNombre()%></td>  
+            <td><a href="ProductoBorrarServlet?id=<%= producto.getIdproducto()%>">Borrar</a></td> 
+            <td><a href="ProductoNuevoEditarServlet?id=<%= producto.getIdproducto()%>">Editar</a></td>            
+        </tr>
 
-            <%
-                }
-            %>
-        </table>
         <%
             }
         %>
-        <a href="ProductoNuevoEditarServlet">Crear nuevo producto ... </a>
+    </table>
+    <%
+        }
+    %>
+    </br>
 
-    </body>
+    <a href="ProductoNuevoEditarServlet">Crear nuevo producto ... </a>
+
+</body>
 </html>
+

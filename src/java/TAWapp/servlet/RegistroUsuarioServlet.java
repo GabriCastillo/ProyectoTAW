@@ -1,15 +1,18 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.servlet;
 
-import TAWapp.dao.UsuarioFacade;
+import TAWapp.dto.RolDTO;
 import TAWapp.dto.UsuarioDTO;
-import TAWapp.entity.Usuario;
+import TAWapp.service.RolService;
 import TAWapp.service.UsuarioService;
-import javax.ejb.EJB;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,13 +22,15 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author casti
+ * @author RaulDF
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "RegistroUsuarioServlet", urlPatterns = {"/RegistroUsuarioServlet"})
+public class RegistroUsuarioServlet extends TAWappServlet {
 
     @EJB
     UsuarioService usuarioService;
+    @EJB
+    RolService rolService;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,24 +44,44 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        List<RolDTO> listaRoles = this.rolService.listarRoles();
+
+        request.setAttribute("roles", listaRoles);
+
+        UsuarioDTO usuario = null;
+        request.setAttribute("usuario", usuario);
+
+        request.getRequestDispatcher("/WEB-INF/jsp/usuarioNuevo.jsp").forward(request, response);
+
+        /*
         String usuario = request.getParameter("usuario");
-        String clave = request.getParameter("clave");
-
-        UsuarioDTO user = this.usuarioService.comprobarCredenciales(usuario, clave);
-
-        if (user == null) {
-            String strError = "El usuario o la clave son incorrectos";
+        String clave = request.getParameter("clave");        
+        String claveRepetida = request.getParameter("claveRepetida");
+              
+        List<UsuarioDTO> listaUsers = this.us.listarUsuarios("");
+        Boolean encontrado = false;
+        int i=0;
+        while(!encontrado && i<listaUsers.size()){ 
+            encontrado = listaUsers.get(i).getNombre().equals(usuario);
+            i++;
+        }
+        
+        if(encontrado){
+            String strError = "El usuario ya existe";
             request.setAttribute("error", strError);
-            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);  
-        } else {
-            // if(user.getRolIdrol().getIdRol()==1){
+            request.getRequestDispatcher("SignIn.jsp").forward(request, response);
+        }else if(!clave.equals(claveRepetida)){
+            String strError = "Las contraseñas no coinciden";
+            request.setAttribute("error", strError);
+            request.getRequestDispatcher("SignIn.jsp").forward(request, response);
+        }else{
+            UsuarioDTO user = this.us.crearUsuario(usuario,clave);
             HttpSession session = request.getSession();
             session.setAttribute("usuario", user);
-           
-            response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
-       
-        }
+            response.sendRedirect(request.getContextPath() + "/UsuarioServlet");                            
 
+        }
+         */
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

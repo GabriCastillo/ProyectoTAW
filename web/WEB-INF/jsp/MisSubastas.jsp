@@ -1,31 +1,98 @@
 <%-- 
-    Document   : cabecera
-    Created on : 30 mar. 2022, 11:56:49
-    Author     : guzman
+    Document   : Subastas
+    Created on : 29-abr-2022, 22:10:20
+    Author     : RaulDF
 --%>
 
 <%@page import="TAWapp.dto.UsuarioDTO"%>
-<%@page import="TAWapp.entity.Usuario"%>
+<%@page import="TAWapp.dto.CategoriaDTO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%
-    UsuarioDTO admin = (UsuarioDTO)session.getAttribute("usuario");
-    if (admin == null) {
-        response.sendRedirect(request.getContextPath());
-    }
-%>
-
-
- <body>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Mis subastas</title>
+    </head>
+    <%
+        UsuarioDTO user = (UsuarioDTO) request.getAttribute("usuario");
+        List<CategoriaDTO> listaCategorias = (List) request.getAttribute("categorias");
+    %> 
+    <body>
         <header>       <ul>
                 <li><a class="active" href="UsuarioServlet">Home</a></li>
-                <li><a href="UsuarioServlet">Listado de usuarios</a></li>
-                <li><a href="ProductoServlet">Listado de productos</a></li>
+                <li><a href="VenderServlet">Mis Subastas</a></li>
                 <li style="float:right"><a href="LogoutServlet">Cerrar Sesion</a></li>
-                <li style="float:right"><a><%= admin.getNombre()%></a></li>
+                <li style="float:right"><a><%= user.getNombre()%></a></li>
         </header>
- </body>
- 
+        <section>
+            <section id="subastas">
+                <h1 id="titulo">Tus subastas</h1>
+            </section>
+            <section id="formulario">
+                <h1 id="titulo">Añade un producto</h1>
+                <form method="POST" action="SubirProductoServlet">
+                    <div style="display:flex">
+                        <div class="izqBox" style="width: 50%;margin-bottom: 15px">
+                            <div class="input-container ic1">
+                                <input id="titulo" class="input" type="text" name="titulo" placeholder=" " />
+                                <div class="cut"></div>
+                                <label for="titulo" class="placeholder">Titulo</label>
+                            </div>                   
+                            <div class="input-container ic2" >
+                                <input id="titulo" class="input" type="text" name="precioInicial" placeholder=" " />
+                                <div class="cut2"></div>
+                                <label for="precioInicial" class="placeholder">Precio Inicial</label>
+                            </div>
+                            <div class="input-container ic2">
+                                <input id="precioLimite" class="input" type="text" name="precioLimite" placeholder=" " />
+                                <div class="cut2"></div>
+                                <label for="precioInicial" class="placeholder">Precio limite</label>
+                            </div>
+
+                            <div class="input-container ic2" >
+                                <input id="fechaLimite" class="input" type="date" name="fechaLimite" placeholder=" " />
+                                <div class="cut2"></div>
+                                <label for="fechaLimite" class="placeholder">Fecha Limite</label>
+                            </div>
+                        </div>
+                        <div class="dBox">
+                            <div class="input-container ic1" >
+                                <input id="descripcion" class="input2" type="text" name="descripcion" placeholder=" " />
+                                <div class="cut2"></div>
+                                <label for="descripcion" class="placeholder">Descripcion</label>
+                            </div>
+                            <div class="input-container ic3" >
+                                <input id="imagen" class="input" type="file" accept="image/*" name="imagen" />
+                                <div class="cut3"></div>
+                                <label for="imagen" class="placeholder">Selecciona la imagen:</label>
+                            </div>
+                            <div class="input-container ic2">
+                                <select id="categoria" class="input" name="categoria" placeholder=" ">
+                                    <%
+                                        for (CategoriaDTO c : listaCategorias) {
+                                            String selected = "";
+
+                                    %>
+                                    <option <%= selected%> value="<%= String.valueOf(c.getIdCategoria())%>"><%= c.getTipo()%></option>    
+                                    <%
+                                        }
+                                    %> 
+
+                                </select>
+                                <div class="cut2"></div>
+                                <label for="categoria" class="placeholder">Categoria</label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="id" id="id" value="<%= user.getIdusuario()%>" />
+
+                    </div>
+                    <div style="text-align:center"><input id="btn" type="submit" value="Subir Producto" /></div>
+                </form>
+            </section>
+        </section>
+    </body>
+</html>
 <style>
     *{
         box-sizing: border-box;
@@ -40,20 +107,6 @@
         margin-top: 40px;
     }
     .input {
-        background-color: #828282;
-        border-radius: 12px;
-        border: 0;
-        box-sizing: border-box;
-        color: #eee;
-        font-size: 15px;
-        height: 100%;
-        outline: 0;
-        padding: 4px 20px 0 ;
-        margin-left: 20px;
-        width: 70%;
-    }
-    
-    .select {
         background-color: #828282;
         border-radius: 12px;
         border: 0;
@@ -212,24 +265,6 @@
         height: 600px;
         float: left;
     }
-    
-    #formulario2{
-        border-radius: 25px;
-        margin-top: 10px;
-        background-color:#404040 ;
-        height: 600px;
-        float:center;
-    }
-    
-    #usuarios{
-
-        border-radius: 25px;
-        margin-top: 10px;
-        background-color:#404040 ;
-        width: 60%;
-        height: 600px;
-        float: left;
-    }
     #formulario{
         border-radius: 25px;
         margin-top: 10px;
@@ -270,22 +305,4 @@
     .active {
         background-color: #04AA6D;
     }
-    
-    
-    table{border-collapse:collapse;}
-th,tr,td{
-	border:1px solid #000;
-	width:150px;
-	height:45px;
-	vertical-align:middle;
-	text-align:center;
-}
-th{
-	color:#fff;
-	background-color: #252525;
-}
-
-tr:nth-child(odd) td{
-	background-color:#eee;
-}
 </style>

@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/producto.jsp</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/service/ProductoService.java</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/ProductoNuevoEditarServlet.java</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/ProductoGuardarServlet.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/dao/UsuarioFacade.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/usuario.jsp</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/productos.jsp</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/ProductoServlet.java</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/TAWappServlet.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/entity/Usuario.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/cabecera.jsp</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/service/UsuarioService.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/UsuarioServlet.java</file>
         </group>
     </open-files>
 </project-private>

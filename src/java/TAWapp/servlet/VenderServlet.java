@@ -1,32 +1,31 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.servlet;
 
-import TAWapp.service.UsuarioService;
-import TAWapp.dao.UsuarioFacade;
+import TAWapp.dto.CategoriaDTO;
 import TAWapp.dto.UsuarioDTO;
-import TAWapp.entity.Usuario;
-import javax.ejb.EJB;
+import TAWapp.service.CategoriaService;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author casti
+ * @author RaulDF
  */
-@WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
-public class UsuarioServlet extends TAWappServlet {
-
-    @EJB
-    UsuarioService usuarioService;
-
+@WebServlet(name = "VenderServlet", urlPatterns = {"/VenderServlet"})
+public class VenderServlet extends TAWappServlet {
+ @EJB CategoriaService categoriaService;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,18 +40,11 @@ public class UsuarioServlet extends TAWappServlet {
         if (super.comprobarSession(request, response)) {
             HttpSession session = request.getSession();
             UsuarioDTO user = (UsuarioDTO) session.getAttribute("usuario");
-            session.setAttribute("usuario", user);
+            List<CategoriaDTO> listaCategorias = this.categoriaService.listarCategorias();
+
             request.setAttribute("usuario", user);
-
-            if (user.getRolIdrol().getIdRol() == 1) {
-                String filtroNombre = request.getParameter("filtroNombre");
-                List<UsuarioDTO> usuarios = this.usuarioService.listarUsuarios(filtroNombre);
-
-                request.setAttribute("usuarios", usuarios);
-                request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp").forward(request, response);
-            } else {
-                request.getRequestDispatcher("/WEB-INF/jsp/iniciado.jsp").forward(request, response);
-            }
+            request.setAttribute("categorias", listaCategorias);
+            request.getRequestDispatcher("/WEB-INF/jsp/MisSubastas.jsp").forward(request, response);
 
         }
     }

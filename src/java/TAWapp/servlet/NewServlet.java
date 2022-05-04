@@ -1,31 +1,24 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.servlet;
 
-import TAWapp.service.UsuarioService;
-import TAWapp.dao.UsuarioFacade;
-import TAWapp.dto.UsuarioDTO;
-import TAWapp.entity.Usuario;
-import javax.ejb.EJB;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author casti
  */
-@WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
-public class UsuarioServlet extends TAWappServlet {
-
-    @EJB
-    UsuarioService usuarioService;
+@WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
+public class NewServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,22 +31,18 @@ public class UsuarioServlet extends TAWappServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (super.comprobarSession(request, response)) {
-            HttpSession session = request.getSession();
-            UsuarioDTO user = (UsuarioDTO) session.getAttribute("usuario");
-            session.setAttribute("usuario", user);
-            request.setAttribute("usuario", user);
-
-            if (user.getRolIdrol().getIdRol() == 1) {
-                String filtroNombre = request.getParameter("filtroNombre");
-                List<UsuarioDTO> usuarios = this.usuarioService.listarUsuarios(filtroNombre);
-
-                request.setAttribute("usuarios", usuarios);
-                request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp").forward(request, response);
-            } else {
-                request.getRequestDispatcher("/WEB-INF/jsp/iniciado.jsp").forward(request, response);
-            }
-
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet NewServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet NewServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
