@@ -1,9 +1,11 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.entity;
 
+import TAWapp.dto.RolDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -17,20 +19,22 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author casti
+ * @author RaulDF
  */
 @Entity
 @Table(name = "ROL")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r"),
-    @NamedQuery(name = "Rol.findByIdRol", query = "SELECT r FROM Rol r WHERE r.idRol = :idRol"),
-    @NamedQuery(name = "Rol.findByNombre", query = "SELECT r FROM Rol r WHERE r.nombre = :nombre")})
+    @NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r")
+    , @NamedQuery(name = "Rol.findByIdRol", query = "SELECT r FROM Rol r WHERE r.idRol = :idRol")
+    , @NamedQuery(name = "Rol.findByNombre", query = "SELECT r FROM Rol r WHERE r.nombre = :nombre")})
 public class Rol implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,6 +44,8 @@ public class Rol implements Serializable {
     @Column(name = "ID_ROL")
     private Integer idRol;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "NOMBRE")
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolIdrol")
@@ -106,5 +112,12 @@ public class Rol implements Serializable {
     public String toString() {
         return "TAWapp.entity.Rol[ idRol=" + idRol + " ]";
     }
-    
+    public RolDTO toDTO () {    
+        RolDTO dto = new RolDTO();
+        
+        dto.setIdRol(idRol);
+        dto.setNombre(nombre);
+                
+        return dto;        
+    }  
 }
