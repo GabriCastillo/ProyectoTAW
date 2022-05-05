@@ -47,10 +47,10 @@ public class RegistroUsuarioServlet extends TAWappServlet {
 
         UsuarioDTO usuario = null;
         request.setAttribute("usuario", usuario);
-
+        String strError = (String) request.getAttribute("error");
+        request.setAttribute("error", strError);
         request.getRequestDispatcher("/WEB-INF/jsp/usuarioNuevo.jsp").forward(request, response);
 
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

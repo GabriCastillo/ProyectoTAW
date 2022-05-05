@@ -28,7 +28,12 @@ public class UsuarioService {
       
     public UsuarioDTO comprobarCredenciales (String user, String password) {
         Usuario usuario = this.usuarioFacade.comprobarUsuario(user, password);
-        return usuario.toDTO();
+        if(usuario!=null){
+            return usuario.toDTO();
+        }else{
+            return null;
+        }
+        
     }
     
     private List<UsuarioDTO> listaEntityADTO (List<Usuario> lista) {

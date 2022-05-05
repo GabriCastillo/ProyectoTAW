@@ -42,7 +42,6 @@ public class UsuarioGuardarNuevoServlet extends TAWappServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
         String clave = request.getParameter("password");
         String claveRepetida = request.getParameter("password2");
         String nombre = request.getParameter("nombre");
@@ -51,9 +50,8 @@ public class UsuarioGuardarNuevoServlet extends TAWappServlet {
         String ciudad = request.getParameter("ciudad");
         int edad = Integer.parseInt(request.getParameter("edad"));
         String sexo = request.getParameter("sexo");
-        String contraseña = request.getParameter("password");
         int rol = Integer.parseInt(request.getParameter("rol"));
-        
+
         List<UsuarioDTO> listaUsers = this.usuarioService.listarUsuarios("");
         Boolean encontrado = false;
         int i = 0;
@@ -62,25 +60,26 @@ public class UsuarioGuardarNuevoServlet extends TAWappServlet {
             i++;
         }
 
+        String strError;
+
         if (encontrado) {
-            String strError = "El usuario ya existe";
+            strError = "El usuario ya existe";
             request.setAttribute("error", strError);
-            
-            response.sendRedirect(request.getContextPath() + "/RegistroUsuarioServlet");                            
+            request.getRequestDispatcher("RegistroUsuarioServlet").forward(request, response);
+
+         //   response.sendRedirect(request.getContextPath() + "/RegistroUsuarioServlet");
         } else if (!clave.equals(claveRepetida)) {
-            String strError = "Las contraseñas no coinciden";
+            strError = "Las contraseñas no coinciden";
             request.setAttribute("error", strError);
-            response.sendRedirect(request.getContextPath() + "/RegistroUsuarioServlet");                            
-            
+            request.getRequestDispatcher("RegistroUsuarioServlet").forward(request, response);
+
         } else {
-            this.usuarioService.crearUsuario(nombre,apellido,domicilio,ciudad,edad,sexo, clave,rol);
-   
+            this.usuarioService.crearUsuario(nombre, apellido, domicilio, ciudad, edad, sexo, clave, rol);
 
             request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 
         }
 
-        
         // response.sendRedirect(request.getContextPath() + "/WEB-INF/jsp/login.jsp");
     }
 

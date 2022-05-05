@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  * @author casti
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends TAWappServlet {
 
     @EJB
     UsuarioService usuarioService;

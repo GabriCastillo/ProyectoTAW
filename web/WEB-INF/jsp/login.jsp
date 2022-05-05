@@ -4,6 +4,8 @@
     Author     : guzman
 --%>
 
+<%@page import="javax.script.ScriptEngine"%>
+<%@page import="javax.script.ScriptEngineManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,25 +20,42 @@
         }
     %>    
     <body>
-        <%= strError%>
-      
+
+
+
         <div class="loginBox"> <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
-        <h3>Inicia Sesion</h3>
-        <form action="LoginServlet" method="post">
-            <div class="inputBox"> 
-                <input id="usuario" type="text" name="usuario" placeholder="Usuario"> 
-                <input id="password" type="password" name="clave" placeholder="Contraseña"> 
-            </div> <input type="submit" value="Entrar">
-        </form> 
-        <div class="text-center">
-            <a href="RegistroUsuarioServlet" style="color: #59238F;">Registrate</a>
+            <h3>Inicia Sesion</h3>
+            <form action="LoginServlet" method="post">
+                <div class="inputBox"> 
+                    <input id="usuario" type="text" name="usuario" placeholder="Usuario"> 
+                    <input id="password" type="password" name="clave" placeholder="Contraseña"> 
+                </div> <input type="submit" value="Entrar">
+            </form> 
+            <div class="text-center">
+           
+                <a href="RegistroUsuarioServlet" style="color: #59238F;">Registrate</a>
+            </div>
         </div>
 
-    </div>
+        <%
+            if (strError != "") {
+        %>  
+        <script>
+            function myFunction() {
+                alert("<%= strError%>");
+            }
+
+            myFunction();
+        </script>
+        <%
+            }
+        %>              
+
+
     </body>
 
 
-    
+
 </html>
 
 <style>

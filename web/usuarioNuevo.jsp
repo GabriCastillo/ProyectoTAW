@@ -4,7 +4,6 @@
     Author     : casti
 --%>
 
-<%@page import="TAWapp.service.UsuarioService"%>
 <%@page import="TAWapp.dto.UsuarioDTO"%>
 <%@page import="TAWapp.dto.RolDTO"%>
 <%@page import="java.util.List"%>
@@ -13,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Nuevo usuario</title>
+        <title>JSP Page</title>
     </head>
     <%
         List<RolDTO> listaRoles = (List) request.getAttribute("roles");
@@ -108,20 +107,18 @@
 
             </form>
         </section>
-
         <%
             if (strError != "") {
-        %>  
+        %>
         <script>
             function myFunction() {
-                alert("<%= strError%>");
+                alert("I am an alert box!");
             }
-
-            myFunction();
         </script>
         <%
             }
-        %>   
+        %>
+
     </body>
 </html>
 
