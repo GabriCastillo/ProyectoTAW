@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/RegistroUsuarioServlet.java</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/login.jsp</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/entity/Usuario.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/RegistroUsuarioServlet.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/MisSubastas.jsp</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/UsuarioGuardarNuevoServlet.java</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/usuarioNuevo.jsp</file>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/service/UsuarioService.java</file>
+            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/web/WEB-INF/jsp/cabecera.jsp</file>
             <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/cosas/PROYECTOTAW/src/java/TAWapp/servlet/LoginServlet.java</file>
         </group>
     </open-files>

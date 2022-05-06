@@ -107,6 +107,9 @@
                 <div style="text-align:center"><input id="btn" type="submit" value="Añadir Usuario" /></div>
 
             </form>
+            </br>
+            <div style="text-align:center"> <input type = "button" value = "Cancelar" onclick = "window.history.back ();" style="color: #04AA6D;"/> </ div>
+
         </section>
 
         <%

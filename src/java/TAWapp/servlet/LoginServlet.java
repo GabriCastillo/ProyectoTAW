@@ -41,23 +41,24 @@ public class LoginServlet extends TAWappServlet {
         String clave = request.getParameter("clave");
 
         UsuarioDTO user = this.usuarioService.comprobarCredenciales(usuario, clave);
-
-        if (user == null) {
+        if (usuario.isEmpty() || clave.isEmpty()) {
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+        } else if (user == null) {
             String strError = "El usuario o la clave son incorrectos";
             request.setAttribute("error", strError);
-            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);  
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
         } else {
             // if(user.getRolIdrol().getIdRol()==1){
             HttpSession session = request.getSession();
             session.setAttribute("usuario", user);
-           
+
             response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
-       
+
         }
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

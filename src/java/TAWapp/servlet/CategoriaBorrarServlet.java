@@ -5,17 +5,13 @@
  */
 package TAWapp.servlet;
 
-import TAWapp.dto.CategoriaDTO;
-import TAWapp.dto.ProductoDTO;
-import TAWapp.dto.UsuarioDTO;
 import TAWapp.service.CategoriaService;
-import TAWapp.service.ProductoService;
-import TAWapp.service.UsuarioService;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,12 +19,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author casti
  */
-@WebServlet(name = "ProductoNuevoEditarServlet", urlPatterns = {"/ProductoNuevoEditarServlet"})
-public class ProductoNuevoEditarServlet extends TAWappServlet {
+@WebServlet(name = "CategoriaBorrarServlet", urlPatterns = {"/CategoriaBorrarServlet"})
+public class CategoriaBorrarServlet extends TAWappServlet {
 
-    @EJB ProductoService productoService;
+    
     @EJB CategoriaService categoriaService;
-    @EJB UsuarioService usuarioService;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,22 +35,15 @@ public class ProductoNuevoEditarServlet extends TAWappServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (super.comprobarSession(request, response)) { 
+        String str = request.getParameter("id");
+   
         
-        if (super.comprobarSession(request, response)) {
-            List<CategoriaDTO> listaCategorias = this.categoriaService.listarCategorias("");
-            List<UsuarioDTO> listaUsuarios = this.usuarioService.listarUsuarios(null);
+        this.categoriaService.borrarCategoria(Integer.parseInt(str));
 
-            
-            request.setAttribute("categorias", listaCategorias);
-            request.setAttribute("usuarios", listaUsuarios);
-            String str = request.getParameter("id");
-            if (str != null) {
-                ProductoDTO producto = this.productoService.buscarProducto(Integer.parseInt(str));
-                request.setAttribute("producto", producto);
-            }
-
-            request.getRequestDispatcher("/WEB-INF/jsp/producto.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/CategoriaServlet");
         }
+    
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

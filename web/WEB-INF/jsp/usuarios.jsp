@@ -58,8 +58,8 @@
                 <td><%= usuario.getEdad()%></td>                      
                 <td><%= usuario.getSexo()%></td>             
                 <td><%= usuario.getRolIdrol().getNombre()%></td>  
-                <td><a href="UsuarioBorrarServlet?id=<%= usuario.getIdusuario()%>">Borrar</a></td> 
-                <td><a href="UsuarioNuevoEditarServlet?id=<%= usuario.getIdusuario()%>">Editar</a></td>            
+                <td><a href="UsuarioBorrarServlet?id=<%= usuario.getIdusuario()%>" style="color: #04AA6D;">Borrar</a></td> 
+                <td><a href="UsuarioNuevoEditarServlet?id=<%= usuario.getIdusuario()%>" style="color: #04AA6D;">Editar</a></td>            
             </tr>
 
             <%
@@ -71,7 +71,7 @@
         %>
         </br>
 
-        <a href="UsuarioNuevoEditarServlet">Crear nuevo usuario ... </a>
+        <a href="UsuarioNuevoEditarServlet" style="color: #04AA6D;">Crear nuevo usuario ... </a>
 
     </body>
 </html>

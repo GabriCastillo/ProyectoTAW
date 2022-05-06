@@ -48,18 +48,10 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     
     public List<Usuario> findByNombre (String n) {
         Query q;
-        q = this.getEntityManager().createQuery("select u from Usuario u where u.nombre like :nombre");
-        q.setParameter("nombre", '%' + n +'%');
+        q = this.getEntityManager().createQuery("select u from Usuario u where upper(u.nombre) like :nombre");
+        q.setParameter("nombre", '%' + n.toUpperCase() +'%');
         return q.getResultList();
-        
-        /*
-        List<Integer> list = em.createQuery("select u.balance from Users u where u.userName = '" + user_name.getText() +"'", Integer.class).getResultList();
 
         
-        TypedQuery<Integer> query = em.createQuery("select u.balance from Users u where u.userName = :user_name", Integer.class);
-query.setParameter("user_name", user_name.getText());
-Integer balance = query.getSingleResult();
-        
-        */
     }
 }

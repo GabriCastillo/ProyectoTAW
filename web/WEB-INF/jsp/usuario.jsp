@@ -94,9 +94,13 @@
 
 
                 </div>
-                <div style="text-align:center"><input id="btn" type="submit" value="Añadir Usuario" /></div>
+                            </br>
+                <div style="text-align:center"><input id="btn" type="submit" value="Subir" /></div>
 
             </form>
+            </br>
+
+            <div style="text-align:center"><a href="UsuarioServlet" style="color: #04AA6D;">Cancelar</a></div>
         </section>
     </body>
 </html>

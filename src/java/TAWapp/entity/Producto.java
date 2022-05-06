@@ -57,12 +57,12 @@ public class Producto implements Serializable {
     private String titulo;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 300)
     @Column(name = "DESCRIPCION")//
     private String descripcion;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 300)
     @Column(name = "URL_IMAGEN")//
     private String urlImagen;
     @JoinColumn(name = "CATEGORIA_IDCATEGORIA", referencedColumnName = "ID_CATEGORIA")//

@@ -38,7 +38,7 @@ public class VenderServlet extends TAWappServlet {
         if (super.comprobarSession(request, response)) {
             HttpSession session = request.getSession();
             UsuarioDTO user = (UsuarioDTO) session.getAttribute("usuario");
-            List<CategoriaDTO> listaCategorias = this.categoriaService.listarCategorias();
+            List<CategoriaDTO> listaCategorias = this.categoriaService.listarCategorias("");
 
             request.setAttribute("usuario", user);
             request.setAttribute("categorias", listaCategorias);

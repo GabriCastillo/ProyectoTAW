@@ -21,6 +21,7 @@
                 <li><a class="active" href="UsuarioServlet">Home</a></li>
                 <li><a href="UsuarioServlet">Listado de usuarios</a></li>
                 <li><a href="ProductoServlet">Listado de productos</a></li>
+                <li><a href="CategoriaServlet">Listado de categorias</a></li>
                 <li style="float:right"><a href="LogoutServlet">Cerrar Sesion</a></li>
                 <li style="float:right"><a><%= admin.getNombre()%></a></li>
         </header>
@@ -52,6 +53,7 @@
         margin-left: 20px;
         width: 70%;
     }
+    
     
     .select {
         background-color: #828282;
@@ -175,6 +177,16 @@
     }
     #btn{
         background-color:#04AA6D;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+     #btnCancel{
+        background-color:#828282;
         border: none;
         color: white;
         padding: 15px 32px;

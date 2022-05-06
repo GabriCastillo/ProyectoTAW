@@ -52,11 +52,13 @@
         <tr>
             <td><%= producto.getTitulo()%></td>
             <td><%= producto.getDescripcion()%></td>            
-            <td><%= producto.getImagen()%></td>                                 
+            <td> <img src="<%= producto.getImagen() %>" 
+                         style="border-radius:15px;border: 5px solid #04AA6D " 
+                         alt="<%= producto.getImagen() %>" width="200" height="200"></td>                                 
             <td><%= producto.getCategoriaIdcategoria().getTipo()%></td>
             <td><%= producto.getUsuarioVendedor().getNombre()%></td>  
-            <td><a href="ProductoBorrarServlet?id=<%= producto.getIdproducto()%>">Borrar</a></td> 
-            <td><a href="ProductoNuevoEditarServlet?id=<%= producto.getIdproducto()%>">Editar</a></td>            
+            <td><a href="ProductoBorrarServlet?id=<%= producto.getIdproducto()%>" style="color: #04AA6D;">Borrar</a></td> 
+            <td><a href="ProductoNuevoEditarServlet?id=<%= producto.getIdproducto()%>" style="color: #04AA6D;">Editar</a></td>            
         </tr>
 
         <%
@@ -69,7 +71,6 @@
     </br>
 
     <a href="ProductoNuevoEditarServlet">Crear nuevo producto ... </a>
-
 </body>
 </html>
 

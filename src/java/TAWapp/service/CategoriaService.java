@@ -19,23 +19,67 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class CategoriaService {
-    
-    @EJB CategoriaFacade categoriaFacade;
-    
-    public List<CategoriaDTO> listarCategorias () {
-        List<Categoria> lista = this.categoriaFacade.findAll();
-        return this.listaEntityADTO(lista);
+
+    @EJB
+    CategoriaFacade categoriaFacade;
+
+    public List<CategoriaDTO> listarCategorias(String filtroTitulo) {
+        List<Categoria> categorias;
+
+        if (filtroTitulo == null || filtroTitulo.isEmpty()) {
+            categorias = this.categoriaFacade.findAll();        
+        } else {
+            categorias = this.categoriaFacade.findByTitulo(filtroTitulo);
+        }
+        
+        return this.listaEntityADTO(categorias);
     }
-    
-     private List<CategoriaDTO> listaEntityADTO (List<Categoria> lista) {
+
+    private List<CategoriaDTO> listaEntityADTO(List<Categoria> lista) {
         List<CategoriaDTO> listaDTO = null;
         if (lista != null) {
             listaDTO = new ArrayList<>();
-            for (Categoria r :lista) {
+            for (Categoria r : lista) {
                 listaDTO.add(r.toDTO());
             }
         }
         return listaDTO;
     }
-    
+
+    public CategoriaDTO buscarCategoria(Integer id) {
+        Categoria categoria = this.categoriaFacade.find(id);
+        return categoria.toDTO();
+    }
+
+    public void borrarCategoria(Integer id) {
+        Categoria categoria = this.categoriaFacade.find(id);
+
+        this.categoriaFacade.remove(categoria);
+    }
+
+    private void rellenarCategoria(Categoria categoria,
+            String tipo) {
+
+        categoria.setTipo(tipo);
+
+    }
+
+    public void crearCategoria(String tipo) {
+        Categoria categoria = new Categoria();
+        this.rellenarCategoria(categoria, tipo);
+
+        this.categoriaFacade.create(categoria);
+
+    }
+
+    public void modificarCategoria(Integer id,
+            String tipo) {
+
+        Categoria categoria = this.categoriaFacade.find(id);
+
+        this.rellenarCategoria(categoria, tipo);
+
+        this.categoriaFacade.edit(categoria);
+    }
+
 }

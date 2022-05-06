@@ -35,24 +35,20 @@
                         <div class="input-container ic1">
                             <input id="titulo" class="input" type="text" name="titulo" placeholder=" " value="<%= producto == null ? "" : producto.getTitulo()%>" />
                             <div class="cut"></div>
-                            <label for="titulo" class="placeholder">Titulo:</label>
+                            <label for="titulo" class="placeholder">Titulo</label>
                         </div>         
 
                         <div class="input-container ic2" >
-                            <textarea  id="descripcion"  name="descripcion" class="input2" type="text" style="width:70%; height:130px;" placeholder=" " >
-<%= producto == null ? "" : producto.getDescripcion()%>
-                            </textarea>                            
-
-                            <input id="descripcion" class="input2" type="text" name="descripcion" placeholder=" " value="<%= producto == null ? "" : producto.getDescripcion()%>" />
+                            <textarea  id="descripcion"  name="descripcion" class="input" type="text" style="width:70%; height:130px;" placeholder=" " value="<%= producto == null ? " " : producto.getDescripcion()%>"><%= producto == null ? " " : producto.getDescripcion()%></textarea>                            
                             <div class="cut2"></div>
                             <label for="descripcion" class="placeholder">Descripcion</label>
                         </div>
                     </div>
                     <div class="dBox">
-                        <div class="input-container ic3" >
-                            <input id="url" class="input" type="file" accept="image/*" name="url" value="<%= producto == null ? "" : producto.getImagen()%>" /> 
+                        <div class="input-container ic1" >
+                            <input id="url" class="input" type="text" name="url" />
                             <div class="cut3"></div>
-                            <label for="url" class="placeholder">Selecciona la imagen:</label>
+                            <label for="url" class="placeholder">Selecciona la imagen:</label>                     
                         </div>
 
 
@@ -96,8 +92,11 @@
                     </div>
                 </div>
                 </br>
-                <div style="text-align:center"><input id="btn" type="submit" value="Añadir Producto" /></div>
+                <div style="text-align:center"><input id="btn" type="submit" value="Subir" /></div>
+
             </form>
+            </br>
+            <div style="text-align:center"><a href="ProductoServlet" style="color: #04AA6D;">Cancelar</a></div>
     </body>
 </html>
 

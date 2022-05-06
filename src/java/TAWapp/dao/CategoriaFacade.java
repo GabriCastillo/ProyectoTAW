@@ -6,9 +6,11 @@
 package TAWapp.dao;
 
 import TAWapp.entity.Categoria;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,15 @@ public class CategoriaFacade extends AbstractFacade<Categoria> {
 
     public CategoriaFacade() {
         super(Categoria.class);
+    }
+    
+    public List<Categoria> findByTitulo (String t) {
+        Query q;
+            q = this.getEntityManager().createQuery("select c from Categoria c where upper(c.tipo) like :tipo");
+        q.setParameter("tipo", '%' + t.toUpperCase() +'%');
+        return q.getResultList();
+
+        
     }
     
 }
