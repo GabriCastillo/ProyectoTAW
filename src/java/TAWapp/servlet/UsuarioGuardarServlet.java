@@ -57,8 +57,10 @@ public class UsuarioGuardarServlet extends TAWappServlet {
                 usuarioService.crearUsuario(nombre,  apellido,  domicilio,  ciudad, 
                                edad,  sexo,  contraseña,  rol);
             } else {                               // Editar usuario
+               
                usuarioService.modificarUsuario(Integer.parseInt(strId),nombre,  apellido,  domicilio,  ciudad, 
                                edad,  sexo,  contraseña,  rol);
+               
             }
 
             response.sendRedirect(request.getContextPath() + "/UsuarioServlet");

@@ -7,7 +7,7 @@ package TAWapp.entity;
 
 import TAWapp.dto.CategoriaDTO;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author RaulDF
+ * @author frees
  */
 @Entity
 @Table(name = "CATEGORIA")
@@ -50,7 +49,7 @@ public class Categoria implements Serializable {
     @Column(name = "TIPO")
     private String tipo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoriaIdcategoria")
-    private List<Producto> productoList;
+    private Collection<Producto> productoCollection;
 
     public Categoria() {
     }
@@ -81,12 +80,12 @@ public class Categoria implements Serializable {
     }
 
     @XmlTransient
-    public List<Producto> getProductoList() {
-        return productoList;
+    public Collection<Producto> getProductoCollection() {
+        return productoCollection;
     }
 
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
+    public void setProductoCollection(Collection<Producto> productoCollection) {
+        this.productoCollection = productoCollection;
     }
 
     @Override
@@ -111,14 +110,16 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.Categoria[ idCategoria=" + idCategoria + " ]";
+        return "TAWapp.dao.Categoria[ idCategoria=" + idCategoria + " ]";
     }
-    public CategoriaDTO toDTO () {    
+
+    public CategoriaDTO toDTO() {
         CategoriaDTO dto = new CategoriaDTO();
         
         dto.setIdCategoria(idCategoria);
         dto.setTipo(tipo);
                 
-        return dto;        
-    } 
+        return dto;  
+    }
+    
 }

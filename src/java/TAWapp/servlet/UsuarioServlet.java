@@ -6,8 +6,14 @@ package TAWapp.servlet;
 
 import TAWapp.service.UsuarioService;
 import TAWapp.dao.UsuarioFacade;
+import TAWapp.dto.CategoriaDTO;
+import TAWapp.dto.CompradorProductoDTO;
+import TAWapp.dto.ProductoDTO;
 import TAWapp.dto.UsuarioDTO;
 import TAWapp.entity.Usuario;
+import TAWapp.service.CategoriaService;
+import TAWapp.service.CompradorProductoService;
+import TAWapp.service.ProductoService;
 import javax.ejb.EJB;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -26,6 +32,11 @@ public class UsuarioServlet extends TAWappServlet {
 
     @EJB
     UsuarioService usuarioService;
+    @EJB ProductoService productoService;
+    @EJB CategoriaService categoriaService;
+    @EJB CompradorProductoService subastaService;
+ 
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,7 +51,12 @@ public class UsuarioServlet extends TAWappServlet {
             throws ServletException, IOException {
         if (super.comprobarSession(request, response)) {
             HttpSession session = request.getSession();
+            List<CategoriaDTO> listaCategorias = this.categoriaService.listarCategorias();
+             request.setAttribute("categorias", listaCategorias);
             UsuarioDTO user = (UsuarioDTO) session.getAttribute("usuario");
+            List<ProductoDTO> productos = this.productoService.listarProductos("");
+            session.setAttribute("productos", productos);
+               request.setAttribute("productos", productos);
             session.setAttribute("usuario", user);
             request.setAttribute("usuario", user);
 
@@ -51,6 +67,10 @@ public class UsuarioServlet extends TAWappServlet {
                 request.setAttribute("usuarios", usuarios);
                 request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp").forward(request, response);
             } else {
+                List<CompradorProductoDTO> listaSubastas = this.subastaService.listaPropiasSubastas("");
+                request.setAttribute("subastas", listaSubastas);
+                 session.setAttribute("subastas", listaSubastas);
+                request.setAttribute("productos", productos);
                 request.getRequestDispatcher("/WEB-INF/jsp/iniciado.jsp").forward(request, response);
             }
 

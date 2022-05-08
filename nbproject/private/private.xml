@@ -2,6 +2,22 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/servlet/CategoriaFiltroServlet.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/dao/UsuarioFacade.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/servlet/UsuarioServlet.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/entity/Usuario.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/service/UsuarioService.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/dto/CompradorProductoDTO.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/servlet/VenderServlet.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/servlet/ComprarPujaServlet.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/web/WEB-INF/jsp/compras.jsp</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/service/CompradorProductoService.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/entity/CompradorProducto.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/servlet/SubirProductoServlet.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/servlet/CerrarPujaServlet.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/web/WEB-INF/jsp/producto.jsp</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/web/WEB-INF/jsp/MisSubastas.jsp</file>
+        </group>
     </open-files>
 </project-private>

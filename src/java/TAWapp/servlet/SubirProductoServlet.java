@@ -52,10 +52,9 @@ public class SubirProductoServlet extends HttpServlet {
         String fechaLimite = (String)request.getParameter("fechaLimite");
         String i = (String) request.getParameter("id");
         int user = Integer.parseInt(i);
-        this.ps.crearProducto(titulo, descripcion,imagen,categoria,user);
-        List<ProductoDTO> productos = ps.listarProductos(titulo);
-        ProductoDTO producto = productos.get(0);
-        Producto pro = this.ps.listaProductos(producto.getTitulo()).get(0);
+        Producto pro = this.ps.crearProductoID(titulo, descripcion,imagen,categoria,user);
+        
+        //Producto pro = this.ps.listaProductos(producto.getTitulo()).get(0);
         this.cps.crearSubasta(pro,precioInicial,precioLimite,user);  
         
         
@@ -64,7 +63,7 @@ public class SubirProductoServlet extends HttpServlet {
         //Subasta tambien se crea
         
         HttpSession session = request.getSession();
-        session.setAttribute("producto", producto);
+        session.setAttribute("producto", pro);
         response.sendRedirect(request.getContextPath()+"/VenderServlet");
     }
 

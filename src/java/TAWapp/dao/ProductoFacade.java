@@ -5,6 +5,7 @@
  */
 package TAWapp.dao;
 
+import TAWapp.entity.Categoria;
 import TAWapp.entity.Producto;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -14,7 +15,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author RaulDF
+ * @author frees
  */
 @Stateless
 public class ProductoFacade extends AbstractFacade<Producto> {
@@ -30,10 +31,28 @@ public class ProductoFacade extends AbstractFacade<Producto> {
     public ProductoFacade() {
         super(Producto.class);
     }
-    public List<Producto> findByTitulo (String titulo) {
-        Query q;
-        q = this.getEntityManager().createQuery("select p from Producto p where p.titulo like :titulo");
-        q.setParameter("titulo", '%' + titulo +'%');
+
+    public List<Producto> findByTitulo(String filtroTitulo) {
+       Query q;
+        q = this.getEntityManager().createQuery("select p from Producto p where UPPER(p.titulo) like :titulo");
+        q.setParameter("titulo", '%' + filtroTitulo.toUpperCase() +'%');
         return q.getResultList();
     }
+    public List<Producto> findByTituloCategoria(String filtroTitulo,String i) {
+       Query q;
+       
+        q = this.getEntityManager().createQuery("select p from Producto p where UPPER(p.titulo) like :titulo and p.categoriaIdcategoria = :categoria");
+        q.setParameter("titulo", '%' + filtroTitulo.toUpperCase() +'%');
+        Categoria c = new Categoria(Integer.parseInt(i));
+        q.setParameter("categoria",c );
+        return q.getResultList();
+    }
+    public List<Producto> findByCategoria(String i) {
+       Query q;
+        q = this.getEntityManager().createQuery("select p from Producto p where p.categoriaIdcategoria = :categoria");
+        Categoria c = new Categoria(Integer.parseInt(i));
+        q.setParameter("categoria",c );
+        return q.getResultList();
+    }
+    
 }

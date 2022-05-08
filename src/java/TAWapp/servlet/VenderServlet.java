@@ -29,6 +29,7 @@ import javax.servlet.http.HttpSession;
 public class VenderServlet extends TAWappServlet {
  @EJB CategoriaService categoriaService;
  @EJB CompradorProductoService subastaService;
+ 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,7 +45,9 @@ public class VenderServlet extends TAWappServlet {
             HttpSession session = request.getSession();
             UsuarioDTO user = (UsuarioDTO) session.getAttribute("usuario");
             List<CategoriaDTO> listaCategorias = this.categoriaService.listarCategorias();
-            List<CompradorProductoDTO> listaSubastas = this.subastaService.listaPropiasSubastas(user.getNombre());
+            
+           List<CompradorProductoDTO> listaSubastas = this.subastaService.listaPropiasSubastas(user.getNombre());
+           
             request.setAttribute("subastas", listaSubastas);
             request.setAttribute("usuario", user);
             request.setAttribute("categorias", listaCategorias);

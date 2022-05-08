@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author RaulDF
+ * @author frees
  */
 @Stateless
 public class CategoriaFacade extends AbstractFacade<Categoria> {

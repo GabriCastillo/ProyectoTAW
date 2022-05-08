@@ -6,25 +6,27 @@
 package TAWapp.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author RaulDF
+ * @author frees
  */
 @Entity
 @Table(name = "ESTADISTICA")
@@ -40,11 +42,13 @@ public class Estadistica implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDESTADISTICA")
     private Integer idestadistica;
-    @ManyToMany(mappedBy = "estadisticaList")
-    private List<CompradorProducto> compradorProductoList;
     @JoinColumn(name = "USUARIO_ANALISTA", referencedColumnName = "IDUSUARIO")
     @ManyToOne(optional = false)
     private Usuario usuarioAnalista;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "estadistica")
+    private EstadisticaHasProductosFavoritos estadisticaHasProductosFavoritos;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadistica")
+    private Collection<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoCollection;
 
     public Estadistica() {
     }
@@ -61,21 +65,29 @@ public class Estadistica implements Serializable {
         this.idestadistica = idestadistica;
     }
 
-    @XmlTransient
-    public List<CompradorProducto> getCompradorProductoList() {
-        return compradorProductoList;
-    }
-
-    public void setCompradorProductoList(List<CompradorProducto> compradorProductoList) {
-        this.compradorProductoList = compradorProductoList;
-    }
-
     public Usuario getUsuarioAnalista() {
         return usuarioAnalista;
     }
 
     public void setUsuarioAnalista(Usuario usuarioAnalista) {
         this.usuarioAnalista = usuarioAnalista;
+    }
+
+    public EstadisticaHasProductosFavoritos getEstadisticaHasProductosFavoritos() {
+        return estadisticaHasProductosFavoritos;
+    }
+
+    public void setEstadisticaHasProductosFavoritos(EstadisticaHasProductosFavoritos estadisticaHasProductosFavoritos) {
+        this.estadisticaHasProductosFavoritos = estadisticaHasProductosFavoritos;
+    }
+
+    @XmlTransient
+    public Collection<EstadisticaHasCompradorProducto> getEstadisticaHasCompradorProductoCollection() {
+        return estadisticaHasCompradorProductoCollection;
+    }
+
+    public void setEstadisticaHasCompradorProductoCollection(Collection<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoCollection) {
+        this.estadisticaHasCompradorProductoCollection = estadisticaHasCompradorProductoCollection;
     }
 
     @Override
@@ -100,7 +112,7 @@ public class Estadistica implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.Estadistica[ idestadistica=" + idestadistica + " ]";
+        return "TAWapp.dao.Estadistica[ idestadistica=" + idestadistica + " ]";
     }
     
 }

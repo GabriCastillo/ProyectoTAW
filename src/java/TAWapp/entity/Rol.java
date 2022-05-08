@@ -7,7 +7,7 @@ package TAWapp.entity;
 
 import TAWapp.dto.RolDTO;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author RaulDF
+ * @author frees
  */
 @Entity
 @Table(name = "ROL")
@@ -49,7 +49,7 @@ public class Rol implements Serializable {
     @Column(name = "NOMBRE")
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolIdrol")
-    private List<Usuario> usuarioList;
+    private Collection<Usuario> usuarioCollection;
 
     public Rol() {
     }
@@ -80,12 +80,12 @@ public class Rol implements Serializable {
     }
 
     @XmlTransient
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
+    public Collection<Usuario> getUsuarioCollection() {
+        return usuarioCollection;
     }
 
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
+    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
+        this.usuarioCollection = usuarioCollection;
     }
 
     @Override
@@ -110,14 +110,16 @@ public class Rol implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.Rol[ idRol=" + idRol + " ]";
+        return "TAWapp.dao.Rol[ idRol=" + idRol + " ]";
     }
-    public RolDTO toDTO () {    
-        RolDTO dto = new RolDTO();
+
+    public RolDTO toDTO() {
+         RolDTO dto = new RolDTO();
         
         dto.setIdRol(idRol);
         dto.setNombre(nombre);
                 
-        return dto;        
-    }  
+        return dto; 
+    }
+    
 }

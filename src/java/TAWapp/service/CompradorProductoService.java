@@ -29,6 +29,17 @@ public class CompradorProductoService {
     @EJB ProductoFacade productoFacade;
     
     public List<CompradorProductoDTO> listaPropiasSubastas(String nombreUsuario){
+        if (nombreUsuario == null || nombreUsuario.isEmpty()) {
+            List<CompradorProducto> list = this.cpFacade.findAll();
+        List<CompradorProducto> listaMisSubastas = new ArrayList<>();
+        for(CompradorProducto cp : list){
+           
+                listaMisSubastas.add(cp);
+            
+            
+        }  return this.listaEntityADTO(listaMisSubastas);
+        }
+        else{ 
         List<CompradorProducto> list = this.cpFacade.findAll();
         List<CompradorProducto> listaMisSubastas = new ArrayList<>();
         for(CompradorProducto cp : list){
@@ -36,8 +47,24 @@ public class CompradorProductoService {
                 listaMisSubastas.add(cp);
             }
         }
-        return this.listaEntityADTO(listaMisSubastas);
+        return this.listaEntityADTO(listaMisSubastas);}
     } 
+    public List<CompradorProductoDTO> listaproductos(List<ProductoDTO> productos){
+        List<CompradorProducto> list = this.cpFacade.findAll();
+        List<CompradorProducto> listaMisSubastas = new ArrayList<>();
+        for(ProductoDTO producto:productos){
+        for(CompradorProducto cp : list){
+            if(cp.getProductoIdproducto().equals(producto.getIdproducto())){
+                listaMisSubastas.add(cp);
+            }
+        }
+        
+        }
+        
+        return this.listaEntityADTO(listaMisSubastas);
+    }
+        
+    
     private List<CompradorProductoDTO> listaEntityADTO (List<CompradorProducto> lista) {
         List<CompradorProductoDTO> listaDTO = null;
         if (lista != null) {
@@ -67,7 +94,7 @@ public class CompradorProductoService {
         cp.setUsuarioVendedor(usuario);
         cp.setUsuarioComprador(usuario);
         
-        usuario.getCompradorProductoList().add(cp);
+       // usuario.getCompradorProductoList().add(cp);
     }
 
     public void cerrarSubasta(String strId) {
@@ -77,6 +104,14 @@ public class CompradorProductoService {
         
         this.cpFacade.edit(subasta);
     }
-    
+    public void comprarSubasta(String strId,Integer comprador,String precio) {
+        CompradorProducto subasta = this.cpFacade.find(strId);
+        Usuario user = new Usuario(comprador);
+        subasta.setUsuarioComprador(user);
+        subasta.setPrecioCompra(0);
+        subasta.setPrecioSalida(Integer.parseInt(precio));
+        
+        this.cpFacade.edit(subasta);
+    }
 }
 

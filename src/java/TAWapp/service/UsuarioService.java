@@ -110,9 +110,11 @@ public class UsuarioService {
      public UsuarioDTO crearUsuario(String usuario, String clave) {
         Usuario user = new Usuario();
 
-        this.rellenarCliente(user,usuario,clave);
-
+        user.setNombre(usuario);
+        user.setPassword(clave);
+            System.out.print(user);
         this.usuarioFacade.create(user);
+       
         return user.toDTO();
     }
 

@@ -39,8 +39,11 @@ public class ProductoServlet extends TAWappServlet {
         if (super.comprobarSession(request, response)) {
             
             String filtroTitulo = request.getParameter("filtroTitulo");
+            String categoria = request.getParameter("categoria");
+            System.out.print(categoria);
+           
             List<ProductoDTO> productos = this.productoService.listarProductos(filtroTitulo);
-
+            
             request.setAttribute("productos", productos);
             request.getRequestDispatcher("/WEB-INF/jsp/productos.jsp").forward(request, response);        
         }  

@@ -39,9 +39,7 @@
                         </div>         
 
                         <div class="input-container ic2" >
-                            <textarea  id="descripcion"  name="descripcion" class="input2" type="text" style="width:70%; height:130px;" placeholder=" " >
-<%= producto == null ? "" : producto.getDescripcion()%>
-                            </textarea>                            
+                                                        
 
                             <input id="descripcion" class="input2" type="text" name="descripcion" placeholder=" " value="<%= producto == null ? "" : producto.getDescripcion()%>" />
                             <div class="cut2"></div>
@@ -51,13 +49,14 @@
                     <div class="dBox">
                         <div class="input-container ic3" >
                             <input id="url" class="input" type="file" accept="image/*" name="url" value="<%= producto == null ? "" : producto.getImagen()%>" /> 
+                            
                             <div class="cut3"></div>
                             <label for="url" class="placeholder">Selecciona la imagen:</label>
                         </div>
 
 
                         <div class="input-container ic2">
-                            <select id="categoria" class="input" name="categoria" placeholder=" ">
+                            <select id="categoria" class="input" name="categoria" placeholder=" " >
                                 <%
                                     for (CategoriaDTO c : listaCategorias) {
                                         String selected = "";

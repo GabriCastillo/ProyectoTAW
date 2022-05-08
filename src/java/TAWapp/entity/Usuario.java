@@ -7,7 +7,7 @@ package TAWapp.entity;
 
 import TAWapp.dto.UsuarioDTO;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -29,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author RaulDF
+ * @author frees
  */
 @Entity
 @Table(name = "USUARIO")
@@ -86,16 +85,16 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "PASSWORD")
     private String password;
-    @ManyToMany(mappedBy = "usuarioList")
-    private List<Producto> productoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioAnalista")
-    private List<Estadistica> estadisticaList;
+    private Collection<Estadistica> estadisticaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioVendedor")
-    private List<Producto> productoList1;
+    private Collection<Producto> productoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private Collection<ProductosFavoritos> productosFavoritosCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioVendedor")
-    private List<CompradorProducto> compradorProductoList;
+    private Collection<CompradorProducto> compradorProductoCollection;
     @OneToMany(mappedBy = "usuarioComprador")
-    private List<CompradorProducto> compradorProductoList1;
+    private Collection<CompradorProducto> compradorProductoCollection1;
     @JoinColumn(name = "ROL_IDROL", referencedColumnName = "ID_ROL")
     @ManyToOne(optional = false)
     private Rol rolIdrol;
@@ -183,48 +182,48 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<Producto> getProductoList() {
-        return productoList;
+    public Collection<Estadistica> getEstadisticaCollection() {
+        return estadisticaCollection;
     }
 
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
-    }
-
-    @XmlTransient
-    public List<Estadistica> getEstadisticaList() {
-        return estadisticaList;
-    }
-
-    public void setEstadisticaList(List<Estadistica> estadisticaList) {
-        this.estadisticaList = estadisticaList;
+    public void setEstadisticaCollection(Collection<Estadistica> estadisticaCollection) {
+        this.estadisticaCollection = estadisticaCollection;
     }
 
     @XmlTransient
-    public List<Producto> getProductoList1() {
-        return productoList1;
+    public Collection<Producto> getProductoCollection() {
+        return productoCollection;
     }
 
-    public void setProductoList1(List<Producto> productoList1) {
-        this.productoList1 = productoList1;
-    }
-
-    @XmlTransient
-    public List<CompradorProducto> getCompradorProductoList() {
-        return compradorProductoList;
-    }
-
-    public void setCompradorProductoList(List<CompradorProducto> compradorProductoList) {
-        this.compradorProductoList = compradorProductoList;
+    public void setProductoCollection(Collection<Producto> productoCollection) {
+        this.productoCollection = productoCollection;
     }
 
     @XmlTransient
-    public List<CompradorProducto> getCompradorProductoList1() {
-        return compradorProductoList1;
+    public Collection<ProductosFavoritos> getProductosFavoritosCollection() {
+        return productosFavoritosCollection;
     }
 
-    public void setCompradorProductoList1(List<CompradorProducto> compradorProductoList1) {
-        this.compradorProductoList1 = compradorProductoList1;
+    public void setProductosFavoritosCollection(Collection<ProductosFavoritos> productosFavoritosCollection) {
+        this.productosFavoritosCollection = productosFavoritosCollection;
+    }
+
+    @XmlTransient
+    public Collection<CompradorProducto> getCompradorProductoCollection() {
+        return compradorProductoCollection;
+    }
+
+    public void setCompradorProductoCollection(Collection<CompradorProducto> compradorProductoCollection) {
+        this.compradorProductoCollection = compradorProductoCollection;
+    }
+
+    @XmlTransient
+    public Collection<CompradorProducto> getCompradorProductoCollection1() {
+        return compradorProductoCollection1;
+    }
+
+    public void setCompradorProductoCollection1(Collection<CompradorProducto> compradorProductoCollection1) {
+        this.compradorProductoCollection1 = compradorProductoCollection1;
     }
 
     public Rol getRolIdrol() {
@@ -257,9 +256,14 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.Usuario[ idusuario=" + idusuario + " ]";
+        return "TAWapp.dao.Usuario[ idusuario=" + idusuario + " ]";
     }
-    public UsuarioDTO toDTO () {    
+
+    public Object getProductoList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public UsuarioDTO toDTO() {
         UsuarioDTO dto = new UsuarioDTO();
         dto.setIdusuario(idusuario);   
         dto.setRolIdrol(rolIdrol.toDTO());
@@ -270,8 +274,11 @@ public class Usuario implements Serializable {
         dto.setDomicilio(domicilio);
         dto.setEdad(edad);
         dto.setSexo(sexo);
-        
-                
         return dto;        
     }
+
+    public Object getCompradorProductoList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

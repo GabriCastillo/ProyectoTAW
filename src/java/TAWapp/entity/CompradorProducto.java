@@ -7,17 +7,17 @@ package TAWapp.entity;
 
 import TAWapp.dto.CompradorProductoDTO;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author RaulDF
+ * @author frees
  */
 @Entity
 @Table(name = "COMPRADOR_PRODUCTO")
@@ -53,11 +53,8 @@ public class CompradorProducto implements Serializable {
     @NotNull
     @Column(name = "PRECIO_COMPRA")
     private int precioCompra;
-    @JoinTable(name = "ESTADISTICA_HAS_COMPRADOR_PRODUCTO", joinColumns = {
-        @JoinColumn(name = "COMPRADOR_PRODUCTO_IDCOMPRA", referencedColumnName = "IDCOMPRA")}, inverseJoinColumns = {
-        @JoinColumn(name = "ESTADISTICA_IDESTADISTICA", referencedColumnName = "IDESTADISTICA")})
-    @ManyToMany
-    private List<Estadistica> estadisticaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compradorProducto")
+    private Collection<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoCollection;
     @JoinColumn(name = "PRODUCTO_IDPRODUCTO", referencedColumnName = "IDPRODUCTO")
     @ManyToOne(optional = false)
     private Producto productoIdproducto;
@@ -74,7 +71,7 @@ public class CompradorProducto implements Serializable {
     public CompradorProducto(String idcompra) {
         this.idcompra = idcompra;
     }
-
+   
     public CompradorProducto(String idcompra, int precioSalida, int precioCompra) {
         this.idcompra = idcompra;
         this.precioSalida = precioSalida;
@@ -92,7 +89,11 @@ public class CompradorProducto implements Serializable {
     public int getPrecioSalida() {
         return precioSalida;
     }
-
+    
+    public Usuario getcomprador() {
+        return usuarioComprador;
+    }
+    
     public void setPrecioSalida(int precioSalida) {
         this.precioSalida = precioSalida;
     }
@@ -106,12 +107,12 @@ public class CompradorProducto implements Serializable {
     }
 
     @XmlTransient
-    public List<Estadistica> getEstadisticaList() {
-        return estadisticaList;
+    public Collection<EstadisticaHasCompradorProducto> getEstadisticaHasCompradorProductoCollection() {
+        return estadisticaHasCompradorProductoCollection;
     }
 
-    public void setEstadisticaList(List<Estadistica> estadisticaList) {
-        this.estadisticaList = estadisticaList;
+    public void setEstadisticaHasCompradorProductoCollection(Collection<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoCollection) {
+        this.estadisticaHasCompradorProductoCollection = estadisticaHasCompradorProductoCollection;
     }
 
     public Producto getProductoIdproducto() {
@@ -160,15 +161,19 @@ public class CompradorProducto implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.CompradorProducto[ idcompra=" + idcompra + " ]";
+        return "TAWapp.dao.CompradorProducto[ idcompra=" + idcompra + " ]";
     }
+
     public CompradorProductoDTO toDTO() {
-          CompradorProductoDTO dto = new CompradorProductoDTO();
+        CompradorProductoDTO dto = new CompradorProductoDTO();
+        
           dto.setIdCompradorProductoDTO(idcompra);
           dto.setPrecio_Compra(precioCompra);
           dto.setPrecio_salida(precioSalida);
           dto.setProducto(productoIdproducto.toDTO());
           dto.setVendedor(usuarioVendedor.toDTO());
+          dto.setComprador(usuarioComprador.toDTO());
           return dto;
     }
+    
 }

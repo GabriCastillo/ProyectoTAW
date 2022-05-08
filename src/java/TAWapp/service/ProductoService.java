@@ -57,6 +57,29 @@ public class ProductoService {
         
         return this.listaEntityADTO(productos);                
     } 
+    public List<ProductoDTO> listarProductosCategoria (String filtroTitulo,String categoria) {
+        List<Producto> productos;
+        if(categoria == null || categoria.isEmpty() ){
+        if (filtroTitulo == null || filtroTitulo.isEmpty()) {
+            productos = this.productoFacade.findAll(); 
+            return this.listaEntityADTO(productos);  
+        } else {
+            productos = this.productoFacade.findByTitulo(filtroTitulo);
+            return this.listaEntityADTO(productos);  
+        }
+        }
+        else{
+            if (filtroTitulo == null || filtroTitulo.isEmpty()) {
+            productos = this.productoFacade.findByCategoria(categoria); 
+            return this.listaEntityADTO(productos);  
+        } else {
+            productos = this.productoFacade.findByTituloCategoria(filtroTitulo,categoria);
+            return this.listaEntityADTO(productos);  
+        }
+        }
+       
+                     
+    } 
     public List<Producto> listaProductos (String filtroTitulo) {
         List<Producto> productos;
 
@@ -77,7 +100,7 @@ public class ProductoService {
     public void borrarProducto(Integer id) {
         Producto producto = this.productoFacade.find(id);
         Usuario u = producto.getUsuarioVendedor();
-        u.getProductoList().remove(producto);
+       // u.getProductoList().remove(producto);
 
         this.productoFacade.remove(producto);
     }
@@ -94,7 +117,7 @@ public class ProductoService {
         
         producto.setCategoriaIdcategoria(c);
         producto.setUsuarioVendedor(usuario);
-        usuario.getProductoList().add(producto);
+       // usuario.getProductoList().add(producto);
     }
 
     public void crearProducto(String titulo, String descripcion, String URL,  int categoria, int idUsuario) {
@@ -104,13 +127,19 @@ public class ProductoService {
         this.productoFacade.create(producto);
 
     }
+    public Producto crearProductoID(String titulo, String descripcion, String URL,  int categoria, int idUsuario) {
+        Producto producto = new Producto();
+        this.rellenarProducto(producto, titulo, descripcion, URL,categoria,idUsuario);
 
+        this.productoFacade.create(producto);
+        return producto;
+    }
     public void modificarProducto(Integer id,
             String titulo, String descripcion, String URL, int categoria, int idUsuario) {
 
         Producto producto = this.productoFacade.find(id);
         Usuario u = producto.getUsuarioVendedor();
-        u.getProductoList().remove(producto);
+       // u.getProductoList().remove(producto);
         
         this.rellenarProducto(producto, titulo, descripcion, URL,categoria,idUsuario);
 
