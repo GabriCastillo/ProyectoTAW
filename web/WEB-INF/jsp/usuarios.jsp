@@ -3,6 +3,7 @@
     Done:      : 100%
 --%>
 
+<%@page import="TAWapp.dto.RolDTO"%>
 <%@page import="TAWapp.dto.UsuarioDTO"%>
 <%@page import="TAWapp.entity.Usuario"%>
 <%@page import="java.util.List"%>
