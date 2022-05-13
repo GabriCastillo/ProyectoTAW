@@ -16,8 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -30,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author RaulDF
+ * @author casti
  */
 @Entity
 @Table(name = "PRODUCTO")
@@ -61,20 +59,17 @@ public class Producto implements Serializable {
     private String descripcion;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 500)
     @Column(name = "URL_IMAGEN")
     private String urlImagen;
-    @JoinTable(name = "PRODUCTOS_FAVORITOS", joinColumns = {
-        @JoinColumn(name = "PRODUCTO_IDPRODUCTO", referencedColumnName = "IDPRODUCTO")}, inverseJoinColumns = {
-        @JoinColumn(name = "USUARIO_COMPRADOR", referencedColumnName = "IDUSUARIO")})
-    @ManyToMany
-    private List<Usuario> usuarioList;
     @JoinColumn(name = "CATEGORIA_IDCATEGORIA", referencedColumnName = "ID_CATEGORIA")
     @ManyToOne(optional = false)
     private Categoria categoriaIdcategoria;
     @JoinColumn(name = "USUARIO_VENDEDOR", referencedColumnName = "IDUSUARIO")
     @ManyToOne(optional = false)
     private Usuario usuarioVendedor;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    private List<ProductosFavoritos> productosFavoritosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
     private List<CompradorProducto> compradorProductoList;
 
@@ -124,15 +119,6 @@ public class Producto implements Serializable {
         this.urlImagen = urlImagen;
     }
 
-    @XmlTransient
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
-
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
-    }
-
     public Categoria getCategoriaIdcategoria() {
         return categoriaIdcategoria;
     }
@@ -147,6 +133,15 @@ public class Producto implements Serializable {
 
     public void setUsuarioVendedor(Usuario usuarioVendedor) {
         this.usuarioVendedor = usuarioVendedor;
+    }
+
+    @XmlTransient
+    public List<ProductosFavoritos> getProductosFavoritosList() {
+        return productosFavoritosList;
+    }
+
+    public void setProductosFavoritosList(List<ProductosFavoritos> productosFavoritosList) {
+        this.productosFavoritosList = productosFavoritosList;
     }
 
     @XmlTransient
@@ -182,7 +177,8 @@ public class Producto implements Serializable {
     public String toString() {
         return "TAWapp.entity.Producto[ idproducto=" + idproducto + " ]";
     }
-    public ProductoDTO toDTO() {
+    
+     public ProductoDTO toDTO() {
         ProductoDTO dto = new ProductoDTO();
         dto.setIdproducto(idproducto);
         dto.setTitulo(titulo);

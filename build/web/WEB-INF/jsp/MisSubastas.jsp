@@ -4,6 +4,7 @@
     Author     : RaulDF
 --%>
 
+<%@page import="TAWapp.dto.CompradorProductoDTO"%>
 <%@page import="TAWapp.dto.UsuarioDTO"%>
 <%@page import="TAWapp.dto.CategoriaDTO"%>
 <%@page import="java.util.List"%>
@@ -17,7 +18,10 @@
     <%
         UsuarioDTO user = (UsuarioDTO) request.getAttribute("usuario");
         List<CategoriaDTO> listaCategorias = (List) request.getAttribute("categorias");
+        List<CompradorProductoDTO> listaSubastas = (List) request.getAttribute("subastas");
+       
     %> 
+
     <body>
         <header>       <ul>
                 <li><a class="active" href="UsuarioServlet">Home</a></li>
@@ -26,8 +30,58 @@
                 <li style="float:right"><a><%= user.getNombre()%></a></li>
         </header>
         <section>
-            <section id="subastas">
+            <section id="subastas" style="box-sizing:content-box">
                 <h1 id="titulo">Tus subastas</h1>
+                <%
+                    if (listaSubastas != null) {
+                        for (CompradorProductoDTO subasta : listaSubastas) {
+                %>
+
+                <div style="display:flex;margin-top: 20px;margin-bottom: 20px">
+                    <div style="width:40%;text-align: center">
+                        <img src="<%= subasta.getProducto().getImagen()%>" 
+                             style="border-radius:15px;border: 5px solid #04AA6D " 
+                             alt="Foto del producto" width="200" height="200"> 
+                    </div>
+                    <div style="width:30%">
+                        <h3><%=subasta.getProducto().getTitulo()%></h3><br/>
+                        <a style="color:white">Descripcion:<%= subasta.getProducto().getDescripcion()%></a><br/>
+
+                        <%
+                            if (subasta.getPrecio_Compra() == 0) {
+                        %>
+                        <a style="color:white">Precio vendido: <%= subasta.getPrecio_salida()%></a>
+                        <%
+                        } else {
+                        %>
+                        <a style="color:white">Precio actual: <%= subasta.getPrecio_salida()%></a><br/>
+                        <a style="color:white">Precio limite: <%= subasta.getPrecio_Compra()%></a><br/>
+                        <%
+                            }
+                        %>
+                    </div>
+                    <div style="text-align: center;width:20%;margin-top: 50px">
+                        <%
+                            if (subasta.getPrecio_Compra() == 0) {
+                        %>
+                        <a id="btnCancel" >Cerrada</a>
+                        <%
+                        } else {
+                        %>
+                        <a href="CerrarPujaServlet?id=<%= subasta.getIdCompradorProductoDTO()%>" id="btn" type="button" value="Cerrar Puja" >Cerrar Puja</a>
+                        <%
+                            }
+                        %>
+
+                    </div>
+                </div>
+                <%
+                        }
+                    }
+                %>
+
+
+
             </section>
             <section id="formulario">
                 <h1 id="titulo">Añade un producto</h1>
@@ -35,37 +89,22 @@
                     <div style="display:flex">
                         <div class="izqBox" style="width: 50%;margin-bottom: 15px">
                             <div class="input-container ic1">
-                                <input id="titulo" class="input" type="text" name="titulo" placeholder=" " />
+                                <input id="titulo" class="input" type="text" name="titulo" placeholder=" " required oninvalid="this.setCustomValidity('Pon el titulo')"
+                                       oninput="this.setCustomValidity('')"/>
                                 <div class="cut"></div>
                                 <label for="titulo" class="placeholder">Titulo</label>
                             </div>                   
                             <div class="input-container ic2" >
-                                <input id="titulo" class="input" type="text" name="precioInicial" placeholder=" " />
+                                <input id="titulo" class="input" type="number" name="precioInicial" placeholder=" " required oninvalid="this.setCustomValidity('Pon un precio')"
+                                       oninput="this.setCustomValidity('')"/>
                                 <div class="cut2"></div>
                                 <label for="precioInicial" class="placeholder">Precio Inicial</label>
                             </div>
                             <div class="input-container ic2">
-                                <input id="precioLimite" class="input" type="text" name="precioLimite" placeholder=" " />
+                                <input id="precioLimite" class="input" type="number" name="precioLimite" placeholder=" " required oninvalid="this.setCustomValidity('Pon un precio')"
+                                       oninput="this.setCustomValidity('')"/>
                                 <div class="cut2"></div>
                                 <label for="precioInicial" class="placeholder">Precio limite</label>
-                            </div>
-
-                            <div class="input-container ic2" >
-                                <input id="fechaLimite" class="input" type="date" name="fechaLimite" placeholder=" " />
-                                <div class="cut2"></div>
-                                <label for="fechaLimite" class="placeholder">Fecha Limite</label>
-                            </div>
-                        </div>
-                        <div class="dBox">
-                            <div class="input-container ic1" >
-                                <input id="descripcion" class="input2" type="text" name="descripcion" placeholder=" " />
-                                <div class="cut2"></div>
-                                <label for="descripcion" class="placeholder">Descripcion</label>
-                            </div>
-                            <div class="input-container ic3" >
-                                <input id="imagen" class="input" type="file" accept="image/*" name="imagen" />
-                                <div class="cut3"></div>
-                                <label for="imagen" class="placeholder">Selecciona la imagen:</label>
                             </div>
                             <div class="input-container ic2">
                                 <select id="categoria" class="input" name="categoria" placeholder=" ">
@@ -83,6 +122,22 @@
                                 <div class="cut2"></div>
                                 <label for="categoria" class="placeholder">Categoria</label>
                             </div>
+
+                        </div>
+                        <div class="dBox">
+                            <div class="input-container ic1" >
+                                <input id="descripcion" class="input2" type="text" name="descripcion" placeholder=" " required oninvalid="this.setCustomValidity('Pon una descripcion')"
+                                       oninput="this.setCustomValidity('')"/>
+                                <div class="cut2"></div>
+                                <label for="descripcion" class="placeholder">Descripcion</label>
+                            </div>
+                            <div class="input-container ic3" >
+                                <input id="imagen" class="input" type="text" name="imagen" required oninvalid="this.setCustomValidity('Pega la url de la imagen')"
+                                       oninput="this.setCustomValidity('')"/>
+                                <div class="cut3"></div>
+                                <label for="imagen" class="placeholder">Url imagen:</label>
+                            </div>
+
                         </div>
                         <input type="hidden" name="id" id="id" value="<%= user.getIdusuario()%>" />
 
@@ -91,6 +146,7 @@
                 </form>
             </section>
         </section>
+      
     </body>
 </html>
 <style>
@@ -236,6 +292,16 @@
         display: inline-block;
         font-size: 16px;
     }
+    #btnCancel{
+        background-color:#828282;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
     #formText{
         position: relative;
     }
@@ -251,6 +317,7 @@
         background-color:  #DBCFBB;
     }
     #titulo{
+
         display: block;
         text-align: center;
         font-size:26px;
@@ -262,11 +329,12 @@
         margin-top: 10px;
         background-color:#404040 ;
         width: 60%;
-        height: 600px;
         float: left;
     }
     #formulario{
+        position:fixed;
         border-radius: 25px;
+        margin-left: 62%;
         margin-top: 10px;
         background-color:#404040 ;
         width: 37%;

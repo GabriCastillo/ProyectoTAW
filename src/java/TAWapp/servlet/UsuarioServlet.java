@@ -4,8 +4,10 @@
  */
 package TAWapp.servlet;
 
+import TAWapp.dto.RolDTO;
 import TAWapp.service.UsuarioService;
 import TAWapp.dto.UsuarioDTO;
+import TAWapp.service.RolService;
 import javax.ejb.EJB;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -17,14 +19,15 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author casti
- * Done: 100%
+ * @author casti Done: 100%
  */
 @WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
 public class UsuarioServlet extends TAWappServlet {
 
     @EJB
     UsuarioService usuarioService;
+    @EJB
+    RolService rolService;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,8 +47,13 @@ public class UsuarioServlet extends TAWappServlet {
             request.setAttribute("usuario", user);
 
             if (user.getRolIdrol().getIdRol() == 1) {
+                List<RolDTO> listaRoles = this.rolService.listarRoles();
+
+                request.setAttribute("roles", listaRoles);
                 String filtroNombre = request.getParameter("filtroNombre");
-                List<UsuarioDTO> usuarios = this.usuarioService.listarUsuarios(filtroNombre);
+                String filtroApellido = request.getParameter("filtroApellido");
+                String filtroRol = request.getParameter("filtroRol");
+                List<UsuarioDTO> usuarios = this.usuarioService.listarUsuarios(filtroNombre, filtroApellido, filtroRol);
 
                 request.setAttribute("usuarios", usuarios);
                 request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp").forward(request, response);

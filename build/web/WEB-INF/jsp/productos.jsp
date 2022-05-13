@@ -1,7 +1,6 @@
 <%-- 
-    Document   : productos
-    Created on : 29-abr-2022, 17:07:16
     Author     : casti
+    Done: 100%
 --%>
 
 <%@page import="TAWapp.dto.ProductoDTO"%>
@@ -52,9 +51,13 @@
         <tr>
             <td><%= producto.getTitulo()%></td>
             <td><%= producto.getDescripcion()%></td>            
-            <td> <img src="<%= producto.getImagen() %>" 
+            <td>  
+                <div style="width:40%;text-align: center">
+                    <img src="<%= producto.getImagen()%>" 
                          style="border-radius:15px;border: 5px solid #04AA6D " 
-                         alt="<%= producto.getImagen() %>" width="200" height="200"></td>                                 
+                         alt="<%= producto.getImagen()%>" width="200" height="200">
+                </div>
+            </td>                                 
             <td><%= producto.getCategoriaIdcategoria().getTipo()%></td>
             <td><%= producto.getUsuarioVendedor().getNombre()%></td>  
             <td><a href="ProductoBorrarServlet?id=<%= producto.getIdproducto()%>" style="color: #04AA6D;">Borrar</a></td> 

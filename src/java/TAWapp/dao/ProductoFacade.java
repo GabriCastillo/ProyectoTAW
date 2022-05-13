@@ -14,7 +14,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author RaulDF
+ * @author casti
  */
 @Stateless
 public class ProductoFacade extends AbstractFacade<Producto> {
@@ -30,6 +30,7 @@ public class ProductoFacade extends AbstractFacade<Producto> {
     public ProductoFacade() {
         super(Producto.class);
     }
+    
     public List<Producto> findByTitulo (String titulo) {
         Query q;
         q = this.getEntityManager().createQuery("select p from Producto p where upper(p.titulo) like :titulo");

@@ -1,14 +1,13 @@
 <%-- 
-    Document   : categorias
-    Created on : 05-may-2022, 16:05:45
     Author     : casti
+    Done       : 100%
 --%>
 
 <%@page import="TAWapp.dto.CategoriaDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

@@ -14,7 +14,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author RaulDF
+ * @author casti
  */
 @Stateless
 public class RolFacade extends AbstractFacade<Rol> {
@@ -43,4 +43,5 @@ public class RolFacade extends AbstractFacade<Rol> {
             return lista.get(0);
         }        
     }
+    
 }

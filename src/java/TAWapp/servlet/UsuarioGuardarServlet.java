@@ -39,6 +39,7 @@ public class UsuarioGuardarServlet extends TAWappServlet {
             throws ServletException, IOException {
         if (super.comprobarSession(request, response)) {
             
+          
             
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");

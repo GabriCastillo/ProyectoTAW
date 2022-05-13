@@ -27,56 +27,79 @@ public class UsuarioService {
       @EJB UsuarioFacade usuarioFacade;
       @EJB RolFacade rolFacade;
       
-    public UsuarioDTO comprobarCredenciales (String user, String password) {
+     public UsuarioDTO comprobarCredenciales(String user, String password) {
         Usuario usuario = this.usuarioFacade.comprobarUsuario(user, password);
-        if(usuario!=null){
+        if (usuario != null) {
             return usuario.toDTO();
-        }else{
+        } else {
             return null;
         }
-        
+
     }
-    
-    private List<UsuarioDTO> listaEntityADTO (List<Usuario> lista) {
+
+    private List<UsuarioDTO> listaEntityADTO(List<Usuario> lista) {
         List<UsuarioDTO> listaDTO = null;
         if (lista != null) {
             listaDTO = new ArrayList<>();
-            for (Usuario cliente:lista) {
+            for (Usuario cliente : lista) {
                 listaDTO.add(cliente.toDTO());
             }
         }
         return listaDTO;
     }
-    
-    
-    public List<UsuarioDTO> listarUsuarios (String filtroNombre) {
+
+    public List<UsuarioDTO> listarUsuarios(String filtroNombre, String filtroApellido, String filtroRol) {
         List<Usuario> usuarios;
 
-        if (filtroNombre == null || filtroNombre.isEmpty()) {
-            usuarios = this.usuarioFacade.findAll();        
-        } else {
+         Boolean nombre = !((filtroNombre == null) || (filtroNombre.isEmpty()));
+        Boolean apellido = !((filtroApellido == null) || (filtroApellido.isEmpty()));
+        Boolean rol = !((filtroRol == null) || (filtroRol.isEmpty()));
+
+        if (!nombre && !apellido && !rol) {
+
+            usuarios = this.usuarioFacade.findAll();
+
+        } else if (!nombre && !apellido && rol) {
+            usuarios = this.usuarioFacade.findByRol(filtroRol);
+
+        } else if (!nombre && apellido && !rol) {
+            usuarios = this.usuarioFacade.findByAplellido(filtroApellido);
+
+        } else if (!nombre && apellido && rol) {
+            usuarios = this.usuarioFacade.findByApellidoRol(filtroApellido, filtroRol);
+
+        } else if (nombre && !apellido && !rol) {
             usuarios = this.usuarioFacade.findByNombre(filtroNombre);
+
+        } else if (nombre && !apellido && rol) {
+            usuarios = this.usuarioFacade.findByNombreRol(filtroNombre, filtroRol);
+
+        } else if (nombre && apellido && !rol) {
+            usuarios = this.usuarioFacade.findByNombreApellido(filtroNombre, filtroApellido);
+
+        } else {
+            usuarios = this.usuarioFacade.findByTodo(filtroNombre, filtroApellido, filtroRol);
+
         }
-        
-        return this.listaEntityADTO(usuarios);                
-    } 
-    
+
+        return this.listaEntityADTO(usuarios);
+    }
+
     public UsuarioDTO buscarUsuario(Integer id) {
         Usuario cliente = this.usuarioFacade.find(id);
         return cliente.toDTO();
     }
-    
-    public void borrarUsuario (Integer id) {
+
+    public void borrarUsuario(Integer id) {
         Usuario user = this.usuarioFacade.find(id);
 
-        this.usuarioFacade.remove(user);      
+        this.usuarioFacade.remove(user);
     }
-    
-    
-    private void rellenarUsuario (Usuario usuario,
-                              String nombre, String apellido, String domicilio, String ciudad, 
-                              int edad, String sexo, String contraseña, int rol) {
-        
+
+    private void rellenarUsuario(Usuario usuario,
+            String nombre, String apellido, String domicilio, String ciudad,
+            int edad, String sexo, String contraseña, int rol) {
+
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
         usuario.setDomicilio(domicilio);
@@ -84,39 +107,38 @@ public class UsuarioService {
         usuario.setEdad(edad);
         usuario.setSexo(sexo);
         usuario.setPassword(contraseña);
-       
 
         Rol r = this.rolFacade.find(rol);
         usuario.setRolIdrol(r);
-              
+
     }
-    
-    public void crearUsuario (String nombre, String apellido, String domicilio, String ciudad, 
-                              int edad, String sexo, String contraseña, int rol) {
+
+    public void crearUsuario(String nombre, String apellido, String domicilio, String ciudad,
+            int edad, String sexo, String contraseña, int rol) {
         Usuario usuario = new Usuario();
 
-        this.rellenarUsuario(usuario,  nombre,  apellido,  domicilio,  ciudad, 
-                               edad,  sexo,  contraseña,  rol);
+        this.rellenarUsuario(usuario, nombre, apellido, domicilio, ciudad,
+                edad, sexo, contraseña, rol);
 
         this.usuarioFacade.create(usuario);
     }
 
-    public void modificarUsuario (Integer id,
-                              String nombre, String apellido, String domicilio, String ciudad, 
-                              int edad, String sexo, String contraseña, int rol) {
-        
+    public void modificarUsuario(Integer id,
+            String nombre, String apellido, String domicilio, String ciudad,
+            int edad, String sexo, String contraseña, int rol) {
+
         Usuario usuario = this.usuarioFacade.find(id);
 
-        this.rellenarUsuario(usuario,  nombre,  apellido,  domicilio,  ciudad, 
-                               edad,  sexo,  contraseña,  rol);
+        this.rellenarUsuario(usuario, nombre, apellido, domicilio, ciudad,
+                edad, sexo, contraseña, rol);
 
         this.usuarioFacade.edit(usuario);
     }
-    
-     public UsuarioDTO crearUsuario(String usuario, String clave) {
+
+    public UsuarioDTO crearUsuario(String usuario, String clave) {
         Usuario user = new Usuario();
 
-        this.rellenarCliente(user,usuario,clave);
+        this.rellenarCliente(user, usuario, clave);
 
         this.usuarioFacade.create(user);
         return user.toDTO();

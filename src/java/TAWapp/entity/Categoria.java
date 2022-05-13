@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author RaulDF
+ * @author casti
  */
 @Entity
 @Table(name = "CATEGORIA")
@@ -112,7 +112,8 @@ public class Categoria implements Serializable {
     public String toString() {
         return "TAWapp.entity.Categoria[ idCategoria=" + idCategoria + " ]";
     }
-    public CategoriaDTO toDTO () {    
+    
+     public CategoriaDTO toDTO () {    
         CategoriaDTO dto = new CategoriaDTO();
         
         dto.setIdCategoria(idCategoria);

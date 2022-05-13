@@ -12,15 +12,33 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Listado de usuarios</title>
-    </head>        
+    </head>  
+    <%
+        List<RolDTO> listaRoles = (List) request.getAttribute("roles");
+    %>  
     <body>
         <jsp:include page="/WEB-INF/jsp/cabecera.jsp" />        
 
         <h1>Listado de usuarios</h1>
         <form method="post" action="UsuarioServlet">
             Nombre: <input type="text" name="filtroNombre" value="" />
+            Apellido: <input type="text" name="filtroApellido" value="" />
+            <select  name="filtroRol">
+                <option  value=""> N/A </option>
+                <%
+                    for (RolDTO r : listaRoles) {
+                     
+                %>
+                <option  value="<%= String.valueOf(r.getIdRol())%>"><%= r.getNombre()%></option>    
+
+                <%
+                    }
+                %> 
+            </select>
             <input type="submit" value="Filtrar" />
         </form>
+
+
         </br>
 
         <%

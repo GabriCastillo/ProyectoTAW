@@ -1,7 +1,6 @@
 <%-- 
-    Document   : categoria
-    Created on : 05-may-2022, 16:05:33
     Author     : casti
+    Done:      : 100%
 --%>
 
 <%@page import="TAWapp.dto.CategoriaDTO"%>
@@ -28,7 +27,8 @@
                         <input type="hidden" name="id" value="<%= categoria == null ? "" : categoria.getIdCategoria()%>" />
 
                         <div class="input-container ic1">
-                            <input id="tipo" class="input" type="text" name="tipo" placeholder=" " value="<%= categoria == null ? "" : categoria.getTipo()%>" />
+                            <input id="tipo" class="input" type="text" name="tipo" placeholder=" " value="<%= categoria == null ? "" : categoria.getTipo()%>" required oninvalid="this.setCustomValidity('Pon el tipo')"
+                                   oninput="this.setCustomValidity('')"/>
                             <div class="cut"></div>
                             <label for="tipo" class="placeholder">Tipo</label>
                         </div>         

@@ -50,32 +50,31 @@ public class CompradorProductoService {
         return listaDTO;
     }
 
-    public void crearSubasta(Producto producto,Integer precioInicial, Integer precioLimite,  int user) {
+    public void crearSubasta(ProductoDTO producto,Integer precioInicial, Integer precioLimite,  int user) {
         CompradorProducto subasta = new CompradorProducto();
         this.rellenarSubasta(producto,subasta,precioInicial,precioLimite,user);
-        
         this.cpFacade.create(subasta);
     }
 
-    private void rellenarSubasta(Producto producto,CompradorProducto cp,Integer 
+    private void rellenarSubasta(ProductoDTO producto,CompradorProducto cp,Integer 
             precioInicial, Integer precioLimite,  int user) {
-        Random rd = new Random();
-        cp.setIdcompra(rd.nextInt()+"");
         cp.setPrecioSalida(precioInicial);
         cp.setPrecioCompra(precioLimite);
-        cp.setProductoIdproducto(producto);
+        Producto pro = this.productoFacade.find(producto.getIdproducto());
+        cp.setProductoIdproducto(pro);
         Usuario usuario = this.usuarioFacade.find(user);
         cp.setUsuarioVendedor(usuario);
         cp.setUsuarioComprador(usuario);
-        
+
         usuario.getCompradorProductoList().add(cp);
     }
 
-    public void cerrarSubasta(String strId) {
-        CompradorProducto subasta = this.cpFacade.find(strId);
-        
+
+    public void cerrarSubasta(Integer Id) {
+        CompradorProducto subasta = this.cpFacade.find(Id);
+
         subasta.setPrecioCompra(0);
-        
+
         this.cpFacade.edit(subasta);
     }
     

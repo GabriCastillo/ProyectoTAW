@@ -116,4 +116,13 @@ public class ProductoService {
         this.productoFacade.edit(producto);
     }
 
+    public ProductoDTO crearNuevoProducto(String titulo, String descripcion, String URL,  int categoria, int idUsuario) {
+        Producto producto = new Producto();
+        this.rellenarProducto(producto, titulo, descripcion, URL,categoria,idUsuario);
+
+        this.productoFacade.create(producto);
+        Producto pro=this.productoFacade.findAll().get(this.productoFacade.findAll().lastIndexOf(producto));
+        return pro.toDTO();
+    }
+
 }

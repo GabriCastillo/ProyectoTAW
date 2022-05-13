@@ -11,7 +11,7 @@ package TAWapp.dto;
  * @author RaulDF
  */
 public class CompradorProductoDTO {
-    private String idCompradorProductoDTO;
+    private Integer idCompradorProductoDTO;
     private int precio_salida;
     private int precio_Compra;
     private ProductoDTO producto;
@@ -21,11 +21,11 @@ public class CompradorProductoDTO {
         
     }
 
-    public void setIdCompradorProductoDTO(String idCompradorProductoDTO) {
+    public void setIdCompradorProductoDTO(int idCompradorProductoDTO) {
         this.idCompradorProductoDTO = idCompradorProductoDTO;
     }
 
-    public String getIdCompradorProductoDTO() {
+    public int getIdCompradorProductoDTO() {
         return idCompradorProductoDTO;
     }
 

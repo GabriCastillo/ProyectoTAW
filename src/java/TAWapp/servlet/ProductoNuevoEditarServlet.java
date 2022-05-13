@@ -39,14 +39,13 @@ public class ProductoNuevoEditarServlet extends TAWappServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         if (super.comprobarSession(request, response)) {
             List<CategoriaDTO> listaCategorias = this.categoriaService.listarCategorias("");
-            List<UsuarioDTO> listaUsuarios = this.usuarioService.listarUsuarios(null);
+            List<UsuarioDTO> listaUsuarios = this.usuarioService.listarUsuarios("", "", "");
 
-            
             request.setAttribute("categorias", listaCategorias);
             request.setAttribute("usuarios", listaUsuarios);
             String str = request.getParameter("id");
@@ -54,7 +53,7 @@ public class ProductoNuevoEditarServlet extends TAWappServlet {
                 ProductoDTO producto = this.productoService.buscarProducto(Integer.parseInt(str));
                 request.setAttribute("producto", producto);
             }
-
+         
             request.getRequestDispatcher("/WEB-INF/jsp/producto.jsp").forward(request, response);
         }
     }

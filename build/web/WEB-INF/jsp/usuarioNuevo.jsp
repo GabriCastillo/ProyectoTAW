@@ -1,10 +1,8 @@
 <%-- 
-    Document   : usuarioNuevo
-    Created on : 04-may-2022, 17:01:07
-    Author     : casti
+     Author     : casti
+     Done:      : 100%
 --%>
 
-<%@page import="TAWapp.service.UsuarioService"%>
 <%@page import="TAWapp.dto.UsuarioDTO"%>
 <%@page import="TAWapp.dto.RolDTO"%>
 <%@page import="java.util.List"%>
@@ -34,23 +32,27 @@
                         <input type="hidden" name="id"  />
 
                         <div class="input-container ic1">
-                            <input id="nombre" class="input" type="text" name="nombre" placeholder=" " />
+                            <input id="nombre" class="input" type="text" name="nombre" placeholder=" " required oninvalid="this.setCustomValidity('Pon el nombre')"
+                                       oninput="this.setCustomValidity('')"/>
                             <div class="cut"></div>
                             <label for="nombre" class="placeholder">Nombre</label>
                         </div>                   
                         <div class="input-container ic2" >
-                            <input id="apellido" class="input" type="text" name="apellido" placeholder=" " />
+                            <input id="apellido" class="input" type="text" name="apellido" placeholder=" " required oninvalid="this.setCustomValidity('Pon el apellido')"
+                                       oninput="this.setCustomValidity('')"/>
                             <div class="cut2"></div>
                             <label for="apellido" class="placeholder">Apellido</label>
                         </div>
                         <div class="input-container ic2">
-                            <input id="domicilio" class="input" type="text" name="domicilio" placeholder=" "  /> 
+                            <input id="domicilio" class="input" type="text" name="domicilio" placeholder=" "  required oninvalid="this.setCustomValidity('Pon el domicilio')"
+                                       oninput="this.setCustomValidity('')"/>
                             <div class="cut2"></div>
                             <label for="domicilio" class="placeholder">Domicilio</label>
                         </div>
 
                         <div class="input-container ic2" >
-                            <input id="ciudad" class="input" type="text" name="ciudad" placeholder=" "  />
+                            <input id="ciudad" class="input" type="text" name="ciudad" placeholder=" "  required oninvalid="this.setCustomValidity('Pon la ciudad de residencia')"
+                                       oninput="this.setCustomValidity('')"/>
                             <div class="cut2"></div>
                             <label for="ciudad" class="placeholder">Ciudad</label>
                         </div>
@@ -60,44 +62,31 @@
 
                     <div class="dBox">
                         <div class="input-container ic1" >
-                            <input id="edad" class="input" type="text" name="edad" placeholder=" "  /> 
+                            <input id="edad" class="input" type="number" name="edad" placeholder=" "  required oninvalid="this.setCustomValidity('Pon una edad')"
+                                       oninput="this.setCustomValidity('')"/>
                             <div class="cut2"></div>
                             <label for="edad" class="placeholder">Edad</label>
                         </div>
                         <div class="input-container ic2" >
-                            <input id="sexo" class="input"  type="text" name="sexo" placeholder=" "  />
+                            <input id="sexo" class="input"  type="text" name="sexo" placeholder=" "  required oninvalid="this.setCustomValidity('Pon el sexo')"
+                                       oninput="this.setCustomValidity('')"/>
                             <div class="cut3"></div>
                             <label for="sexo" class="placeholder">Sexo</label>
                         </div>
                         <div class="input-container ic2" >
-                            <input id="password" class="input" type="text" name="password" placeholder=" "  />
+                            <input id="password" class="input" type="text" name="password" placeholder=" "  required oninvalid="this.setCustomValidity('Pon la contrasela')"
+                                       oninput="this.setCustomValidity('')"/>
                             <div class="cut2"></div>
                             <label for="password" class="placeholder">Contraseña</label>
                         </div>
 
                         <div class="input-container ic2" >
-                            <input id="password2" class="input" type="text" name="password2" placeholder=" "  />
+                            <input id="password2" class="input" type="text" name="password2" placeholder=" "  required oninvalid="this.setCustomValidity('Pon la repeticion de la contraseña')"
+                                       oninput="this.setCustomValidity('')"/>
                             <div class="cut2"></div>
                             <label for="password2" class="placeholder">Repetir Contraseña</label>
                         </div>
-
-                        <div class="input-container ic2">
-
-                            <select id="rol" class="input" name="rol" placeholder=" ">
-                                <%
-                                    for (RolDTO r : listaRoles) {
-                                        String selected = "";
-
-                                %>
-                                <option <%= selected%> value="<%= String.valueOf(r.getIdRol())%>"><%= r.getNombre()%></option>    
-                                <%
-                                    }
-                                %> 
-                            </select>
-                            <div class="cut2"></div>
-                            <label for="rol" class="placeholder">Rol</label>
-
-                        </div>
+                           <input id="rol" type="hidden" name="rol" value="2"  />
 
                     </div>
 

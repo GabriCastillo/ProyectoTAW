@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author RaulDF
+ * @author casti
  */
 @Entity
 @Table(name = "ROL")
@@ -112,6 +112,7 @@ public class Rol implements Serializable {
     public String toString() {
         return "TAWapp.entity.Rol[ idRol=" + idRol + " ]";
     }
+    
     public RolDTO toDTO () {    
         RolDTO dto = new RolDTO();
         
@@ -119,5 +120,6 @@ public class Rol implements Serializable {
         dto.setNombre(nombre);
                 
         return dto;        
-    }  
+    } 
+    
 }

@@ -51,7 +51,7 @@ public class UsuarioGuardarNuevoServlet extends TAWappServlet {
         String sexo = request.getParameter("sexo");
         int rol = Integer.parseInt(request.getParameter("rol"));
 
-        List<UsuarioDTO> listaUsers = this.usuarioService.listarUsuarios("");
+        List<UsuarioDTO> listaUsers = this.usuarioService.listarUsuarios("", "", "");
         Boolean encontrado = false;
         int i = 0;
         while (!encontrado && i < listaUsers.size()) {

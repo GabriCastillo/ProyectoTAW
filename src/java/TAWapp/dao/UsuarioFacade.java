@@ -6,6 +6,7 @@
 package TAWapp.dao;
 
 import TAWapp.entity.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -14,7 +15,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author RaulDF
+ * @author casti
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {
@@ -30,9 +31,10 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public UsuarioFacade() {
         super(Usuario.class);
     }
-    public Usuario comprobarUsuario (String strusuario, String strclave) {
-         Query q;
-        
+
+    public Usuario comprobarUsuario(String strusuario, String strclave) {
+        Query q;
+
         q = this.getEntityManager().createQuery("select u from Usuario u where u.nombre = :usuario and"
                 + " u.password = :clave");
         q.setParameter("usuario", strusuario);
@@ -42,15 +44,78 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
             return null;
         } else {
             return lista.get(0);
-        }        
+        }
     }
-    
-   public List<Usuario> findByNombre (String n) {
+
+    public List<Usuario> findByNombre(String n) {
         Query q;
-        q = this.getEntityManager().createQuery("select u from Usuario u where upper(u.nombre) like :nombre");
-        q.setParameter("nombre", '%' + n.toUpperCase() +'%');
+
+        q = this.getEntityManager().createQuery("select u from Usuario u where upper(u.nombre)  like :nombre");
+        q.setParameter("nombre", '%' + n.toUpperCase() + '%');
+
         return q.getResultList();
 
-        
     }
+
+    public List<Usuario> findByTodo(String filtroNombre, String filtroApellido, String filtroRol) {
+        Query q;
+
+        q = this.getEntityManager().createQuery("select u from Usuario u where upper(u.nombre)  like :nombre and upper(u.apellido)  like :apellido and u.rolIdrol.idRol  = :rol");
+        q.setParameter("nombre", '%' + filtroNombre.toUpperCase() + '%');
+        q.setParameter("apellido", '%' + filtroApellido.toUpperCase() + '%');
+        q.setParameter("rol", Integer.parseInt(filtroRol));
+
+        return q.getResultList();
+    }
+
+    public List<Usuario> findByRol(String filtroRol) {
+        Query q;
+
+         q = this.getEntityManager().createQuery("select u from Usuario u where u.rolIdrol.idRol = :rol");
+
+        q.setParameter("rol", Integer.parseInt(filtroRol));
+        
+        return q.getResultList();
+    }
+
+    public List<Usuario> findByAplellido(String filtroApellido) {
+        Query q;
+
+        q = this.getEntityManager().createQuery("select u from Usuario u where  upper(u.apellido)  like :apellido" );
+
+        q.setParameter("apellido", '%' + filtroApellido.toUpperCase() + '%');
+
+        return q.getResultList();
+    }
+
+    public List<Usuario> findByApellidoRol(String filtroApellido, String filtroRol) {
+        Query q;
+
+        q = this.getEntityManager().createQuery("select u from Usuario u where upper(u.apellido)  like :apellido and u.rolIdrol.idRol  = :rol");
+        q.setParameter("apellido", '%' + filtroApellido.toUpperCase() + '%');
+        q.setParameter("rol", Integer.parseInt(filtroRol));
+
+        return q.getResultList();
+    }
+
+    public List<Usuario> findByNombreRol(String filtroNombre, String filtroRol) {
+        Query q;
+
+         q = this.getEntityManager().createQuery("select u from Usuario u where upper(u.nombre)  like :nombre  and u.rolIdrol.idRol  = :rol");
+        q.setParameter("nombre", '%' + filtroNombre.toUpperCase() + '%');
+        q.setParameter("rol", Integer.parseInt(filtroRol));
+        
+        return q.getResultList();
+    }
+
+    public List<Usuario> findByNombreApellido(String filtroNombre, String filtroApellido) {
+        Query q;
+
+        q = this.getEntityManager().createQuery("select u from Usuario u where upper(u.nombre)  like :nombre and upper(u.apellido)  like :apellido ");
+        q.setParameter("nombre", '%' + filtroNombre.toUpperCase() + '%');
+        q.setParameter("apellido", '%' + filtroApellido.toUpperCase() + '%');
+        
+        return q.getResultList();
+    }
+
 }

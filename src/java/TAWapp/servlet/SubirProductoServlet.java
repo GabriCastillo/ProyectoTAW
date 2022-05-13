@@ -40,30 +40,26 @@ public class SubirProductoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String titulo = (String)request.getParameter("titulo");
-        String descripcion = (String)request.getParameter("descripcion");
-        Integer precioInicial =Integer.parseInt(request.getParameter("precioInicial")) ;
+        
+ 
+        
+        String titulo = (String) request.getParameter("titulo");
+        String descripcion = (String) request.getParameter("descripcion");
+        Integer precioInicial = Integer.parseInt(request.getParameter("precioInicial"));
         Integer precioLimite = Integer.parseInt(request.getParameter("precioLimite"));
-        String c = (String)request.getParameter("categoria");
+        String c = (String) request.getParameter("categoria");
         int categoria = Integer.parseInt(c);
-        String imagen = (String)request.getParameter("imagen");
-        String fechaLimite = (String)request.getParameter("fechaLimite");
+        String imagen = (String) request.getParameter("imagen");
+        String fechaLimite = (String) request.getParameter("fechaLimite");
         String i = (String) request.getParameter("id");
         int user = Integer.parseInt(i);
-        this.ps.crearProducto(titulo, descripcion,imagen,categoria,user);
-        List<ProductoDTO> productos = ps.listarProductos(titulo);
-        ProductoDTO producto = productos.get(0);
-        Producto pro = this.ps.listaProductos(producto.getTitulo()).get(0);
-        this.cps.crearSubasta(pro,precioInicial,precioLimite,user);  
-        
-        
+        ProductoDTO producto = this.ps.crearNuevoProducto(titulo, descripcion, imagen, categoria, user);
+        this.cps.crearSubasta(producto, precioInicial, precioLimite, user);
 
-        
         //Subasta tambien se crea
-        
         HttpSession session = request.getSession();
         session.setAttribute("producto", producto);
-        response.sendRedirect(request.getContextPath()+"/VenderServlet");
+        response.sendRedirect(request.getContextPath() + "/VenderServlet");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

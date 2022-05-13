@@ -14,7 +14,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author RaulDF
+ * @author casti
  */
 @Stateless
 public class CategoriaFacade extends AbstractFacade<Categoria> {
@@ -31,7 +31,7 @@ public class CategoriaFacade extends AbstractFacade<Categoria> {
         super(Categoria.class);
     }
     
-     public List<Categoria> findByTitulo (String t) {
+    public List<Categoria> findByTitulo (String t) {
         Query q;
             q = this.getEntityManager().createQuery("select c from Categoria c where upper(c.tipo) like :tipo");
         q.setParameter("tipo", '%' + t.toUpperCase() +'%');
@@ -39,5 +39,4 @@ public class CategoriaFacade extends AbstractFacade<Categoria> {
 
         
     }
-    
 }

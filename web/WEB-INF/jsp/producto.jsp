@@ -18,6 +18,7 @@
         List<CategoriaDTO> listaCategorias = (List) request.getAttribute("categorias");
         List<UsuarioDTO> listaUsuarios = (List) request.getAttribute("usuarios");
         ProductoDTO producto = (ProductoDTO) request.getAttribute("producto");
+      
     %> 
 
 
@@ -32,20 +33,23 @@
                         <input type="hidden" name="id" value="<%= producto == null ? "" : producto.getIdproducto()%>" />
 
                         <div class="input-container ic1">
-                            <input id="titulo" class="input" type="text" name="titulo" placeholder=" " value="<%= producto == null ? "" : producto.getTitulo()%>" />
+                            <input id="titulo" class="input" type="text" name="titulo" placeholder=" " value="<%= producto == null ? "" : producto.getTitulo()%>" required oninvalid="this.setCustomValidity('Pon el titulo')"
+                                       oninput="this.setCustomValidity('')"/>
                             <div class="cut"></div>
                             <label for="titulo" class="placeholder">Titulo</label>
                         </div>         
 
                         <div class="input-container ic2" >
-                            <textarea  id="descripcion"  name="descripcion" class="input" type="text" style="width:70%; height:130px;" placeholder=" " value="<%= producto == null ? " " : producto.getDescripcion()%>"><%= producto == null ? " " : producto.getDescripcion()%></textarea>                            
+                            <textarea  id="descripcion"  name="descripcion" class="input" type="text" style="width:70%; height:130px;" placeholder=" " value="<%= producto == null ? " " : producto.getDescripcion()%>" required oninvalid="this.setCustomValidity('Pon la descripcion')"
+                                       oninput="this.setCustomValidity('')"/><%= producto == null ? " " : producto.getDescripcion()%></textarea>                            
                             <div class="cut2"></div>
                             <label for="descripcion" class="placeholder">Descripcion</label>
                         </div>
                     </div>
                     <div class="dBox">
                         <div class="input-container ic1" >
-                            <input id="url" class="input" type="text" name="url" />
+                            <input id="url" class="input" type="text" name="url" value="<%= producto == null ? "" : producto.getImagen() %>" required oninvalid="this.setCustomValidity('Pon la url de la imagen')"
+                                       oninput="this.setCustomValidity('')"/>
                             <div class="cut3"></div>
                             <label for="url" class="placeholder">Selecciona la imagen:</label>                     
                         </div>
@@ -96,6 +100,7 @@
             </form>
             </br>
             <div style="text-align:center"><a href="ProductoServlet" style="color: #04AA6D;">Cancelar</a></div>
+     
     </body>
 </html>
 

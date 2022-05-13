@@ -34,7 +34,7 @@ public class CerrarPujaServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String strId = request.getParameter("id");
-        this.cps.cerrarSubasta(strId);
+        this.cps.cerrarSubasta(Integer.parseInt(strId));
         
         response.sendRedirect(request.getContextPath() + "/VenderServlet");
         

@@ -16,6 +16,10 @@
     <%
         List<RolDTO> listaRoles = (List) request.getAttribute("roles");
         UsuarioDTO usuario = (UsuarioDTO) request.getAttribute("usuario");
+        String strError = (String) request.getAttribute("error");
+        if (strError == null) {
+            strError = "";
+        }
     %>    
     <body>
 
@@ -28,23 +32,27 @@
                         <input type="hidden" name="id" value="<%= usuario == null ? "" : usuario.getIdusuario()%>" />
 
                         <div class="input-container ic1">
-                            <input id="nombre" class="input" type="text" name="nombre" placeholder=" " value="<%= usuario == null ? "" : usuario.getNombre()%>" />
+                            <input id="nombre" class="input" type="text" name="nombre" placeholder=" " value="<%= usuario == null ? "" : usuario.getNombre()%>" required oninvalid="this.setCustomValidity('Pon el nombre')"
+                                   oninput="this.setCustomValidity('')"/>
                             <div class="cut"></div>
                             <label for="nombre" class="placeholder">Nombre</label>
                         </div>                   
                         <div class="input-container ic2" >
-                            <input id="apellido" class="input" type="text" name="apellido" placeholder=" " value="<%= usuario == null ? "" : usuario.getApellido()%>" />
+                            <input id="apellido" class="input" type="text" name="apellido" placeholder=" " value="<%= usuario == null ? "" : usuario.getApellido()%>" required oninvalid="this.setCustomValidity('Pon el apellido')"
+                                   oninput="this.setCustomValidity('')"/>
                             <div class="cut2"></div>
                             <label for="apellido" class="placeholder">Apellido</label>
                         </div>
                         <div class="input-container ic2">
-                            <input id="domicilio" class="input" type="text" name="domicilio" placeholder=" " value="<%= usuario == null ? "" : usuario.getDomicilio()%>" /> 
+                            <input id="domicilio" class="input" type="text" name="domicilio" placeholder=" " value="<%= usuario == null ? "" : usuario.getDomicilio()%>" required oninvalid="this.setCustomValidity('Pon el domicilio')"
+                                   oninput="this.setCustomValidity('')"/> 
                             <div class="cut2"></div>
                             <label for="domicilio" class="placeholder">Domicilio</label>
                         </div>
 
                         <div class="input-container ic2" >
-                            <input id="ciudad" class="input" type="text" name="ciudad" placeholder=" " value="<%= usuario == null ? "" : usuario.getCiudadResidencia()%>" />
+                            <input id="ciudad" class="input" type="text" name="ciudad" placeholder=" " value="<%= usuario == null ? "" : usuario.getCiudadResidencia()%>" required oninvalid="this.setCustomValidity('Pon la ciudad de residencia')"
+                                   oninput="this.setCustomValidity('')"/>
                             <div class="cut2"></div>
                             <label for="ciudad" class="placeholder">Ciudad</label>
                         </div>
@@ -54,17 +62,20 @@
 
                     <div class="dBox">
                         <div class="input-container ic1" >
-                            <input id="edad" class="input" type="text" name="edad" placeholder=" " value="<%= usuario == null ? "" : usuario.getEdad()%>" /> 
+                            <input id="edad" class="input" type="number" name="edad" placeholder=" " value="<%= usuario == null ? "" : usuario.getEdad()%>" required oninvalid="this.setCustomValidity('Pon una edad')"
+                                   oninput="this.setCustomValidity('')"/>
                             <div class="cut2"></div>
                             <label for="edad" class="placeholder">Edad</label>
                         </div>
                         <div class="input-container ic2" >
-                            <input id="sexo" class="input"  type="text" name="sexo" placeholder=" " value="<%= usuario == null ? "" : usuario.getSexo()%>" />
+                            <input id="sexo" class="input"  type="text" name="sexo" placeholder=" " value="<%= usuario == null ? "" : usuario.getSexo()%>" required oninvalid="this.setCustomValidity('Pon el sexo')"
+                                   oninput="this.setCustomValidity('')"/>
                             <div class="cut3"></div>
                             <label for="sexo" class="placeholder">Sexo</label>
                         </div>
                         <div class="input-container ic2" >
-                            <input id="password" class="input" type="text" name="password" placeholder=" " value="<%= usuario == null ? "" : usuario.getPassword()%>" />
+                            <input id="password" class="input" type="text" name="password" placeholder=" " value="<%= usuario == null ? "" : usuario.getPassword()%>" required oninvalid="this.setCustomValidity('Pon la contraseña')"
+                                   oninput="this.setCustomValidity('')"/>
                             <div class="cut2"></div>
                             <label for="password" class="placeholder">Contraseña</label>
                         </div>
@@ -93,7 +104,7 @@
 
 
                 </div>
-                            </br>
+                </br>
                 <div style="text-align:center"><input id="btn" type="submit" value="Subir" /></div>
 
             </form>
@@ -101,5 +112,18 @@
 
             <div style="text-align:center"><a href="UsuarioServlet" style="color: #04AA6D;">Cancelar</a></div>
         </section>
+        <%
+            if (strError != "") {
+        %>  
+        <script>
+            function myFunction() {
+                alert("<%= strError%>");
+            }
+
+            myFunction();
+        </script>
+        <%
+            }
+        %>
     </body>
 </html>
