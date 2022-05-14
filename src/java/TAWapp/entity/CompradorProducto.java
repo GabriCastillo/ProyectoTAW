@@ -7,6 +7,7 @@ package TAWapp.entity;
 
 import TAWapp.dto.CompradorProductoDTO;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,12 +15,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -49,6 +53,11 @@ public class CompradorProducto implements Serializable {
     @NotNull
     @Column(name = "PRECIO_COMPRA")
     private int precioCompra;
+    @JoinTable(name = "ESTADISTICA_HAS_COMPRADOR_PRODUCTO", joinColumns = {
+        @JoinColumn(name = "COMPRADOR_PRODUCTO_IDCOMPRA", referencedColumnName = "IDCOMPRA")}, inverseJoinColumns = {
+        @JoinColumn(name = "ESTADISTICA_IDESTADISTICA", referencedColumnName = "IDESTADISTICA")})
+    @ManyToMany
+    private List<Estadistica> estadisticaList;
     @JoinColumn(name = "PRODUCTO_IDPRODUCTO", referencedColumnName = "IDPRODUCTO")
     @ManyToOne(optional = false)
     private Producto productoIdproducto;
@@ -94,6 +103,15 @@ public class CompradorProducto implements Serializable {
 
     public void setPrecioCompra(int precioCompra) {
         this.precioCompra = precioCompra;
+    }
+
+    @XmlTransient
+    public List<Estadistica> getEstadisticaList() {
+        return estadisticaList;
+    }
+
+    public void setEstadisticaList(List<Estadistica> estadisticaList) {
+        this.estadisticaList = estadisticaList;
     }
 
     public Producto getProductoIdproducto() {
@@ -145,7 +163,7 @@ public class CompradorProducto implements Serializable {
         return "TAWapp.entity.CompradorProducto[ idcompra=" + idcompra + " ]";
     }
     
-    public CompradorProductoDTO toDTO() {
+        public CompradorProductoDTO toDTO() {
           CompradorProductoDTO dto = new CompradorProductoDTO();
           dto.setIdCompradorProductoDTO(idcompra);
           dto.setPrecio_Compra(precioCompra);

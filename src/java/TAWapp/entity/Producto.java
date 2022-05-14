@@ -68,8 +68,6 @@ public class Producto implements Serializable {
     @JoinColumn(name = "USUARIO_VENDEDOR", referencedColumnName = "IDUSUARIO")
     @ManyToOne(optional = false)
     private Usuario usuarioVendedor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
-    private List<ProductosFavoritos> productosFavoritosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
     private List<CompradorProducto> compradorProductoList;
 
@@ -136,15 +134,6 @@ public class Producto implements Serializable {
     }
 
     @XmlTransient
-    public List<ProductosFavoritos> getProductosFavoritosList() {
-        return productosFavoritosList;
-    }
-
-    public void setProductosFavoritosList(List<ProductosFavoritos> productosFavoritosList) {
-        this.productosFavoritosList = productosFavoritosList;
-    }
-
-    @XmlTransient
     public List<CompradorProducto> getCompradorProductoList() {
         return compradorProductoList;
     }
@@ -178,7 +167,7 @@ public class Producto implements Serializable {
         return "TAWapp.entity.Producto[ idproducto=" + idproducto + " ]";
     }
     
-     public ProductoDTO toDTO() {
+    public ProductoDTO toDTO() {
         ProductoDTO dto = new ProductoDTO();
         dto.setIdproducto(idproducto);
         dto.setTitulo(titulo);

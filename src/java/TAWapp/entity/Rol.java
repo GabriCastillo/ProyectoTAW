@@ -121,5 +121,4 @@ public class Rol implements Serializable {
                 
         return dto;        
     } 
-    
 }

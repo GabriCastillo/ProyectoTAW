@@ -15,12 +15,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -33,7 +34,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Estadistica.findAll", query = "SELECT e FROM Estadistica e")
-    , @NamedQuery(name = "Estadistica.findByIdestadistica", query = "SELECT e FROM Estadistica e WHERE e.idestadistica = :idestadistica")})
+    , @NamedQuery(name = "Estadistica.findByIdestadistica", query = "SELECT e FROM Estadistica e WHERE e.idestadistica = :idestadistica")
+    , @NamedQuery(name = "Estadistica.findByNombre", query = "SELECT e FROM Estadistica e WHERE e.nombre = :nombre")
+    , @NamedQuery(name = "Estadistica.findByDescripcion", query = "SELECT e FROM Estadistica e WHERE e.descripcion = :descripcion")
+    , @NamedQuery(name = "Estadistica.findByValor", query = "SELECT e FROM Estadistica e WHERE e.valor = :valor")})
 public class Estadistica implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,13 +46,22 @@ public class Estadistica implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDESTADISTICA")
     private Integer idestadistica;
+    @Size(max = 255)
+    @Column(name = "NOMBRE")
+    private String nombre;
+    @Size(max = 255)
+    @Column(name = "DESCRIPCION")
+    private String descripcion;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "VALOR")
+    private Double valor;
+    @ManyToMany(mappedBy = "estadisticaList")
+    private List<CompradorProducto> compradorProductoList;
     @JoinColumn(name = "USUARIO_ANALISTA", referencedColumnName = "IDUSUARIO")
     @ManyToOne(optional = false)
     private Usuario usuarioAnalista;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "estadistica")
     private EstadisticaHasProductosFavoritos estadisticaHasProductosFavoritos;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadistica")
-    private List<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoList;
 
     public Estadistica() {
     }
@@ -65,6 +78,39 @@ public class Estadistica implements Serializable {
         this.idestadistica = idestadistica;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    @XmlTransient
+    public List<CompradorProducto> getCompradorProductoList() {
+        return compradorProductoList;
+    }
+
+    public void setCompradorProductoList(List<CompradorProducto> compradorProductoList) {
+        this.compradorProductoList = compradorProductoList;
+    }
+
     public Usuario getUsuarioAnalista() {
         return usuarioAnalista;
     }
@@ -79,15 +125,6 @@ public class Estadistica implements Serializable {
 
     public void setEstadisticaHasProductosFavoritos(EstadisticaHasProductosFavoritos estadisticaHasProductosFavoritos) {
         this.estadisticaHasProductosFavoritos = estadisticaHasProductosFavoritos;
-    }
-
-    @XmlTransient
-    public List<EstadisticaHasCompradorProducto> getEstadisticaHasCompradorProductoList() {
-        return estadisticaHasCompradorProductoList;
-    }
-
-    public void setEstadisticaHasCompradorProductoList(List<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoList) {
-        this.estadisticaHasCompradorProductoList = estadisticaHasCompradorProductoList;
     }
 
     @Override

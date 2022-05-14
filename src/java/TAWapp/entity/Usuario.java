@@ -89,8 +89,6 @@ public class Usuario implements Serializable {
     private List<Estadistica> estadisticaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioVendedor")
     private List<Producto> productoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<ProductosFavoritos> productosFavoritosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioVendedor")
     private List<CompradorProducto> compradorProductoList;
     @OneToMany(mappedBy = "usuarioComprador")
@@ -200,15 +198,6 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<ProductosFavoritos> getProductosFavoritosList() {
-        return productosFavoritosList;
-    }
-
-    public void setProductosFavoritosList(List<ProductosFavoritos> productosFavoritosList) {
-        this.productosFavoritosList = productosFavoritosList;
-    }
-
-    @XmlTransient
     public List<CompradorProducto> getCompradorProductoList() {
         return compradorProductoList;
     }
@@ -258,6 +247,7 @@ public class Usuario implements Serializable {
     public String toString() {
         return "TAWapp.entity.Usuario[ idusuario=" + idusuario + " ]";
     }
+    
      public UsuarioDTO toDTO () {    
         UsuarioDTO dto = new UsuarioDTO();
         dto.setIdusuario(idusuario);   
@@ -273,4 +263,5 @@ public class Usuario implements Serializable {
                 
         return dto;        
     }
+    
 }

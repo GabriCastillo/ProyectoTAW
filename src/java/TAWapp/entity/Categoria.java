@@ -113,7 +113,7 @@ public class Categoria implements Serializable {
         return "TAWapp.entity.Categoria[ idCategoria=" + idCategoria + " ]";
     }
     
-     public CategoriaDTO toDTO () {    
+    public CategoriaDTO toDTO () {    
         CategoriaDTO dto = new CategoriaDTO();
         
         dto.setIdCategoria(idCategoria);
