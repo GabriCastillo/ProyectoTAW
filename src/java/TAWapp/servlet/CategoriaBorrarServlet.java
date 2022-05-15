@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author casti
+ * Done: 100%
  */
 @WebServlet(name = "CategoriaBorrarServlet", urlPatterns = {"/CategoriaBorrarServlet"})
 public class CategoriaBorrarServlet extends TAWappServlet {

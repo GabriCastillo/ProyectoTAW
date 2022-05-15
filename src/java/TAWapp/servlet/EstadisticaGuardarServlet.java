@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author pepe_
+ * Done: 100%
  */
 @WebServlet(name = "EstadisticaGuardarServlet", urlPatterns = {"/EstadisticaGuardarServlet"})
 public class EstadisticaGuardarServlet extends TAWappServlet {

@@ -10,6 +10,7 @@ import java.util.Objects;
 /**
  *
  * @author casti
+ * Done: 100%
  */
 public class RolDTO {
     

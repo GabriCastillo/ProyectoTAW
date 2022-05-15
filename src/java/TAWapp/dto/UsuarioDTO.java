@@ -8,6 +8,7 @@ package TAWapp.dto;
 /**
  *
  * @author casti
+ * Done: 100%
  */
 public class UsuarioDTO {
     

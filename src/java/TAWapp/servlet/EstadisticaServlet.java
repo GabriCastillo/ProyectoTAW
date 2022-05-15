@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author pepe_
+ * Done: 100%
  */
 @WebServlet(name = "EstadisticaServlet", urlPatterns = {"/EstadisticaServlet"})
 public class EstadisticaServlet extends TAWappServlet {

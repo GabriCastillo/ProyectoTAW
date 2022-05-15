@@ -1,7 +1,6 @@
 <%-- 
-    Document   : Analisis
-    Created on : 13-may-2022, 0:53:08
     Author     : pepe_
+    Done       : 100%
 --%>
 
 <%@page import="TAWapp.dto.EstadisticaDTO"%>

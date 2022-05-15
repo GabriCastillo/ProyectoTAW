@@ -1,7 +1,6 @@
 <%-- 
-    Document   : Subastas
-    Created on : 29-abr-2022, 22:10:20
     Author     : RaulDF
+    Done       : 100%
 --%>
 
 <%@page import="TAWapp.dto.CompradorProductoDTO"%>

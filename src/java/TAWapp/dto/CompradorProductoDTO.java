@@ -9,6 +9,7 @@ package TAWapp.dto;
 /**
  *
  * @author RaulDF
+ * Done: 100%
  */
 public class CompradorProductoDTO {
     private Integer idCompradorProductoDTO;

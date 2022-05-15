@@ -10,6 +10,7 @@ import TAWapp.entity.Usuario;
 /**
  *
  * @author pepe_
+ * Done: 100%
  */
 public class EstadisticaDTO {
     private String descripcion;
