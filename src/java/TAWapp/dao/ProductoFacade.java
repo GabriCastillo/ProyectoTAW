@@ -1,21 +1,26 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.dao;
 
+import java.util.List;
 import TAWapp.entity.Producto;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
+ *  @author Javier
+ *  DONE: 100%
  *
- * @author casti
  */
-@jakarta.ejb.Stateless
+@Stateless
 public class ProductoFacade extends AbstractFacade<Producto> {
 
-    @PersistenceContext(unitName = "ProyectoTAWPU")
+    @PersistenceContext(unitName = "TAWPU")
     private EntityManager em;
 
     @Override
@@ -26,5 +31,4 @@ public class ProductoFacade extends AbstractFacade<Producto> {
     public ProductoFacade() {
         super(Producto.class);
     }
-    
 }

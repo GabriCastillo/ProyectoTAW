@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.entity;
 
@@ -19,16 +20,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ *  @author Javier
+ *  DONE: 100%
  *
- * @author casti
  */
 @Entity
 @Table(name = "PRODUCTOS_FAVORITOS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ProductosFavoritos.findAll", query = "SELECT p FROM ProductosFavoritos p"),
-    @NamedQuery(name = "ProductosFavoritos.findByUsuarioComprador", query = "SELECT p FROM ProductosFavoritos p WHERE p.productosFavoritosPK.usuarioComprador = :usuarioComprador"),
-    @NamedQuery(name = "ProductosFavoritos.findByProductoIdproducto", query = "SELECT p FROM ProductosFavoritos p WHERE p.productosFavoritosPK.productoIdproducto = :productoIdproducto")})
+    @NamedQuery(name = "ProductosFavoritos.findAll", query = "SELECT p FROM ProductosFavoritos p")
+    , @NamedQuery(name = "ProductosFavoritos.findByUsuarioComprador", query = "SELECT p FROM ProductosFavoritos p WHERE p.productosFavoritosPK.usuarioComprador = :usuarioComprador")
+    , @NamedQuery(name = "ProductosFavoritos.findByProductoIdproducto", query = "SELECT p FROM ProductosFavoritos p WHERE p.productosFavoritosPK.productoIdproducto = :productoIdproducto")})
 public class ProductosFavoritos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -109,7 +111,7 @@ public class ProductosFavoritos implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.ProductosFavoritos[ productosFavoritosPK=" + productosFavoritosPK + " ]";
+        return "entity.ProductosFavoritos[ productosFavoritosPK=" + productosFavoritosPK + " ]";
     }
     
 }

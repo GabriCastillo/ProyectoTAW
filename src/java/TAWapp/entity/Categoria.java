@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.entity;
 
@@ -17,21 +18,28 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import TAWapp.dto.CategoriaDTO;
 
 /**
+ *  @author Javier
+ *  DONE: 100%
  *
- * @author casti
  */
 @Entity
 @Table(name = "CATEGORIA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
-    @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria"),
-    @NamedQuery(name = "Categoria.findByTipo", query = "SELECT c FROM Categoria c WHERE c.tipo = :tipo")})
+    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")
+    , @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria")
+    , @NamedQuery(name = "Categoria.findByTipo", query = "SELECT c FROM Categoria c WHERE c.tipo = :tipo")})
 public class Categoria implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoriaIdcategoria")
+    private List<Producto> productoList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,10 +48,10 @@ public class Categoria implements Serializable {
     @Column(name = "ID_CATEGORIA")
     private Integer idCategoria;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "TIPO")
     private String tipo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoriaIdcategoria")
-    private List<Producto> productoList;
 
     public Categoria() {
     }
@@ -104,7 +112,14 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.Categoria[ idCategoria=" + idCategoria + " ]";
+        return "entity.Categoria[ idCategoria=" + idCategoria + " ]";
     }
     
+    public CategoriaDTO toDTO () {    
+        CategoriaDTO dto = new CategoriaDTO();
+        dto.setIdCategoria(this.idCategoria);
+        dto.setTipo(this.tipo);
+                
+        return dto;        
+    }  
 }

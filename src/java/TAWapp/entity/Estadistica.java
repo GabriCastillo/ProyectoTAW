@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.entity;
 
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,16 +26,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ *  @author Javier
+ *  DONE: 100%
  *
- * @author casti
  */
 @Entity
 @Table(name = "ESTADISTICA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Estadistica.findAll", query = "SELECT e FROM Estadistica e"),
-    @NamedQuery(name = "Estadistica.findByIdestadistica", query = "SELECT e FROM Estadistica e WHERE e.idestadistica = :idestadistica")})
+    @NamedQuery(name = "Estadistica.findAll", query = "SELECT e FROM Estadistica e")
+    , @NamedQuery(name = "Estadistica.findByIdestadistica", query = "SELECT e FROM Estadistica e WHERE e.idestadistica = :idestadistica")})
 public class Estadistica implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadistica")
+    private List<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,13 +47,13 @@ public class Estadistica implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDESTADISTICA")
     private Integer idestadistica;
+    @ManyToMany(mappedBy = "estadisticaList")
+    private List<CompradorProducto> compradorProductoList;
     @JoinColumn(name = "USUARIO_ANALISTA", referencedColumnName = "IDUSUARIO")
     @ManyToOne(optional = false)
     private Usuario usuarioAnalista;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "estadistica")
     private EstadisticaHasProductosFavoritos estadisticaHasProductosFavoritos;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadistica")
-    private List<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoList;
 
     public Estadistica() {
     }
@@ -64,6 +70,15 @@ public class Estadistica implements Serializable {
         this.idestadistica = idestadistica;
     }
 
+    @XmlTransient
+    public List<CompradorProducto> getCompradorProductoList() {
+        return compradorProductoList;
+    }
+
+    public void setCompradorProductoList(List<CompradorProducto> compradorProductoList) {
+        this.compradorProductoList = compradorProductoList;
+    }
+
     public Usuario getUsuarioAnalista() {
         return usuarioAnalista;
     }
@@ -78,15 +93,6 @@ public class Estadistica implements Serializable {
 
     public void setEstadisticaHasProductosFavoritos(EstadisticaHasProductosFavoritos estadisticaHasProductosFavoritos) {
         this.estadisticaHasProductosFavoritos = estadisticaHasProductosFavoritos;
-    }
-
-    @XmlTransient
-    public List<EstadisticaHasCompradorProducto> getEstadisticaHasCompradorProductoList() {
-        return estadisticaHasCompradorProductoList;
-    }
-
-    public void setEstadisticaHasCompradorProductoList(List<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoList) {
-        this.estadisticaHasCompradorProductoList = estadisticaHasCompradorProductoList;
     }
 
     @Override
@@ -111,7 +117,16 @@ public class Estadistica implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.Estadistica[ idestadistica=" + idestadistica + " ]";
+        return "entity.Estadistica[ idestadistica=" + idestadistica + " ]";
+    }
+
+    @XmlTransient
+    public List<EstadisticaHasCompradorProducto> getEstadisticaHasCompradorProductoList() {
+        return estadisticaHasCompradorProductoList;
+    }
+
+    public void setEstadisticaHasCompradorProductoList(List<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoList) {
+        this.estadisticaHasCompradorProductoList = estadisticaHasCompradorProductoList;
     }
     
 }

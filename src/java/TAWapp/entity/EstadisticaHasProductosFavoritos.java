@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.entity;
 
@@ -16,31 +17,34 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ *  @author Javier
+ *  DONE: 100%
  *
- * @author casti
  */
 @Entity
 @Table(name = "ESTADISTICA_HAS_PRODUCTOS_FAVORITOS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "EstadisticaHasProductosFavoritos.findAll", query = "SELECT e FROM EstadisticaHasProductosFavoritos e"),
-    @NamedQuery(name = "EstadisticaHasProductosFavoritos.findByEstadisticaIdestadistica", query = "SELECT e FROM EstadisticaHasProductosFavoritos e WHERE e.estadisticaIdestadistica = :estadisticaIdestadistica")})
+    @NamedQuery(name = "EstadisticaHasProductosFavoritos.findAll", query = "SELECT e FROM EstadisticaHasProductosFavoritos e")
+    , @NamedQuery(name = "EstadisticaHasProductosFavoritos.findByEstadisticaIdestadistica", query = "SELECT e FROM EstadisticaHasProductosFavoritos e WHERE e.estadisticaIdestadistica = :estadisticaIdestadistica")})
 public class EstadisticaHasProductosFavoritos implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @NotNull
     @Column(name = "ESTADISTICA_IDESTADISTICA")
     private Integer estadisticaIdestadistica;
     @JoinColumn(name = "ESTADISTICA_IDESTADISTICA", referencedColumnName = "IDESTADISTICA", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Estadistica estadistica;
     @JoinColumns({
-        @JoinColumn(name = "PRODUCTOS_FAVORITOS_USUARIO_COMPRADOR", referencedColumnName = "USUARIO_COMPRADOR"),
-        @JoinColumn(name = "PRODUCTOS_FAVORITOS_PRODUCTO_IDPRODUCTO", referencedColumnName = "PRODUCTO_IDPRODUCTO")})
+        @JoinColumn(name = "PRODUCTOS_FAVORITOS_USUARIO_COMPRADOR", referencedColumnName = "USUARIO_COMPRADOR")
+        , @JoinColumn(name = "PRODUCTOS_FAVORITOS_PRODUCTO_IDPRODUCTO", referencedColumnName = "PRODUCTO_IDPRODUCTO")})
     @ManyToOne(optional = false)
     private ProductosFavoritos productosFavoritos;
 
@@ -97,7 +101,7 @@ public class EstadisticaHasProductosFavoritos implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.EstadisticaHasProductosFavoritos[ estadisticaIdestadistica=" + estadisticaIdestadistica + " ]";
+        return "entity.EstadisticaHasProductosFavoritos[ estadisticaIdestadistica=" + estadisticaIdestadistica + " ]";
     }
     
 }
