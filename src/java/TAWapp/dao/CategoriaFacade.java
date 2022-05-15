@@ -39,5 +39,4 @@ public class CategoriaFacade extends AbstractFacade<Categoria> {
 
         
     }
-    
 }

@@ -18,7 +18,6 @@ import javax.ejb.Stateless;
 /**
  *
  * @author pepe_
- * Done: 100%
  */
 @Stateless
 public class EstadisticaService {

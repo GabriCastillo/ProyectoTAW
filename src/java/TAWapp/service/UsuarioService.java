@@ -5,6 +5,15 @@
  */
 package TAWapp.service;
 
+import java.util.ArrayList;
+import TAWapp.dao.RolFacade;
+import TAWapp.dao.UsuarioFacade;
+import TAWapp.entity.Rol;
+import TAWapp.entity.Usuario;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import TAWapp.dto.UsuarioDTO;
 import TAWapp.dao.RolFacade;
 import TAWapp.dao.UsuarioFacade;
 import TAWapp.dto.UsuarioDTO;
@@ -15,19 +24,23 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+
 /**
  *
  * @author casti
- * Done: 100%
+ * Done: 90%
+ * 
+ * @author Javier
+ * Done: 10%
+ * 
  */
 
 @Stateless
 public class UsuarioService {
+    @EJB UsuarioFacade usuarioFacade;
+    @EJB RolFacade rolFacade;
     
-      @EJB UsuarioFacade usuarioFacade;
-      @EJB RolFacade rolFacade;
-      
-     public UsuarioDTO comprobarCredenciales(String user, String password) {
+    public UsuarioDTO comprobarCredenciales(String user, String password) {
         Usuario usuario = this.usuarioFacade.comprobarUsuario(user, password);
         if (usuario != null) {
             return usuario.toDTO();
@@ -37,17 +50,17 @@ public class UsuarioService {
 
     }
 
-    private List<UsuarioDTO> listaEntityADTO(List<Usuario> lista) {
+    private List<UsuarioDTO> listaEntityADTO (List<Usuario> lista) {
         List<UsuarioDTO> listaDTO = null;
-        if (lista != null) {
+        if (lista != null && !lista.isEmpty()) {
             listaDTO = new ArrayList<>();
-            for (Usuario cliente : lista) {
-                listaDTO.add(cliente.toDTO());
+            for (Usuario usuario:lista) {
+                listaDTO.add(usuario.toDTO());
             }
         }
         return listaDTO;
     }
-
+    
     public List<UsuarioDTO> listarUsuarios(String filtroNombre, String filtroApellido, String filtroRol) {
         List<Usuario> usuarios;
 
@@ -148,4 +161,16 @@ public class UsuarioService {
         user.setNombre(usuario);
         user.setPassword(clave);
     }
+    
+    public List<UsuarioDTO> listarCompradores (String filtroNombre) {
+        List<Usuario> usuarios = null;
+
+        if (filtroNombre == null || filtroNombre.isEmpty()) {
+            usuarios = this.usuarioFacade.findCompradores();        
+        } else {
+            usuarios = this.usuarioFacade.findByNombre(filtroNombre);
+        }
+        
+        return this.listaEntityADTO(usuarios);                
+    } 
 }

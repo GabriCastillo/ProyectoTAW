@@ -5,16 +5,22 @@
  */
 package TAWapp.dao;
 
-import TAWapp.entity.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import TAWapp.entity.CompradorProducto;
+import TAWapp.entity.Usuario;
 
 /**
+ *  @author casti
+ *  DONE: 90%
+ * 
+ *  @author Javier
+ *  DONE: 10%
  *
- * @author casti
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {
@@ -31,7 +37,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         super(Usuario.class);
     }
     
-     public Usuario comprobarUsuario(String strusuario, String strclave) {
+    public Usuario comprobarUsuario(String strusuario, String strclave) {
         Query q;
 
         q = this.getEntityManager().createQuery("select u from Usuario u where u.nombre = :usuario and"
@@ -115,6 +121,20 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         q.setParameter("apellido", '%' + filtroApellido.toUpperCase() + '%');
         
         return q.getResultList();
+    }
+
+    public List<Usuario> findCompradores() {
+        Query q = this.getEntityManager().createQuery("select c from CompradorProducto c");
+        List<CompradorProducto> compradoresProducto = q.getResultList();
+        
+        List<Usuario> usuariosCompradores = new ArrayList();
+        compradoresProducto.forEach((compradorProducto) -> {
+            if(compradorProducto.getUsuarioComprador() != null) {
+                usuariosCompradores.add(compradorProducto.getUsuarioComprador());
+            }
+        });
+        
+        return usuariosCompradores;
     }
     
 }

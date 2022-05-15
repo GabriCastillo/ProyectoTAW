@@ -31,7 +31,7 @@ public class RolFacade extends AbstractFacade<Rol> {
         super(Rol.class);
     }
     
-     public Rol findById (String id) {
+    public Rol findById (String id) {
         Query q;
         
         q = this.getEntityManager().createQuery("select r from Rol r where r.idRol = :idRol");

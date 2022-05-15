@@ -8,6 +8,7 @@ package TAWapp.service;
 import TAWapp.dao.CompradorProductoFacade;
 import TAWapp.dao.ProductoFacade;
 import TAWapp.dao.UsuarioFacade;
+import TAWapp.dto.CategoriaDTO;
 import TAWapp.dto.CompradorProductoDTO;
 import TAWapp.dto.ProductoDTO;
 import TAWapp.entity.CompradorProducto;
@@ -18,10 +19,14 @@ import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
 /**
+ *  @author RaulDF
+ *  DONE: 90%
+ * 
+ *  @author Javier
+ *  DONE: 10%
  *
- * @author RaulDF
- * Done: 100%
  */
 @Stateless
 public class CompradorProductoService {
@@ -30,19 +35,6 @@ public class CompradorProductoService {
     @EJB ProductoFacade productoFacade;
     
     public List<CompradorProductoDTO> listaPropiasSubastas(String nombreUsuario){
-        if (nombreUsuario == null || nombreUsuario.isEmpty()) {
-            List<CompradorProducto> list = this.cpFacade.findAll();
-        List<CompradorProducto> listaMisSubastas = new ArrayList<>();
-        for(CompradorProducto cp : list){
-           
-                listaMisSubastas.add(cp);
-            
-            
-        }
-        
-        return this.listaEntityADTO(listaMisSubastas);
-        }
-        else{ 
         List<CompradorProducto> list = this.cpFacade.findAll();
         List<CompradorProducto> listaMisSubastas = new ArrayList<>();
         for(CompradorProducto cp : list){
@@ -50,40 +42,8 @@ public class CompradorProductoService {
                 listaMisSubastas.add(cp);
             }
         }
-        return this.listaEntityADTO(listaMisSubastas);}
-    } 
-        public List<CompradorProductoDTO> listaproductos(List<ProductoDTO> productos){
-        List<CompradorProducto> list = this.cpFacade.findAll();
-        List<CompradorProducto> listaMisSubastas = new ArrayList<>();
-        for(ProductoDTO producto:productos){
-        for(CompradorProducto cp : list){
-            if(cp.getProductoIdproducto().equals(producto.getIdproducto())){
-                listaMisSubastas.add(cp);
-            }
-        }
-        
-        }
-        
         return this.listaEntityADTO(listaMisSubastas);
-    }
-     public List<CompradorProductoDTO> listaMisproductos(Integer id){
-        List<CompradorProducto> list = this.cpFacade.findByMisproductos(id);
-        
-        
-        return this.listaEntityADTO(list);
-    }
-    
-    public List<CompradorProductoDTO> listaproductosFavoritos(List<ProductoDTO> productos){
-        
-        List<CompradorProducto> listaMisFavoritos = new ArrayList<>();
-        for(ProductoDTO producto:productos){
-            CompradorProducto f = this.cpFacade.findByIdproductoFavoritos(producto.getIdproducto());
-            listaMisFavoritos.add(f);
-        
-        }
-        
-        return this.listaEntityADTO(listaMisFavoritos);
-    }
+    } 
     private List<CompradorProductoDTO> listaEntityADTO (List<CompradorProducto> lista) {
         List<CompradorProductoDTO> listaDTO = null;
         if (lista != null) {
@@ -122,6 +82,47 @@ public class CompradorProductoService {
 
         this.cpFacade.edit(subasta);
     }
+    
+    public CategoriaDTO encontrarUltimaCategoriaCliente(int idUsuario) {
+        Usuario usuario = this.usuarioFacade.find(idUsuario);
+        List<CompradorProducto> listaCompradorProducto = cpFacade.findByComprador(usuario);  
+        return listaCompradorProducto.get(listaCompradorProducto.size() - 1).getProductoIdproducto().getCategoriaIdcategoria().toDTO();  
+    }
+    
+    public List<CompradorProductoDTO> listaproductos(List<ProductoDTO> productos){
+        List<CompradorProducto> list = this.cpFacade.findAll();
+        List<CompradorProducto> listaMisSubastas = new ArrayList<>();
+        for(ProductoDTO producto:productos){
+        for(CompradorProducto cp : list){
+            if(cp.getProductoIdproducto().equals(producto.getIdproducto())){
+                listaMisSubastas.add(cp);
+            }
+        }
+        
+        }
+        
+        return this.listaEntityADTO(listaMisSubastas);
+    }
+        
+    public List<CompradorProductoDTO> listaMisproductos(Integer id){
+        List<CompradorProducto> list = this.cpFacade.findByMisproductos(id);
+        
+        
+        return this.listaEntityADTO(list);
+    }
+    
+    public List<CompradorProductoDTO> listaproductosFavoritos(List<ProductoDTO> productos){
+        
+        List<CompradorProducto> listaMisFavoritos = new ArrayList<>();
+        for(ProductoDTO producto:productos){
+            CompradorProducto f = this.cpFacade.findByIdproductoFavoritos(producto.getIdproducto());
+            listaMisFavoritos.add(f);
+        
+        }
+        
+        return this.listaEntityADTO(listaMisFavoritos);
+    }
+
     public void comprarSubasta(String strId,Integer comprador,String precio) {
         CompradorProducto subasta = this.cpFacade.find(Integer.parseInt(strId));
         Usuario user = this.usuarioFacade.find(comprador);
@@ -131,6 +132,4 @@ public class CompradorProductoService {
         
         this.cpFacade.edit(subasta);
     }
-    
 }
-

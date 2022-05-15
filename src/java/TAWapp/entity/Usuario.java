@@ -7,7 +7,6 @@ package TAWapp.entity;
 
 import TAWapp.dto.UsuarioDTO;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -29,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author casti
+ * @author capta
  */
 @Entity
 @Table(name = "USUARIO")
@@ -45,9 +44,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findBySexo", query = "SELECT u FROM Usuario u WHERE u.sexo = :sexo")
     , @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")})
 public class Usuario implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioComprador")
-    private Collection<Productosfavorito> productosfavoritosCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -93,8 +89,6 @@ public class Usuario implements Serializable {
     private List<Estadistica> estadisticaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioVendedor")
     private List<Producto> productoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioComprador")
-    private List<Productosfavorito> productosFavoritosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private List<Correo> correoList;
     @OneToMany(mappedBy = "usuarioLista")
@@ -103,6 +97,8 @@ public class Usuario implements Serializable {
     private List<CompradorProducto> compradorProductoList;
     @OneToMany(mappedBy = "usuarioComprador")
     private List<CompradorProducto> compradorProductoList1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioComprador")
+    private List<Productosfavoritos> productosfavoritosList;
     @JoinColumn(name = "ROL_IDROL", referencedColumnName = "ID_ROL")
     @ManyToOne(optional = false)
     private Rol rolIdrol;
@@ -208,15 +204,6 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<Productosfavorito> getProductosFavoritosList() {
-        return productosFavoritosList;
-    }
-
-    public void setProductosFavoritosList(List<Productosfavorito> productosFavoritosList) {
-        this.productosFavoritosList = productosFavoritosList;
-    }
-
-    @XmlTransient
     public List<Correo> getCorreoList() {
         return correoList;
     }
@@ -250,6 +237,15 @@ public class Usuario implements Serializable {
 
     public void setCompradorProductoList1(List<CompradorProducto> compradorProductoList1) {
         this.compradorProductoList1 = compradorProductoList1;
+    }
+
+    @XmlTransient
+    public List<Productosfavoritos> getProductosfavoritosList() {
+        return productosfavoritosList;
+    }
+
+    public void setProductosfavoritosList(List<Productosfavoritos> productosfavoritosList) {
+        this.productosfavoritosList = productosfavoritosList;
     }
 
     public Rol getRolIdrol() {
@@ -287,27 +283,16 @@ public class Usuario implements Serializable {
     
     public UsuarioDTO toDTO () {    
         UsuarioDTO dto = new UsuarioDTO();
-        dto.setIdusuario(idusuario);   
-        dto.setRolIdrol(rolIdrol.toDTO());
-        dto.setNombre(nombre);
-        dto.setPassword(password);
-        dto.setApellido(apellido);
-        dto.setCiudadResidencia(ciudadResidencia);
-        dto.setDomicilio(domicilio);
-        dto.setEdad(edad);
-        dto.setSexo(sexo);
-        
+        dto.setIdusuario(this.idusuario);
+        dto.setNombre(this.nombre);
+        dto.setApellido(this.apellido);
+        dto.setDomicilio(this.domicilio);
+        dto.setCiudadResidencia(this.ciudadResidencia);
+        dto.setEdad(this.edad);
+        dto.setSexo(this.sexo);
+        dto.setPassword(this.password);
+        dto.setRolIdrol(this.rolIdrol);
                 
         return dto;        
-    }
-
-    @XmlTransient
-    public Collection<Productosfavorito> getProductosfavoritosCollection() {
-        return productosfavoritosCollection;
-    }
-
-    public void setProductosfavoritosCollection(Collection<Productosfavorito> productosfavoritosCollection) {
-        this.productosfavoritosCollection = productosfavoritosCollection;
-    }
-    
+    }  
 }

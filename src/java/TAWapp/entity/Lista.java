@@ -5,6 +5,7 @@
  */
 package TAWapp.entity;
 
+import TAWapp.dto.ListaDTO;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -23,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author casti
+ * @author capta
  */
 @Entity
 @Table(name = "LISTA")
@@ -110,4 +111,12 @@ public class Lista implements Serializable {
         return "TAWapp.entity.Lista[ idLista=" + idLista + " ]";
     }
     
+    public ListaDTO toDTO () {    
+        ListaDTO dto = new ListaDTO();
+        dto.setIdLista(this.idLista);
+        dto.setNombre(this.nombre);
+        dto.setUsuarioLista(this.usuarioLista);
+                
+        return dto;        
+    }  
 }

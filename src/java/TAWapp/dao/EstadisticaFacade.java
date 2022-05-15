@@ -38,4 +38,5 @@ public class EstadisticaFacade extends AbstractFacade<Estadistica> {
         return q.getResultList();
     }
     
+    
 }

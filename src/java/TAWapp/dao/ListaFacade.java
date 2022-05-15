@@ -5,14 +5,16 @@
  */
 package TAWapp.dao;
 
-import TAWapp.entity.Lista;
+import java.util.*;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import TAWapp.entity.Lista;
 
 /**
- *
- * @author casti
+ * 
+ * @author Javier
  */
 @Stateless
 public class ListaFacade extends AbstractFacade<Lista> {
@@ -29,4 +31,10 @@ public class ListaFacade extends AbstractFacade<Lista> {
         super(Lista.class);
     }
     
+    public List<Lista> findByNombre (String nombre) {
+        Query q;
+        q = this.getEntityManager().createQuery("select l from Lista l where l.nombre like :nombre");
+        q.setParameter("nombre", '%' + nombre +'%');
+        return q.getResultList();
+    }
 }

@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.servlet;
 
@@ -29,23 +30,18 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author casti 
- * Done: 100%
+ * @author capta
  */
 @WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
-public class UsuarioServlet extends TAWappServlet {
-
-    @EJB
-    UsuarioService usuarioService;
-    @EJB
-    RolService rolService;
-    @EJB
-    EstadisticaService estadisticaService;
+public class UsuarioServlet extends TAWappServlet  {
+    @EJB UsuarioService usuarioService;
+    @EJB RolService rolService;
+    @EJB EstadisticaService estadisticaService;
     @EJB ProductoService productoService;
     @EJB CategoriaService categoriaService;
     @EJB CompradorProductoService subastaService;
     @EJB FavoritoService favoritoService;
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -106,6 +102,9 @@ public class UsuarioServlet extends TAWappServlet {
 
                     request.setAttribute("estadisticas", estadisticas);
                     request.getRequestDispatcher("/WEB-INF/jsp/Analista.jsp").forward(request, response);
+                    break;
+                case 4:
+                    response.sendRedirect(request.getContextPath() + "/MarketingServlet");
                     break;
                 default:
                     break;

@@ -5,6 +5,7 @@
  */
 package TAWapp.entity;
 
+import TAWapp.dto.FavoritoDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -25,15 +26,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author casti
+ * @author capta
  */
 @Entity
-@Table(name = "PRODUCTOS_FAVORITOS")
+@Table(name = "PRODUCTOSFAVORITOS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ProductosFavoritos.findAll", query = "SELECT p FROM ProductosFavoritos p")
-    , @NamedQuery(name = "ProductosFavoritos.findByIdfavorito", query = "SELECT p FROM ProductosFavoritos p WHERE p.idfavorito = :idfavorito")})
-public class ProductosFavoritos implements Serializable {
+    @NamedQuery(name = "Productosfavoritos.findAll", query = "SELECT p FROM Productosfavoritos p")
+    , @NamedQuery(name = "Productosfavoritos.findByIdfavorito", query = "SELECT p FROM Productosfavoritos p WHERE p.idfavorito = :idfavorito")})
+public class Productosfavoritos implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,19 +42,19 @@ public class ProductosFavoritos implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDFAVORITO")
     private Integer idfavorito;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productosFavoritosId")
+    private List<EstadisticaHasProductosFavoritos> estadisticaHasProductosFavoritosList;
     @JoinColumn(name = "PRODUCTO_IDPRODUCTO", referencedColumnName = "IDPRODUCTO")
     @ManyToOne(optional = false)
     private Producto productoIdproducto;
     @JoinColumn(name = "USUARIO_COMPRADOR", referencedColumnName = "IDUSUARIO")
     @ManyToOne(optional = false)
     private Usuario usuarioComprador;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productosFavoritosId")
-    private List<EstadisticaHasProductosFavoritos> estadisticaHasProductosFavoritosList;
 
-    public ProductosFavoritos() {
+    public Productosfavoritos() {
     }
 
-    public ProductosFavoritos(Integer idfavorito) {
+    public Productosfavoritos(Integer idfavorito) {
         this.idfavorito = idfavorito;
     }
 
@@ -63,6 +64,15 @@ public class ProductosFavoritos implements Serializable {
 
     public void setIdfavorito(Integer idfavorito) {
         this.idfavorito = idfavorito;
+    }
+
+    @XmlTransient
+    public List<EstadisticaHasProductosFavoritos> getEstadisticaHasProductosFavoritosList() {
+        return estadisticaHasProductosFavoritosList;
+    }
+
+    public void setEstadisticaHasProductosFavoritosList(List<EstadisticaHasProductosFavoritos> estadisticaHasProductosFavoritosList) {
+        this.estadisticaHasProductosFavoritosList = estadisticaHasProductosFavoritosList;
     }
 
     public Producto getProductoIdproducto() {
@@ -81,15 +91,6 @@ public class ProductosFavoritos implements Serializable {
         this.usuarioComprador = usuarioComprador;
     }
 
-    @XmlTransient
-    public List<EstadisticaHasProductosFavoritos> getEstadisticaHasProductosFavoritosList() {
-        return estadisticaHasProductosFavoritosList;
-    }
-
-    public void setEstadisticaHasProductosFavoritosList(List<EstadisticaHasProductosFavoritos> estadisticaHasProductosFavoritosList) {
-        this.estadisticaHasProductosFavoritosList = estadisticaHasProductosFavoritosList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -100,10 +101,10 @@ public class ProductosFavoritos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProductosFavoritos)) {
+        if (!(object instanceof Productosfavoritos)) {
             return false;
         }
-        ProductosFavoritos other = (ProductosFavoritos) object;
+        Productosfavoritos other = (Productosfavoritos) object;
         if ((this.idfavorito == null && other.idfavorito != null) || (this.idfavorito != null && !this.idfavorito.equals(other.idfavorito))) {
             return false;
         }
@@ -112,7 +113,14 @@ public class ProductosFavoritos implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.ProductosFavoritos[ idfavorito=" + idfavorito + " ]";
+        return "TAWapp.entity.Productosfavoritos[ idfavorito=" + idfavorito + " ]";
     }
     
+    public FavoritoDTO toDTO(){
+        FavoritoDTO dto = new FavoritoDTO();
+        dto.setProductoIdproducto(productoIdproducto);
+        dto.setUsuarioComprador(usuarioComprador);
+        dto.setIdfavorito(idfavorito);
+        return dto;
+    }
 }

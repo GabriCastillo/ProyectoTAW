@@ -7,7 +7,6 @@ package TAWapp.entity;
 
 import TAWapp.dto.ProductoDTO;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -29,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author casti
+ * @author capta
  */
 @Entity
 @Table(name = "PRODUCTO")
@@ -41,9 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")
     , @NamedQuery(name = "Producto.findByUrlImagen", query = "SELECT p FROM Producto p WHERE p.urlImagen = :urlImagen")})
 public class Producto implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
-    private Collection<Productosfavorito> productosfavoritosCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -72,12 +68,12 @@ public class Producto implements Serializable {
     @JoinColumn(name = "USUARIO_VENDEDOR", referencedColumnName = "IDUSUARIO")
     @ManyToOne(optional = false)
     private Usuario usuarioVendedor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
-    private List<Productosfavorito> productosFavoritosList;
     @OneToMany(mappedBy = "idProducto")
     private List<Correo> correoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
     private List<CompradorProducto> compradorProductoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
+    private List<Productosfavoritos> productosfavoritosList;
 
     public Producto() {
     }
@@ -142,15 +138,6 @@ public class Producto implements Serializable {
     }
 
     @XmlTransient
-    public List<Productosfavorito> getProductosFavoritosList() {
-        return productosFavoritosList;
-    }
-
-    public void setProductosFavoritosList(List<Productosfavorito> productosFavoritosList) {
-        this.productosFavoritosList = productosFavoritosList;
-    }
-
-    @XmlTransient
     public List<Correo> getCorreoList() {
         return correoList;
     }
@@ -166,6 +153,15 @@ public class Producto implements Serializable {
 
     public void setCompradorProductoList(List<CompradorProducto> compradorProductoList) {
         this.compradorProductoList = compradorProductoList;
+    }
+
+    @XmlTransient
+    public List<Productosfavoritos> getProductosfavoritosList() {
+        return productosfavoritosList;
+    }
+
+    public void setProductosfavoritosList(List<Productosfavoritos> productosfavoritosList) {
+        this.productosfavoritosList = productosfavoritosList;
     }
 
     @Override
@@ -193,25 +189,16 @@ public class Producto implements Serializable {
         return "TAWapp.entity.Producto[ idproducto=" + idproducto + " ]";
     }
     
-    public ProductoDTO toDTO() {
+    public ProductoDTO toDTO () {    
         ProductoDTO dto = new ProductoDTO();
+        
         dto.setIdproducto(idproducto);
         dto.setTitulo(titulo);
         dto.setDescripcion(descripcion);
         dto.setImagen(urlImagen);
         dto.setCategoriaIdcategoria(categoriaIdcategoria.toDTO());
         dto.setUsuarioVendedor(usuarioVendedor.toDTO());
-        
-        return dto;
-    }
-
-    @XmlTransient
-    public Collection<Productosfavorito> getProductosfavoritosCollection() {
-        return productosfavoritosCollection;
-    }
-
-    public void setProductosfavoritosCollection(Collection<Productosfavorito> productosfavoritosCollection) {
-        this.productosfavoritosCollection = productosfavoritosCollection;
-    }
-    
+                
+        return dto;        
+    } 
 }

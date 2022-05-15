@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/oficial4/ProyectoTAW/src/java/TAWapp/servlet/CategoriaFiltroServlet.java</file>
-            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/oficial4/ProyectoTAW/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/oficial4/ProyectoTAW/src/java/TAWapp/servlet/EstadisticaGuardarServlet.java</file>
-            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/oficial4/ProyectoTAW/src/conf/persistence.xml</file>
-            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/oficial4/ProyectoTAW/src/java/TAWapp/service/CompradorProductoService.java</file>
-            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/oficial4/ProyectoTAW/src/java/TAWapp/dao/CompradorProductoFacade.java</file>
-            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/oficial4/ProyectoTAW/src/java/TAWapp/entity/Productosfavorito.java</file>
-            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/oficial4/ProyectoTAW/src/java/TAWapp/service/CategoriaService.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
