@@ -89,6 +89,12 @@ public class Usuario implements Serializable {
     private List<Estadistica> estadisticaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioVendedor")
     private List<Producto> productoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioComprador")
+    private List<ProductosFavoritos> productosFavoritosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    private List<Correo> correoList;
+    @OneToMany(mappedBy = "usuarioLista")
+    private List<Lista> listaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioVendedor")
     private List<CompradorProducto> compradorProductoList;
     @OneToMany(mappedBy = "usuarioComprador")
@@ -198,6 +204,33 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    public List<ProductosFavoritos> getProductosFavoritosList() {
+        return productosFavoritosList;
+    }
+
+    public void setProductosFavoritosList(List<ProductosFavoritos> productosFavoritosList) {
+        this.productosFavoritosList = productosFavoritosList;
+    }
+
+    @XmlTransient
+    public List<Correo> getCorreoList() {
+        return correoList;
+    }
+
+    public void setCorreoList(List<Correo> correoList) {
+        this.correoList = correoList;
+    }
+
+    @XmlTransient
+    public List<Lista> getListaList() {
+        return listaList;
+    }
+
+    public void setListaList(List<Lista> listaList) {
+        this.listaList = listaList;
+    }
+
+    @XmlTransient
     public List<CompradorProducto> getCompradorProductoList() {
         return compradorProductoList;
     }
@@ -248,7 +281,7 @@ public class Usuario implements Serializable {
         return "TAWapp.entity.Usuario[ idusuario=" + idusuario + " ]";
     }
     
-     public UsuarioDTO toDTO () {    
+    public UsuarioDTO toDTO () {    
         UsuarioDTO dto = new UsuarioDTO();
         dto.setIdusuario(idusuario);   
         dto.setRolIdrol(rolIdrol.toDTO());

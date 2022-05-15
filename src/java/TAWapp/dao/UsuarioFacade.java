@@ -30,8 +30,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public UsuarioFacade() {
         super(Usuario.class);
     }
-
-    public Usuario comprobarUsuario(String strusuario, String strclave) {
+    
+     public Usuario comprobarUsuario(String strusuario, String strclave) {
         Query q;
 
         q = this.getEntityManager().createQuery("select u from Usuario u where u.nombre = :usuario and"
@@ -116,5 +116,5 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         
         return q.getResultList();
     }
-
+    
 }

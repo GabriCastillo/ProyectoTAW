@@ -163,7 +163,7 @@ public class CompradorProducto implements Serializable {
         return "TAWapp.entity.CompradorProducto[ idcompra=" + idcompra + " ]";
     }
     
-        public CompradorProductoDTO toDTO() {
+     public CompradorProductoDTO toDTO() {
           CompradorProductoDTO dto = new CompradorProductoDTO();
           dto.setIdCompradorProductoDTO(idcompra);
           dto.setPrecio_Compra(precioCompra);

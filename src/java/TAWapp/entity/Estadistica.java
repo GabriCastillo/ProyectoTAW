@@ -153,7 +153,7 @@ public class Estadistica implements Serializable {
         return "TAWapp.entity.Estadistica[ idestadistica=" + idestadistica + " ]";
     }
     
-     public EstadisticaDTO toDTO(){
+    public EstadisticaDTO toDTO(){
         EstadisticaDTO dto = new EstadisticaDTO();
         dto.setIdestadistica(idestadistica);
         dto.setUsuarioAnalista(usuarioAnalista);
@@ -162,4 +162,5 @@ public class Estadistica implements Serializable {
         dto.setValor(valor);
         return dto;        
     }
+    
 }

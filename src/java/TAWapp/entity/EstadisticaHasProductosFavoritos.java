@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -27,9 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "EstadisticaHasProductosFavoritos.findAll", query = "SELECT e FROM EstadisticaHasProductosFavoritos e")
-    , @NamedQuery(name = "EstadisticaHasProductosFavoritos.findByEstadisticaIdestadistica", query = "SELECT e FROM EstadisticaHasProductosFavoritos e WHERE e.estadisticaIdestadistica = :estadisticaIdestadistica")
-    , @NamedQuery(name = "EstadisticaHasProductosFavoritos.findByProductosFavoritosUsuarioComprador", query = "SELECT e FROM EstadisticaHasProductosFavoritos e WHERE e.productosFavoritosUsuarioComprador = :productosFavoritosUsuarioComprador")
-    , @NamedQuery(name = "EstadisticaHasProductosFavoritos.findByProductosFavoritosProductoIdproducto", query = "SELECT e FROM EstadisticaHasProductosFavoritos e WHERE e.productosFavoritosProductoIdproducto = :productosFavoritosProductoIdproducto")})
+    , @NamedQuery(name = "EstadisticaHasProductosFavoritos.findByEstadisticaIdestadistica", query = "SELECT e FROM EstadisticaHasProductosFavoritos e WHERE e.estadisticaIdestadistica = :estadisticaIdestadistica")})
 public class EstadisticaHasProductosFavoritos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,29 +37,18 @@ public class EstadisticaHasProductosFavoritos implements Serializable {
     @NotNull
     @Column(name = "ESTADISTICA_IDESTADISTICA")
     private Integer estadisticaIdestadistica;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "PRODUCTOS_FAVORITOS_USUARIO_COMPRADOR")
-    private int productosFavoritosUsuarioComprador;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "PRODUCTOS_FAVORITOS_PRODUCTO_IDPRODUCTO")
-    private int productosFavoritosProductoIdproducto;
     @JoinColumn(name = "ESTADISTICA_IDESTADISTICA", referencedColumnName = "IDESTADISTICA", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Estadistica estadistica;
+    @JoinColumn(name = "PRODUCTOS_FAVORITOS_ID", referencedColumnName = "IDFAVORITO")
+    @ManyToOne(optional = false)
+    private ProductosFavoritos productosFavoritosId;
 
     public EstadisticaHasProductosFavoritos() {
     }
 
     public EstadisticaHasProductosFavoritos(Integer estadisticaIdestadistica) {
         this.estadisticaIdestadistica = estadisticaIdestadistica;
-    }
-
-    public EstadisticaHasProductosFavoritos(Integer estadisticaIdestadistica, int productosFavoritosUsuarioComprador, int productosFavoritosProductoIdproducto) {
-        this.estadisticaIdestadistica = estadisticaIdestadistica;
-        this.productosFavoritosUsuarioComprador = productosFavoritosUsuarioComprador;
-        this.productosFavoritosProductoIdproducto = productosFavoritosProductoIdproducto;
     }
 
     public Integer getEstadisticaIdestadistica() {
@@ -71,28 +59,20 @@ public class EstadisticaHasProductosFavoritos implements Serializable {
         this.estadisticaIdestadistica = estadisticaIdestadistica;
     }
 
-    public int getProductosFavoritosUsuarioComprador() {
-        return productosFavoritosUsuarioComprador;
-    }
-
-    public void setProductosFavoritosUsuarioComprador(int productosFavoritosUsuarioComprador) {
-        this.productosFavoritosUsuarioComprador = productosFavoritosUsuarioComprador;
-    }
-
-    public int getProductosFavoritosProductoIdproducto() {
-        return productosFavoritosProductoIdproducto;
-    }
-
-    public void setProductosFavoritosProductoIdproducto(int productosFavoritosProductoIdproducto) {
-        this.productosFavoritosProductoIdproducto = productosFavoritosProductoIdproducto;
-    }
-
     public Estadistica getEstadistica() {
         return estadistica;
     }
 
     public void setEstadistica(Estadistica estadistica) {
         this.estadistica = estadistica;
+    }
+
+    public ProductosFavoritos getProductosFavoritosId() {
+        return productosFavoritosId;
+    }
+
+    public void setProductosFavoritosId(ProductosFavoritos productosFavoritosId) {
+        this.productosFavoritosId = productosFavoritosId;
     }
 
     @Override

@@ -69,6 +69,10 @@ public class Producto implements Serializable {
     @ManyToOne(optional = false)
     private Usuario usuarioVendedor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
+    private List<ProductosFavoritos> productosFavoritosList;
+    @OneToMany(mappedBy = "idProducto")
+    private List<Correo> correoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
     private List<CompradorProducto> compradorProductoList;
 
     public Producto() {
@@ -134,6 +138,24 @@ public class Producto implements Serializable {
     }
 
     @XmlTransient
+    public List<ProductosFavoritos> getProductosFavoritosList() {
+        return productosFavoritosList;
+    }
+
+    public void setProductosFavoritosList(List<ProductosFavoritos> productosFavoritosList) {
+        this.productosFavoritosList = productosFavoritosList;
+    }
+
+    @XmlTransient
+    public List<Correo> getCorreoList() {
+        return correoList;
+    }
+
+    public void setCorreoList(List<Correo> correoList) {
+        this.correoList = correoList;
+    }
+
+    @XmlTransient
     public List<CompradorProducto> getCompradorProductoList() {
         return compradorProductoList;
     }
@@ -178,4 +200,5 @@ public class Producto implements Serializable {
         
         return dto;
     }
+    
 }
