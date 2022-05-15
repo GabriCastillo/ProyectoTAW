@@ -4,9 +4,11 @@
  */
 package TAWapp.servlet;
 
+import TAWapp.dto.EstadisticaDTO;
 import TAWapp.dto.RolDTO;
 import TAWapp.service.UsuarioService;
 import TAWapp.dto.UsuarioDTO;
+import TAWapp.service.EstadisticaService;
 import TAWapp.service.RolService;
 import javax.ejb.EJB;
 import java.io.IOException;
@@ -28,6 +30,8 @@ public class UsuarioServlet extends TAWappServlet {
     UsuarioService usuarioService;
     @EJB
     RolService rolService;
+    @EJB
+    EstadisticaService estadisticaService;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,19 +50,40 @@ public class UsuarioServlet extends TAWappServlet {
             session.setAttribute("usuario", user);
             request.setAttribute("usuario", user);
 
-            if (user.getRolIdrol().getIdRol() == 1) {
-                List<RolDTO> listaRoles = this.rolService.listarRoles();
+            switch (user.getRolIdrol().getIdRol()) {
+                case 1:
+                    List<RolDTO> listaRoles = this.rolService.listarRoles();
+                    request.setAttribute("roles", listaRoles);
+                    String filtroNombre = request.getParameter("filtroNombre");
+                    String filtroApellido = request.getParameter("filtroApellido");
+                    String filtroRol = request.getParameter("filtroRol");
+                    List<UsuarioDTO> usuarios = this.usuarioService.listarUsuarios(filtroNombre, filtroApellido, filtroRol);
+                    request.setAttribute("usuarios", usuarios);
+                    request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp").forward(request, response);
+                    break;
+                case 2:
+                    request.getRequestDispatcher("/WEB-INF/jsp/iniciado.jsp").forward(request, response);
+                    break;
+                case 3:
+                    /*
+                    String filtroNombre = request.getParameter("findByName");
+            List<EstadisticaDTO> listaEstadisticas = this.estadisticaService.listarEstadisticas(filtroNombre);
 
-                request.setAttribute("roles", listaRoles);
-                String filtroNombre = request.getParameter("filtroNombre");
-                String filtroApellido = request.getParameter("filtroApellido");
-                String filtroRol = request.getParameter("filtroRol");
-                List<UsuarioDTO> usuarios = this.usuarioService.listarUsuarios(filtroNombre, filtroApellido, filtroRol);
+            request.setAttribute("estadisticas", listaEstadisticas);
+            String str = request.getParameter("id");
+            if (str != null) {
+                EstadisticaDTO estadistica = this.estadisticaService.buscarEstadistica(Integer.parseInt(str));
+                request.setAttribute("estadistica", estadistica);
+            }
+                     */
+                    String filtroTitulo = request.getParameter("filtroTitulo");
+                    List<EstadisticaDTO> estadisticas = this.estadisticaService.listarEstadisticas(filtroTitulo);
 
-                request.setAttribute("usuarios", usuarios);
-                request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp").forward(request, response);
-            } else {
-                request.getRequestDispatcher("/WEB-INF/jsp/iniciado.jsp").forward(request, response);
+                    request.setAttribute("estadisticas", estadisticas);
+                    request.getRequestDispatcher("/WEB-INF/jsp/Analista.jsp").forward(request, response);
+                    break;
+                default:
+                    break;
             }
 
         }

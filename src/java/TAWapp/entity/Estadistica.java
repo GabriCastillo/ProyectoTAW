@@ -5,6 +5,7 @@
  */
 package TAWapp.entity;
 
+import TAWapp.dto.EstadisticaDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -152,4 +153,13 @@ public class Estadistica implements Serializable {
         return "TAWapp.entity.Estadistica[ idestadistica=" + idestadistica + " ]";
     }
     
+     public EstadisticaDTO toDTO(){
+        EstadisticaDTO dto = new EstadisticaDTO();
+        dto.setIdestadistica(idestadistica);
+        dto.setUsuarioAnalista(usuarioAnalista);
+        dto.setNombre(nombre);
+        dto.setDescripcion(descripcion);
+        dto.setValor(valor);
+        return dto;        
+    }
 }

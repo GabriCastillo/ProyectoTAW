@@ -6,9 +6,11 @@
 package TAWapp.dao;
 
 import TAWapp.entity.Estadistica;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,13 @@ public class EstadisticaFacade extends AbstractFacade<Estadistica> {
     public EstadisticaFacade() {
         super(Estadistica.class);
     }
+    
+     public List<Estadistica> findByTitulo (String titulo) {
+        Query q;
+        q = this.getEntityManager().createQuery("select p from Producto p where p.titulo like :titulo");
+        q.setParameter("titulo", '%' + titulo +'%');
+        return q.getResultList();
+    }
+    
     
 }
