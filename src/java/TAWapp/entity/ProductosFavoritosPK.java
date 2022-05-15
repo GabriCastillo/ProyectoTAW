@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.entity;
 
@@ -8,18 +9,21 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author casti
+ * @author frees
  */
 @Embeddable
 public class ProductosFavoritosPK implements Serializable {
 
     @Basic(optional = false)
+    @NotNull
     @Column(name = "USUARIO_COMPRADOR")
     private int usuarioComprador;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "PRODUCTO_IDPRODUCTO")
     private int productoIdproducto;
 
@@ -73,7 +77,7 @@ public class ProductosFavoritosPK implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.ProductosFavoritosPK[ usuarioComprador=" + usuarioComprador + ", productoIdproducto=" + productoIdproducto + " ]";
+        return "TAWapp.dao.ProductosFavoritosPK[ usuarioComprador=" + usuarioComprador + ", productoIdproducto=" + productoIdproducto + " ]";
     }
     
 }

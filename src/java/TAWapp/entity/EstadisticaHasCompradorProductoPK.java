@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.entity;
 
@@ -8,18 +9,23 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author casti
+ * @author frees
  */
 @Embeddable
 public class EstadisticaHasCompradorProductoPK implements Serializable {
 
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "COMPRADOR_PRODUCTO_IDCOMPRA")
     private String compradorProductoIdcompra;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "ESTADISTICA_IDESTADISTICA")
     private int estadisticaIdestadistica;
 
@@ -73,7 +79,7 @@ public class EstadisticaHasCompradorProductoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.EstadisticaHasCompradorProductoPK[ compradorProductoIdcompra=" + compradorProductoIdcompra + ", estadisticaIdestadistica=" + estadisticaIdestadistica + " ]";
+        return "TAWapp.dao.EstadisticaHasCompradorProductoPK[ compradorProductoIdcompra=" + compradorProductoIdcompra + ", estadisticaIdestadistica=" + estadisticaIdestadistica + " ]";
     }
     
 }

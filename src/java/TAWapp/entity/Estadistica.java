@@ -1,11 +1,12 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,14 +26,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author casti
+ * @author frees
  */
 @Entity
 @Table(name = "ESTADISTICA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Estadistica.findAll", query = "SELECT e FROM Estadistica e"),
-    @NamedQuery(name = "Estadistica.findByIdestadistica", query = "SELECT e FROM Estadistica e WHERE e.idestadistica = :idestadistica")})
+    @NamedQuery(name = "Estadistica.findAll", query = "SELECT e FROM Estadistica e")
+    , @NamedQuery(name = "Estadistica.findByIdestadistica", query = "SELECT e FROM Estadistica e WHERE e.idestadistica = :idestadistica")})
 public class Estadistica implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,7 +48,7 @@ public class Estadistica implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "estadistica")
     private EstadisticaHasProductosFavoritos estadisticaHasProductosFavoritos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadistica")
-    private List<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoList;
+    private Collection<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoCollection;
 
     public Estadistica() {
     }
@@ -81,12 +82,12 @@ public class Estadistica implements Serializable {
     }
 
     @XmlTransient
-    public List<EstadisticaHasCompradorProducto> getEstadisticaHasCompradorProductoList() {
-        return estadisticaHasCompradorProductoList;
+    public Collection<EstadisticaHasCompradorProducto> getEstadisticaHasCompradorProductoCollection() {
+        return estadisticaHasCompradorProductoCollection;
     }
 
-    public void setEstadisticaHasCompradorProductoList(List<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoList) {
-        this.estadisticaHasCompradorProductoList = estadisticaHasCompradorProductoList;
+    public void setEstadisticaHasCompradorProductoCollection(Collection<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoCollection) {
+        this.estadisticaHasCompradorProductoCollection = estadisticaHasCompradorProductoCollection;
     }
 
     @Override
@@ -111,7 +112,7 @@ public class Estadistica implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.Estadistica[ idestadistica=" + idestadistica + " ]";
+        return "TAWapp.dao.Estadistica[ idestadistica=" + idestadistica + " ]";
     }
     
 }

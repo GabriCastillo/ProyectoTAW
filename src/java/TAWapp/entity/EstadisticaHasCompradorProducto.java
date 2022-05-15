@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package TAWapp.entity;
 
@@ -16,20 +17,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author casti
+ * @author frees
  */
 @Entity
 @Table(name = "ESTADISTICA_HAS_COMPRADOR_PRODUCTO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "EstadisticaHasCompradorProducto.findAll", query = "SELECT e FROM EstadisticaHasCompradorProducto e"),
-    @NamedQuery(name = "EstadisticaHasCompradorProducto.findByCompradorProductoIdcompra", query = "SELECT e FROM EstadisticaHasCompradorProducto e WHERE e.estadisticaHasCompradorProductoPK.compradorProductoIdcompra = :compradorProductoIdcompra"),
-    @NamedQuery(name = "EstadisticaHasCompradorProducto.findByEstadisticaIdestadistica", query = "SELECT e FROM EstadisticaHasCompradorProducto e WHERE e.estadisticaHasCompradorProductoPK.estadisticaIdestadistica = :estadisticaIdestadistica")})
+    @NamedQuery(name = "EstadisticaHasCompradorProducto.findAll", query = "SELECT e FROM EstadisticaHasCompradorProducto e")
+    , @NamedQuery(name = "EstadisticaHasCompradorProducto.findByCompradorProductoIdcompra", query = "SELECT e FROM EstadisticaHasCompradorProducto e WHERE e.estadisticaHasCompradorProductoPK.compradorProductoIdcompra = :compradorProductoIdcompra")
+    , @NamedQuery(name = "EstadisticaHasCompradorProducto.findByEstadisticaIdestadistica", query = "SELECT e FROM EstadisticaHasCompradorProducto e WHERE e.estadisticaHasCompradorProductoPK.estadisticaIdestadistica = :estadisticaIdestadistica")})
 public class EstadisticaHasCompradorProducto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected EstadisticaHasCompradorProductoPK estadisticaHasCompradorProductoPK;
+    @JoinColumn(name = "COMPRADOR_PRODUCTO_IDCOMPRA", referencedColumnName = "IDCOMPRA", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private CompradorProducto compradorProducto;
     @JoinColumn(name = "ESTADISTICA_IDESTADISTICA", referencedColumnName = "IDESTADISTICA", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Estadistica estadistica;
@@ -51,6 +55,14 @@ public class EstadisticaHasCompradorProducto implements Serializable {
 
     public void setEstadisticaHasCompradorProductoPK(EstadisticaHasCompradorProductoPK estadisticaHasCompradorProductoPK) {
         this.estadisticaHasCompradorProductoPK = estadisticaHasCompradorProductoPK;
+    }
+
+    public CompradorProducto getCompradorProducto() {
+        return compradorProducto;
+    }
+
+    public void setCompradorProducto(CompradorProducto compradorProducto) {
+        this.compradorProducto = compradorProducto;
     }
 
     public Estadistica getEstadistica() {
@@ -83,7 +95,7 @@ public class EstadisticaHasCompradorProducto implements Serializable {
 
     @Override
     public String toString() {
-        return "TAWapp.entity.EstadisticaHasCompradorProducto[ estadisticaHasCompradorProductoPK=" + estadisticaHasCompradorProductoPK + " ]";
+        return "TAWapp.dao.EstadisticaHasCompradorProducto[ estadisticaHasCompradorProductoPK=" + estadisticaHasCompradorProductoPK + " ]";
     }
     
 }

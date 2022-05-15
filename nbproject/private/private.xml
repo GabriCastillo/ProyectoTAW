@@ -3,7 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/MEGAsync/Estudios/UMA/3er_año/Segundo%20Cuatri/TAW/proyecto/Ebai/ProyectoTaw/web/index.html</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/servlet/UsuarioServlet.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/dao/CompradorProductoFacade.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/service/FavoritoService.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/servlet/ComprarPujaServlet.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/dao/ProductoFacade.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/web/WEB-INF/jsp/compras.jsp</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/web/WEB-INF/jsp/iniciado.jsp</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/service/CompradorProductoService.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/service/ProductoService.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/servlet/CerrarPujaServlet.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/servlet/SubirProductoServlet.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/entity/Productosfavorito.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/servlet/FavoritoServlet.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/dto/ProductoDTO.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/web/WEB-INF/jsp/MisSubastas.jsp</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/dto/FavoritoDTO.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/dao/ProductosfavoritoFacade.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/src/java/TAWapp/entity/Producto.java</file>
+            <file>file:/C:/Users/frees/OneDrive/Documentos/GitHub/sd/ProyectoTAW/web/WEB-INF/jsp/MisFavoritos.jsp</file>
         </group>
     </open-files>
 </project-private>
