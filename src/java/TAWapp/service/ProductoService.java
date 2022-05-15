@@ -8,7 +8,7 @@ package TAWapp.service;
 import TAWapp.dao.CategoriaFacade;
 import TAWapp.dao.ProductoFacade;
 import TAWapp.dao.CompradorProductoFacade;
-import TAWapp.dao.ProductosfavoritosFacade;
+import TAWapp.dao.ProductosFavoritosFacade;
 import TAWapp.dao.UsuarioFacade;
 import TAWapp.dto.FavoritoDTO;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import TAWapp.entity.Categoria;
 import TAWapp.entity.CompradorProducto;
 import TAWapp.entity.Lista;
 import TAWapp.entity.Producto;
-import TAWapp.entity.Productosfavoritos;
+import TAWapp.entity.ProductosFavoritos;
 import TAWapp.entity.Usuario;
 
 /**
@@ -42,7 +42,7 @@ public class ProductoService {
     @EJB CompradorProductoFacade compradorProductoFacade;
     @EJB CategoriaFacade categoriaFacade;
     @EJB UsuarioFacade usuarioFacade;
-    @EJB ProductosfavoritosFacade FavoritoFacade;
+    @EJB ProductosFavoritosFacade FavoritoFacade;
     
     private List<ProductoDTO> listaEntityADTO (List<Producto> productos) {
         List<ProductoDTO> productoDTO = null;
@@ -153,7 +153,7 @@ public class ProductoService {
     public void AñadirFavorito(String id, Integer idusuario) {
         Producto producto = this.productoFacade.find(Integer.parseInt(id));
         Usuario user = this.usuarioFacade.find(idusuario);
-        Productosfavoritos favorito = new Productosfavoritos();
+        ProductosFavoritos favorito = new ProductosFavoritos();
         favorito.setProductoIdproducto(producto);
         favorito.setUsuarioComprador(user);
         

@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author capta
  */
 @Entity
-@Table(name = "PRODUCTOSFAVORITOS")
+@Table(name = "PRODUCTOS_FAVORITOS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Productosfavoritos.findAll", query = "SELECT p FROM Productosfavoritos p")
-    , @NamedQuery(name = "Productosfavoritos.findByIdfavorito", query = "SELECT p FROM Productosfavoritos p WHERE p.idfavorito = :idfavorito")})
-public class Productosfavoritos implements Serializable {
+    @NamedQuery(name = "ProductosFavoritos.findAll", query = "SELECT p FROM ProductosFavoritos p")
+    , @NamedQuery(name = "ProductosFavoritos.findByIdfavorito", query = "SELECT p FROM ProductosFavoritos p WHERE p.idfavorito = :idfavorito")})
+public class ProductosFavoritos implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,10 +51,10 @@ public class Productosfavoritos implements Serializable {
     @ManyToOne(optional = false)
     private Usuario usuarioComprador;
 
-    public Productosfavoritos() {
+    public ProductosFavoritos() {
     }
 
-    public Productosfavoritos(Integer idfavorito) {
+    public ProductosFavoritos(Integer idfavorito) {
         this.idfavorito = idfavorito;
     }
 
@@ -101,10 +101,10 @@ public class Productosfavoritos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Productosfavoritos)) {
+        if (!(object instanceof ProductosFavoritos)) {
             return false;
         }
-        Productosfavoritos other = (Productosfavoritos) object;
+        ProductosFavoritos other = (ProductosFavoritos) object;
         if ((this.idfavorito == null && other.idfavorito != null) || (this.idfavorito != null && !this.idfavorito.equals(other.idfavorito))) {
             return false;
         }

@@ -98,7 +98,7 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "usuarioComprador")
     private List<CompradorProducto> compradorProductoList1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioComprador")
-    private List<Productosfavoritos> productosfavoritosList;
+    private List<ProductosFavoritos> productosfavoritosList;
     @JoinColumn(name = "ROL_IDROL", referencedColumnName = "ID_ROL")
     @ManyToOne(optional = false)
     private Rol rolIdrol;
@@ -240,11 +240,11 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<Productosfavoritos> getProductosfavoritosList() {
+    public List<ProductosFavoritos> getProductosfavoritosList() {
         return productosfavoritosList;
     }
 
-    public void setProductosfavoritosList(List<Productosfavoritos> productosfavoritosList) {
+    public void setProductosfavoritosList(List<ProductosFavoritos> productosfavoritosList) {
         this.productosfavoritosList = productosfavoritosList;
     }
 

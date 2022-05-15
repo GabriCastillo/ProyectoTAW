@@ -42,7 +42,7 @@ public class EstadisticaHasProductosFavoritos implements Serializable {
     private Estadistica estadistica;
     @JoinColumn(name = "PRODUCTOS_FAVORITOS_ID", referencedColumnName = "IDFAVORITO")
     @ManyToOne(optional = false)
-    private Productosfavoritos productosFavoritosId;
+    private ProductosFavoritos productosFavoritosId;
 
     public EstadisticaHasProductosFavoritos() {
     }
@@ -67,11 +67,11 @@ public class EstadisticaHasProductosFavoritos implements Serializable {
         this.estadistica = estadistica;
     }
 
-    public Productosfavoritos getProductosFavoritosId() {
+    public ProductosFavoritos getProductosFavoritosId() {
         return productosFavoritosId;
     }
 
-    public void setProductosFavoritosId(Productosfavoritos productosFavoritosId) {
+    public void setProductosFavoritosId(ProductosFavoritos productosFavoritosId) {
         this.productosFavoritosId = productosFavoritosId;
     }
 
