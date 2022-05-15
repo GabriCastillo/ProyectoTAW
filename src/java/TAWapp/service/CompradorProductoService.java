@@ -30,6 +30,19 @@ public class CompradorProductoService {
     @EJB ProductoFacade productoFacade;
     
     public List<CompradorProductoDTO> listaPropiasSubastas(String nombreUsuario){
+        if (nombreUsuario == null || nombreUsuario.isEmpty()) {
+            List<CompradorProducto> list = this.cpFacade.findAll();
+        List<CompradorProducto> listaMisSubastas = new ArrayList<>();
+        for(CompradorProducto cp : list){
+           
+                listaMisSubastas.add(cp);
+            
+            
+        }
+        
+        return this.listaEntityADTO(listaMisSubastas);
+        }
+        else{ 
         List<CompradorProducto> list = this.cpFacade.findAll();
         List<CompradorProducto> listaMisSubastas = new ArrayList<>();
         for(CompradorProducto cp : list){
@@ -37,8 +50,40 @@ public class CompradorProductoService {
                 listaMisSubastas.add(cp);
             }
         }
-        return this.listaEntityADTO(listaMisSubastas);
+        return this.listaEntityADTO(listaMisSubastas);}
     } 
+        public List<CompradorProductoDTO> listaproductos(List<ProductoDTO> productos){
+        List<CompradorProducto> list = this.cpFacade.findAll();
+        List<CompradorProducto> listaMisSubastas = new ArrayList<>();
+        for(ProductoDTO producto:productos){
+        for(CompradorProducto cp : list){
+            if(cp.getProductoIdproducto().equals(producto.getIdproducto())){
+                listaMisSubastas.add(cp);
+            }
+        }
+        
+        }
+        
+        return this.listaEntityADTO(listaMisSubastas);
+    }
+     public List<CompradorProductoDTO> listaMisproductos(Integer id){
+        List<CompradorProducto> list = this.cpFacade.findByMisproductos(id);
+        
+        
+        return this.listaEntityADTO(list);
+    }
+    
+    public List<CompradorProductoDTO> listaproductosFavoritos(List<ProductoDTO> productos){
+        
+        List<CompradorProducto> listaMisFavoritos = new ArrayList<>();
+        for(ProductoDTO producto:productos){
+            CompradorProducto f = this.cpFacade.findByIdproductoFavoritos(producto.getIdproducto());
+            listaMisFavoritos.add(f);
+        
+        }
+        
+        return this.listaEntityADTO(listaMisFavoritos);
+    }
     private List<CompradorProductoDTO> listaEntityADTO (List<CompradorProducto> lista) {
         List<CompradorProductoDTO> listaDTO = null;
         if (lista != null) {
@@ -75,6 +120,15 @@ public class CompradorProductoService {
 
         subasta.setPrecioCompra(0);
 
+        this.cpFacade.edit(subasta);
+    }
+    public void comprarSubasta(String strId,Integer comprador,String precio) {
+        CompradorProducto subasta = this.cpFacade.find(Integer.parseInt(strId));
+        Usuario user = this.usuarioFacade.find(comprador);
+        subasta.setUsuarioComprador(user);
+        subasta.setPrecioCompra(0);
+        subasta.setPrecioSalida(Integer.parseInt(precio));
+        
         this.cpFacade.edit(subasta);
     }
     

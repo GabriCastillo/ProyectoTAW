@@ -4,11 +4,19 @@
  */
 package TAWapp.servlet;
 
+import TAWapp.dto.CategoriaDTO;
+import TAWapp.dto.CompradorProductoDTO;
 import TAWapp.dto.EstadisticaDTO;
+import TAWapp.dto.FavoritoDTO;
+import TAWapp.dto.ProductoDTO;
 import TAWapp.dto.RolDTO;
 import TAWapp.service.UsuarioService;
 import TAWapp.dto.UsuarioDTO;
+import TAWapp.service.CategoriaService;
+import TAWapp.service.CompradorProductoService;
 import TAWapp.service.EstadisticaService;
+import TAWapp.service.FavoritoService;
+import TAWapp.service.ProductoService;
 import TAWapp.service.RolService;
 import javax.ejb.EJB;
 import java.io.IOException;
@@ -33,6 +41,10 @@ public class UsuarioServlet extends TAWappServlet {
     RolService rolService;
     @EJB
     EstadisticaService estadisticaService;
+    @EJB ProductoService productoService;
+    @EJB CategoriaService categoriaService;
+    @EJB CompradorProductoService subastaService;
+    @EJB FavoritoService favoritoService;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -63,7 +75,19 @@ public class UsuarioServlet extends TAWappServlet {
                     request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp").forward(request, response);
                     break;
                 case 2:
-                    request.getRequestDispatcher("/WEB-INF/jsp/iniciado.jsp").forward(request, response);
+                    List<CategoriaDTO> listaCategorias = this.categoriaService.listarCategorias();
+             request.setAttribute("categorias", listaCategorias);
+                    List<ProductoDTO> productos = this.productoService.listarProductos("");
+            session.setAttribute("productos", productos);
+               request.setAttribute("productos", productos);
+                    List<FavoritoDTO> listaFavoritos = this.favoritoService.listaPropiosFavoritos(user.getIdusuario());
+                request.setAttribute("favoritos", listaFavoritos);
+                 session.setAttribute("favoritos", listaFavoritos);
+                List<CompradorProductoDTO> listaSubastas = this.subastaService.listaPropiasSubastas("");
+                request.setAttribute("subastas", listaSubastas);
+                 session.setAttribute("subastas", listaSubastas);
+                request.setAttribute("productos", productos);
+                request.getRequestDispatcher("/WEB-INF/jsp/iniciado.jsp").forward(request, response);
                     break;
                 case 3:
                     /*

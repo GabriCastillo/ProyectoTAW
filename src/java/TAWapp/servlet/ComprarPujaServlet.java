@@ -6,11 +6,8 @@
 package TAWapp.servlet;
 
 import TAWapp.dto.UsuarioDTO;
-
-import TAWapp.service.EstadisticaService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,14 +16,32 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author pepe_
- * Done: 100%
+ * @author frees
+ /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-@WebServlet(name = "EstadisticaGuardarServlet", urlPatterns = {"/EstadisticaGuardarServlet"})
-public class EstadisticaGuardarServlet extends TAWappServlet {
 
-    @EJB EstadisticaService estadisticaService;
-    
+
+import TAWapp.service.CompradorProductoService;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ *
+ * @author RaulDF
+ */
+@WebServlet(name = "ComprarPujaServlet", urlPatterns = {"/ComprarPujaServlet"})
+public class ComprarPujaServlet extends HttpServlet {
+    @EJB CompradorProductoService cps;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,24 +53,18 @@ public class EstadisticaGuardarServlet extends TAWappServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String strId = request.getParameter("id");
         
-        if (super.comprobarSession(request, response)){
-            //UsuarioDTO user = (UsuarioDTO) request.getAttribute("usuario");
-            int usuarioAnalista = Integer.parseInt(request.getParameter("idUsuario"));
-            String nombre = request.getParameter("nombre");
-            String descripcion = request.getParameter("descripcion");
-            //Double valor = this.estadisticaService.precioMedio();
-            
-            String strId = request.getParameter("id");
-            
-            if (strId == null || strId.isEmpty()){
-                estadisticaService.crearEstadistica(usuarioAnalista, nombre, descripcion, 0);
-            }else{
-                estadisticaService.modifcarEstadistica(Integer.parseInt(strId), usuarioAnalista, nombre, descripcion, 0);
-            }            
-        }
+        HttpSession session = request.getSession();
         
-        response.sendRedirect(request.getContextPath() + "");
+        UsuarioDTO user = (UsuarioDTO) session.getAttribute("usuario");
+        String precio=(String)request.getParameter("slider");
+        System.out.print(precio);
+        session.setAttribute("usuario", user);
+        request.setAttribute("usuario", user);
+        this.cps.comprarSubasta(strId,user.getIdusuario(),precio);
+        request.getRequestDispatcher("/UsuarioServlet").forward(request, response); 
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -165,11 +165,16 @@ public class CompradorProducto implements Serializable {
     
      public CompradorProductoDTO toDTO() {
           CompradorProductoDTO dto = new CompradorProductoDTO();
-          dto.setIdCompradorProductoDTO(idcompra);
+          dto.setIdCompradorProductoDTO(idcompra.toString());
           dto.setPrecio_Compra(precioCompra);
           dto.setPrecio_salida(precioSalida);
           dto.setProducto(productoIdproducto.toDTO());
           dto.setVendedor(usuarioVendedor.toDTO());
+          if(usuarioComprador==null){
+              dto.setComprador(null);
+          }else{
+          dto.setComprador(usuarioComprador.toDTO());
+          }
           return dto;
     }
 }

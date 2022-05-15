@@ -7,6 +7,7 @@ package TAWapp.entity;
 
 import TAWapp.dto.ProductoDTO;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -41,6 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Producto.findByUrlImagen", query = "SELECT p FROM Producto p WHERE p.urlImagen = :urlImagen")})
 public class Producto implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
+    private Collection<Productosfavorito> productosfavoritosCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,7 +73,7 @@ public class Producto implements Serializable {
     @ManyToOne(optional = false)
     private Usuario usuarioVendedor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
-    private List<ProductosFavoritos> productosFavoritosList;
+    private List<Productosfavorito> productosFavoritosList;
     @OneToMany(mappedBy = "idProducto")
     private List<Correo> correoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
@@ -138,11 +142,11 @@ public class Producto implements Serializable {
     }
 
     @XmlTransient
-    public List<ProductosFavoritos> getProductosFavoritosList() {
+    public List<Productosfavorito> getProductosFavoritosList() {
         return productosFavoritosList;
     }
 
-    public void setProductosFavoritosList(List<ProductosFavoritos> productosFavoritosList) {
+    public void setProductosFavoritosList(List<Productosfavorito> productosFavoritosList) {
         this.productosFavoritosList = productosFavoritosList;
     }
 
@@ -199,6 +203,15 @@ public class Producto implements Serializable {
         dto.setUsuarioVendedor(usuarioVendedor.toDTO());
         
         return dto;
+    }
+
+    @XmlTransient
+    public Collection<Productosfavorito> getProductosfavoritosCollection() {
+        return productosfavoritosCollection;
+    }
+
+    public void setProductosfavoritosCollection(Collection<Productosfavorito> productosfavoritosCollection) {
+        this.productosfavoritosCollection = productosfavoritosCollection;
     }
     
 }

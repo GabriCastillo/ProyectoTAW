@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Subastas
-    Created on : 29-abr-2022, 22:10:20
-    Author     : RaulDF
+    Document   : MisProductos
+    Created on : 14-may-2022, 15:59:01
+    Author     : frees
 --%>
 
 <%@page import="TAWapp.dto.CompradorProductoDTO"%>
@@ -17,25 +17,29 @@
     </head>
     <%
         UsuarioDTO user = (UsuarioDTO) request.getAttribute("usuario");
-        List<CategoriaDTO> listaCategorias = (List) request.getAttribute("categorias");
+        
         List<CompradorProductoDTO> listaSubastas = (List) request.getAttribute("subastas");        
     %> 
     <body>
         <header>       
-            <ul>
-            <li><a class="active" href="UsuarioServlet">Home</a></li>
-            <li><a href="VenderServlet">Mis Subastas</a></li>
-            <li><a href="MisProductosServlet">Mis Productos</a></li>
-            <li><a href="FavoritoServlet">Mis Productos Favoritos</a></li>
-            <li style="float:right"><a href="LogoutServlet">Cerrar Sesion</a></li>
-            <li style="float:right"><a href="PerfilServlet"><%= user.getNombre() %></a></li>
-          </ul>
+                <ul>
+                <li><a class="active" href="UsuarioServlet">Home</a></li>
+                <li><a href="VenderServlet">Mis Subastas</a></li>
+                <li><a href="MisProductosServlet">Mis Productos</a></li>
+                <li><a href="FavoritoServlet">Mis Productos Favoritos</a></li>
+                <li style="float:right"><a href="LogoutServlet">Cerrar Sesion</a></li>
+                <li style="float:right"><a href="PerfilServlet"><%= user.getNombre() %></a></li>
+              </ul>
         </header>
+    <center>
         <section>
-            <section id="subastas" style="box-sizing:content-box">
-                <h1 id="titulo">Tus subastas</h1>
             <%
-                if(listaSubastas!=null){
+                if(!listaSubastas.isEmpty()){
+            %>
+            <section id="subastas" style="box-sizing:content-box">
+                <h1 id="titulo">Tus Productos</h1>
+            <%
+                
                     for(CompradorProductoDTO subasta: listaSubastas){
             %>
             
@@ -56,93 +60,33 @@
                     <%
                         }else{
                     %>
-                    <a style="color:white">Precio actual: <%= subasta.getPrecio_salida() %> €</a><br/>
-                    <a style="color:white">Precio limite: <%= subasta.getPrecio_Compra()  %> €</a><br/>
+                    <a style="color:white">Precio actual: <%= subasta.getPrecio_salida() %></a><br/>
+                    <a style="color:white">Precio limite: <%= subasta.getPrecio_Compra()  %></a><br/>
                     <%
                         }
                     %>
                 </div>
                 <div style="text-align: center;width:20%;margin-top: 50px">
-                    <% 
-                    if(subasta.getPrecio_Compra()==0){ 
-                    %>
-                    <a id="btnCancel" >Cerrada</a>
-                    <% 
-                    }else{
-                    %>
-                    <a href="CerrarPujaServlet?id=<%= subasta.getIdCompradorProductoDTO() %>" id="btn" type="button" value="Cerrar Puja" >Cerrar Puja</a>
-                    <%
-                    }
-                     %>
+                   
+                    
+                    
                     
                 </div>
             </div>
             <%
                     }
-                }
+                }else{
+                  
             %>
+            <h1>No has comprado ningun producto</h1> 
                 
-                
-                
+            <% 
+                }
+            %>    
             </section>
-            <section id="formulario">
-                <h1 id="titulo">Añade un producto</h1>
-                <form method="POST" action="SubirProductoServlet">
-                    <div style="display:flex">
-                        <div class="izqBox" style="width: 50%;margin-bottom: 15px">
-                            <div class="input-container ic1">
-                                <input id="titulo" class="input" type="text" name="titulo" placeholder=" " />
-                                <div class="cut"></div>
-                                <label for="titulo" class="placeholder">Titulo</label>
-                            </div>                   
-                            <div class="input-container ic2" >
-                                <input id="titulo" class="input" type="text" name="precioInicial" placeholder=" " />
-                                <div class="cut2"></div>
-                                <label for="precioInicial" class="placeholder">Precio Inicial</label>
-                            </div>
-                            <div class="input-container ic2">
-                                <input id="precioLimite" class="input" type="text" name="precioLimite" placeholder=" " />
-                                <div class="cut2"></div>
-                                <label for="precioInicial" class="placeholder">Precio limite</label>
-                            </div>
-<div class="input-container ic2">
-                                <select id="categoria" class="input" name="categoria" placeholder=" ">
-                                    <%
-                                        for (CategoriaDTO c : listaCategorias) {
-                                            String selected = "";
-
-                                    %>
-                                    <option <%= selected%> value="<%= String.valueOf(c.getIdCategoria())%>"><%= c.getTipo()%></option>    
-                                    <%
-                                        }
-                                    %> 
-
-                                </select>
-                                <div class="cut2"></div>
-                                <label for="categoria" class="placeholder">Categoria</label>
-                            </div>
-                            
-                        </div>
-                        <div class="dBox">
-                            <div class="input-container ic1" >
-                                <input id="descripcion" class="input2" type="text" name="descripcion" placeholder=" " />
-                                <div class="cut2"></div>
-                                <label for="descripcion" class="placeholder">Descripcion</label>
-                            </div>
-                            <div class="input-container ic3" >
-                                <input id="imagen" class="input" type="text" name="imagen" />
-                                <div class="cut3"></div>
-                                <label for="imagen" class="placeholder">Selecciona la imagen:</label>
-                            </div>
-                            
-                        </div>
-                        <input type="hidden" name="id" id="id" value="<%= user.getIdusuario()%>" />
-
-                    </div>
-                    <div style="text-align:center"><input id="btn" type="submit" value="Subir Producto" /></div>
-                </form>
-            </section>
+            
         </section>
+      </center>      
     </body>
 </html>
 <style>
