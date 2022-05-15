@@ -11,7 +11,8 @@ import TAWapp.entity.Usuario;
 
 /**
  *
- * @author frees
+ * @author Ruben 
+ * Done: 100%
  */
 public class FavoritoDTO {
     

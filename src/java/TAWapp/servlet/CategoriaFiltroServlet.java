@@ -28,7 +28,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author casti
+ * @author Ruben 
+ * Done: 100%
  */
 @WebServlet(name = "CategoriaFiltroServlet", urlPatterns = {"/CategoriaFiltroServlet"})
 public class CategoriaFiltroServlet extends TAWappServlet {

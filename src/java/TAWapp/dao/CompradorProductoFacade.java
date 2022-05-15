@@ -14,8 +14,11 @@ import javax.persistence.Query;
 import TAWapp.entity.Usuario;
 
 /**
- * 
- * @author Javier
+ *
+ * @author casti
+ * Done: 10% 
+ *@author Ruben 
+ * Done: 90%
  */
 @Stateless
 public class CompradorProductoFacade extends AbstractFacade<CompradorProducto> {

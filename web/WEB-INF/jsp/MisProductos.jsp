@@ -1,7 +1,8 @@
 <%-- 
     Document   : MisProductos
     Created on : 14-may-2022, 15:59:01
-    Author     : frees
+    Author     : Ruben
+    Done       : 100%
 --%>
 
 <%@page import="TAWapp.dto.CompradorProductoDTO"%>

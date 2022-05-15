@@ -16,7 +16,9 @@ import javax.ejb.Stateless;
 /**
  *
  * @author casti
- * Done: 100%
+ * Done: 90%
+ * @author Ruben 
+ * Done: 10%
  */
 @Stateless
 public class CategoriaService {

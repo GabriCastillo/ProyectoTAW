@@ -2,6 +2,9 @@
     Document   : Subastas
     Created on : 29-abr-2022, 22:10:20
     Author     : RaulDF
+    Done       : 95%
+    Author     : Ruben
+    Done       : 5%
 --%>
 
 <%@page import="TAWapp.dto.CompradorProductoDTO"%>

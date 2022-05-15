@@ -27,7 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author capta
+ * @author Ruben 
+ * Done: 100%
  */
 @Entity
 @Table(name = "COMPRADOR_PRODUCTO")

@@ -17,7 +17,8 @@ import javax.ejb.Stateless;
 
 /**
  *
- * @author frees
+ * @author Ruben 
+ * Done: 100%
  */
 @Stateless
 public class FavoritoService {
