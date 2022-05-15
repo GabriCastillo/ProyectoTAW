@@ -30,9 +30,9 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author casti 
- * Done: 70%
+ * Done: 80%
  * @author Ruben 
- * Done: 30%
+ * Done: 20%
  */
 @WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
 public class UsuarioServlet extends TAWappServlet {
