@@ -14,7 +14,8 @@ import javax.persistence.Query;
 
 /**
  *
- * @author casti
+ * @author Ruben 
+ * Done: 100%
  */
 @Stateless
 public class ProductosfavoritoFacade extends AbstractFacade<Productosfavorito> {

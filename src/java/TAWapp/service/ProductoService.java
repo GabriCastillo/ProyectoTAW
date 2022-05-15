@@ -23,7 +23,9 @@ import javax.ejb.Stateless;
 /**
  *
  * @author casti
- * Done: 100%
+ * Done: 70%
+ * @author Ruben 
+ * Done: 30%
  */
 @Stateless
 public class ProductoService {

@@ -37,7 +37,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author RaulDF
+ * @author Ruben 
+ * Done: 100%
  */
 @WebServlet(name = "ComprarPujaServlet", urlPatterns = {"/ComprarPujaServlet"})
 public class ComprarPujaServlet extends HttpServlet {

@@ -23,7 +23,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author frees
+ * @author Ruben 
+ * Done: 100%
  */
 @WebServlet(name = "QuitarFavoritoMain", urlPatterns = {"/QuitarFavoritoMain"})
 public class QuitarFavoritoMain extends HttpServlet {

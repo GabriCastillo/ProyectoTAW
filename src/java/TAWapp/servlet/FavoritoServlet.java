@@ -27,7 +27,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author frees
+ * @author Ruben 
+ * Done: 100%
  */
 @WebServlet(name = "FavoritoServlet", urlPatterns = {"/FavoritoServlet"})
 public class FavoritoServlet extends HttpServlet {

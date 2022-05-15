@@ -16,6 +16,9 @@ import javax.persistence.Query;
 /**
  *
  * @author casti
+ * Done: 20%
+ * @author Ruben 
+ * Done: 80%
  */
 @Stateless
 public class ProductoFacade extends AbstractFacade<Producto> {
