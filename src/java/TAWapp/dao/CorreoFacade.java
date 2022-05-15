@@ -5,14 +5,17 @@
  */
 package TAWapp.dao;
 
-import TAWapp.entity.Correo;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import TAWapp.entity.Correo;
+import TAWapp.entity.Usuario;
 
 /**
- *
- * @author casti
+ * 
+ * @author Javier
  */
 @Stateless
 public class CorreoFacade extends AbstractFacade<Correo> {
@@ -29,4 +32,11 @@ public class CorreoFacade extends AbstractFacade<Correo> {
         super(Correo.class);
     }
     
+    public List<Correo> findMensajesFromUser(Usuario usuario) {
+        Query q = this.getEntityManager().createQuery("select c from Correo c where c.idUsuario = :usuario");
+        q.setParameter("usuario", usuario);
+        List<Correo> correosUsuario = q.getResultList();
+        
+        return correosUsuario;
+    }
 }

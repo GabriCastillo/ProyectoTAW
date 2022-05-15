@@ -1,6 +1,7 @@
 <%-- 
+    Document   : Analista
+    Created on : 04-may-2022, 18:39:57
     Author     : pepe_
-    Done       : 100%
 --%>
 <%@page import="TAWapp.dto.EstadisticaDTO"%>
 <%@page import="TAWapp.dto.CategoriaDTO"%>

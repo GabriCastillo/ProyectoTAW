@@ -16,10 +16,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author casti
+ * @author capta
  */
 @Entity
 @Table(name = "ESTADISTICA")
@@ -56,13 +56,13 @@ public class Estadistica implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "VALOR")
     private Double valor;
-    @ManyToMany(mappedBy = "estadisticaList")
-    private List<CompradorProducto> compradorProductoList;
     @JoinColumn(name = "USUARIO_ANALISTA", referencedColumnName = "IDUSUARIO")
     @ManyToOne(optional = false)
     private Usuario usuarioAnalista;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "estadistica")
     private EstadisticaHasProductosFavoritos estadisticaHasProductosFavoritos;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadistica")
+    private List<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoList;
 
     public Estadistica() {
     }
@@ -103,15 +103,6 @@ public class Estadistica implements Serializable {
         this.valor = valor;
     }
 
-    @XmlTransient
-    public List<CompradorProducto> getCompradorProductoList() {
-        return compradorProductoList;
-    }
-
-    public void setCompradorProductoList(List<CompradorProducto> compradorProductoList) {
-        this.compradorProductoList = compradorProductoList;
-    }
-
     public Usuario getUsuarioAnalista() {
         return usuarioAnalista;
     }
@@ -126,6 +117,15 @@ public class Estadistica implements Serializable {
 
     public void setEstadisticaHasProductosFavoritos(EstadisticaHasProductosFavoritos estadisticaHasProductosFavoritos) {
         this.estadisticaHasProductosFavoritos = estadisticaHasProductosFavoritos;
+    }
+
+    @XmlTransient
+    public List<EstadisticaHasCompradorProducto> getEstadisticaHasCompradorProductoList() {
+        return estadisticaHasCompradorProductoList;
+    }
+
+    public void setEstadisticaHasCompradorProductoList(List<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductoList) {
+        this.estadisticaHasCompradorProductoList = estadisticaHasCompradorProductoList;
     }
 
     @Override

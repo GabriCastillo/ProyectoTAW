@@ -21,10 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends TAWappServlet {
-
-    @EJB
-    UsuarioService usuarioService;
-
+    @EJB UsuarioService usuarioService;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,7 +33,6 @@ public class LoginServlet extends TAWappServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String usuario = request.getParameter("usuario");
         String clave = request.getParameter("clave");
 
@@ -54,7 +50,6 @@ public class LoginServlet extends TAWappServlet {
             response.sendRedirect(request.getContextPath() + "/UsuarioServlet");
 
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

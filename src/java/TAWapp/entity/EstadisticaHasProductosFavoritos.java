@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author casti
+ * @author capta
  */
 @Entity
 @Table(name = "ESTADISTICA_HAS_PRODUCTOS_FAVORITOS")
@@ -42,7 +42,7 @@ public class EstadisticaHasProductosFavoritos implements Serializable {
     private Estadistica estadistica;
     @JoinColumn(name = "PRODUCTOS_FAVORITOS_ID", referencedColumnName = "IDFAVORITO")
     @ManyToOne(optional = false)
-    private Productosfavorito productosFavoritosId;
+    private Productosfavoritos productosFavoritosId;
 
     public EstadisticaHasProductosFavoritos() {
     }
@@ -67,11 +67,11 @@ public class EstadisticaHasProductosFavoritos implements Serializable {
         this.estadistica = estadistica;
     }
 
-    public Productosfavorito getProductosFavoritosId() {
+    public Productosfavoritos getProductosFavoritosId() {
         return productosFavoritosId;
     }
 
-    public void setProductosFavoritosId(Productosfavorito productosFavoritosId) {
+    public void setProductosFavoritosId(Productosfavoritos productosFavoritosId) {
         this.productosFavoritosId = productosFavoritosId;
     }
 

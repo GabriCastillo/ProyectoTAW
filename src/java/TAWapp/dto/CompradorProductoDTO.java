@@ -5,34 +5,28 @@
  */
 package TAWapp.dto;
 
-import TAWapp.entity.Producto;
-import TAWapp.entity.Usuario;
 
 /**
  *
  * @author RaulDF
  */
 public class CompradorProductoDTO {
-    private String idCompradorProductoDTO;
+    private Integer idCompradorProductoDTO;
     private int precio_salida;
     private int precio_Compra;
     private ProductoDTO producto;
     private UsuarioDTO vendedor;
-     private UsuarioDTO comprador;
+    private UsuarioDTO comprador;
     
     public CompradorProductoDTO(){
         
     }
 
-    public void setIdCompradorProductoDTO(String idCompradorProductoDTO) {
+    public void setIdCompradorProductoDTO(int idCompradorProductoDTO) {
         this.idCompradorProductoDTO = idCompradorProductoDTO;
     }
-    
-    public void get() {
-        this.idCompradorProductoDTO = idCompradorProductoDTO;
-    }
-    
-    public String getIdCompradorProductoDTO() {
+
+    public int getIdCompradorProductoDTO() {
         return idCompradorProductoDTO;
     }
 
@@ -51,11 +45,7 @@ public class CompradorProductoDTO {
     public void setVendedor(UsuarioDTO vendedor) {
         this.vendedor = vendedor;
     }
-    
-    public void setComprador(UsuarioDTO compra) {
-        this.comprador = compra;
-    }
-    
+
     public int getPrecio_salida() {
         return precio_salida;
     }
@@ -71,9 +61,12 @@ public class CompradorProductoDTO {
     public UsuarioDTO getVendedor() {
         return vendedor;
     }
-     
+    
     public UsuarioDTO getComprador() {
         return comprador;
     }
     
+    public void setComprador(UsuarioDTO compra) {
+        this.comprador = compra;
+    }
 }

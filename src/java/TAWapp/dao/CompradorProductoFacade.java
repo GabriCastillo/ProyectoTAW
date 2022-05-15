@@ -5,12 +5,13 @@
  */
 package TAWapp.dao;
 
-import TAWapp.entity.CompradorProducto;
 import java.util.List;
+import TAWapp.entity.CompradorProducto;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import TAWapp.entity.Usuario;
 
 /**
  *
@@ -33,7 +34,19 @@ public class CompradorProductoFacade extends AbstractFacade<CompradorProducto> {
     public CompradorProductoFacade() {
         super(CompradorProducto.class);
     }
-    public List<CompradorProducto> findByIdproducto(String ID) {
+    
+    public List<CompradorProducto> findByComprador (Usuario usuario) {
+        Query q = this.getEntityManager().createQuery("select cp from CompradorProducto cp where cp.usuarioComprador = :usuario");
+        q.setParameter("usuario", usuario);
+        return q.getResultList();
+    }
+    
+    public List<CompradorProducto> findProductosDisponibles () {
+        Query q = this.getEntityManager().createQuery("select cp from CompradorProducto cp where cp.usuarioComprador is null");
+        return q.getResultList();
+    }
+    
+        public List<CompradorProducto> findByIdproducto(String ID) {
        Query q;
         q = this.getEntityManager().createQuery("select p from CompradorProducto p where p.productoIdproducto = :titulo");
         q.setParameter("titulo", ID);

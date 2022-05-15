@@ -5,6 +5,7 @@
  */
 package TAWapp.entity;
 
+import TAWapp.dto.CorreoDTO;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -23,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author casti
+ * @author capta
  */
 @Entity
 @Table(name = "CORREO")
@@ -121,4 +122,13 @@ public class Correo implements Serializable {
         return "TAWapp.entity.Correo[ idpromo=" + idpromo + " ]";
     }
     
+     public CorreoDTO toDTO () {    
+        CorreoDTO dto = new CorreoDTO();
+        dto.setIdpromo(this.idpromo);
+        dto.setMensaje(this.mensaje);
+        dto.setIdProducto(this.idProducto);
+        dto.setIdUsuario(this.idUsuario);
+                
+        return dto;        
+    } 
 }

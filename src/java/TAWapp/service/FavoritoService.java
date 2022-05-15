@@ -5,11 +5,11 @@
  */
 package TAWapp.service;
 
-import TAWapp.dao.ProductosfavoritoFacade;
+import TAWapp.dao.ProductosfavoritosFacade;
 import TAWapp.dto.CompradorProductoDTO;
 import TAWapp.dto.FavoritoDTO;
 import TAWapp.entity.CompradorProducto;
-import TAWapp.entity.Productosfavorito;
+import TAWapp.entity.Productosfavoritos;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -22,12 +22,12 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class FavoritoService {
-    @EJB ProductosfavoritoFacade FavoritoFacade;
-     private List<FavoritoDTO> listaEntityADTO (List<Productosfavorito> lista) {
+    @EJB ProductosfavoritosFacade FavoritoFacade;
+     private List<FavoritoDTO> listaEntityADTO (List<Productosfavoritos> lista) {
         List<FavoritoDTO> listaDTO = null;
         if (lista != null) {
             listaDTO = new ArrayList<>();
-            for (Productosfavorito f :lista) {
+            for (Productosfavoritos f :lista) {
                 listaDTO.add(f.toDTO());
             }
         }
@@ -35,9 +35,9 @@ public class FavoritoService {
     }
     public boolean Esfavorito (int idp,int idc) {
         boolean esta = false;
-        List<Productosfavorito> favoritos = this.FavoritoFacade.findAll();
+        List<Productosfavoritos> favoritos = this.FavoritoFacade.findAll();
         
-            for (Productosfavorito f :favoritos) {
+            for (Productosfavoritos f :favoritos) {
                 if(f.getProductoIdproducto().getIdproducto().equals(idp)&&f.getUsuarioComprador().getIdusuario().equals(idc)){
                    esta= true; 
               
@@ -51,7 +51,7 @@ public class FavoritoService {
     }
 
     public List<FavoritoDTO> listaPropiosFavoritos(Integer idusuario) {
-        List<Productosfavorito> favoritos = null;   
+        List<Productosfavoritos> favoritos = null;   
         if (idusuario == null) {
             favoritos = this.FavoritoFacade.finduser(idusuario); 
             return this.listaEntityADTO(favoritos);  
@@ -63,7 +63,7 @@ public class FavoritoService {
 }
 
     public void quitarfavorito(Integer idusuario, String strId) {
-        Productosfavorito q = this.FavoritoFacade.finduserproducto(idusuario,strId);
+        Productosfavoritos q = this.FavoritoFacade.finduserproducto(idusuario,strId);
         this.FavoritoFacade.remove(q);
     }
 }

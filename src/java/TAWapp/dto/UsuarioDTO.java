@@ -1,17 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package TAWapp.dto;
 
-/**
- *
- * @author casti
- * Done: 100%
- */
+import TAWapp.entity.Rol;
+
 public class UsuarioDTO {
-    
     private Integer idusuario;
     private String nombre;
     private String apellido;
@@ -20,24 +15,10 @@ public class UsuarioDTO {
     private int edad;
     private String sexo;
     private String password;
-    private RolDTO rolIdrol;
-    
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    private Rol rolIdrol;
 
     public UsuarioDTO() {
     }
-
-    public UsuarioDTO(Integer idusuario) {
-        this.idusuario = idusuario;
-    }
-
 
     public Integer getIdusuario() {
         return idusuario;
@@ -95,13 +76,19 @@ public class UsuarioDTO {
         this.sexo = sexo;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
-    public RolDTO getRolIdrol() {
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Rol getRolIdrol() {
         return rolIdrol;
     }
 
-    public void setRolIdrol(RolDTO rolIdrol) {
+    public void setRolIdrol(Rol rolIdrol) {
         this.rolIdrol = rolIdrol;
-    }
-    
+    } 
 }

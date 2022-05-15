@@ -29,6 +29,7 @@ public class CategoriaService {
         List<Categoria> lista = this.categoriaFacade.findAll();
         return this.listaEntityADTO(lista);
     }
+    
      public List<CategoriaDTO> listarCategorias(String filtroTitulo) {
         List<Categoria> categorias;
 
@@ -51,7 +52,7 @@ public class CategoriaService {
         }
         return listaDTO;
     }
-    
+
     public CategoriaDTO buscarCategoria(Integer id) {
         Categoria categoria = this.categoriaFacade.find(id);
         return categoria.toDTO();

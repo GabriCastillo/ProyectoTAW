@@ -5,18 +5,13 @@
  */
 package TAWapp.dto;
 
-import java.util.Objects;
-
-/**
- *
- * @author casti
- * Done: 100%
- */
 public class CategoriaDTO {
-    private int idCategoria;
+    private Integer idCategoria;
     private String tipo;
-    
-    
+
+    public CategoriaDTO() {
+    }
+
     public Integer getIdCategoria() {
         return idCategoria;
     }
@@ -31,35 +26,6 @@ public class CategoriaDTO {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + this.idCategoria;
-        hash = 41 * hash + Objects.hashCode(this.tipo);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final CategoriaDTO other = (CategoriaDTO) obj;
-        if (this.idCategoria != other.idCategoria) {
-            return false;
-        }
-        if (!Objects.equals(this.tipo, other.tipo)) {
-            return false;
-        }
-        return true;
     }
     
 }

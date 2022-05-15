@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author pepe_
- * Done: 100%
  */
 @WebServlet(name = "MediaVentasServlet", urlPatterns = {"/MediaVentasServlet"})
 public class MediaVentasServlet extends HttpServlet {
