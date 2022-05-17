@@ -33,6 +33,7 @@ public class CompradorProductoService {
     @EJB CompradorProductoFacade cpFacade;
     @EJB UsuarioFacade usuarioFacade;
     @EJB ProductoFacade productoFacade;
+    @EJB CompradorProductoFacade cpf;
     
     public List<CompradorProductoDTO> listaPropiasSubastas(String nombreUsuario){
         List<CompradorProducto> list = this.cpFacade.findAll();
@@ -131,5 +132,15 @@ public class CompradorProductoService {
         subasta.setPrecioSalida(Integer.parseInt(precio));
         
         this.cpFacade.edit(subasta);
+    }
+    
+    public List<CompradorProductoDTO> listaproductosvendidos() {
+        List<CompradorProducto> listaProductosVendidos = this.cpFacade.findSell();
+        return this.listaEntityADTO(listaProductosVendidos);
+    }
+
+    public List<CompradorProductoDTO> listaProductosVenta() {
+        List<CompradorProducto> listaProductosVenta = this.cpFacade.findSelling();
+        return this.listaEntityADTO(listaProductosVenta);
     }
 }

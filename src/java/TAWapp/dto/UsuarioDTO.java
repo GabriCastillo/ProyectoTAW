@@ -4,9 +4,13 @@
  */
 package TAWapp.dto;
 
-import TAWapp.entity.Rol;
-
+/**
+ *
+ * @author casti
+ * Done: 100%
+ */
 public class UsuarioDTO {
+    
     private Integer idusuario;
     private String nombre;
     private String apellido;
@@ -15,10 +19,24 @@ public class UsuarioDTO {
     private int edad;
     private String sexo;
     private String password;
-    private Rol rolIdrol;
+    private RolDTO rolIdrol;
+    
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public UsuarioDTO() {
     }
+
+    public UsuarioDTO(Integer idusuario) {
+        this.idusuario = idusuario;
+    }
+
 
     public Integer getIdusuario() {
         return idusuario;
@@ -76,19 +94,13 @@ public class UsuarioDTO {
         this.sexo = sexo;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Rol getRolIdrol() {
+    public RolDTO getRolIdrol() {
         return rolIdrol;
     }
 
-    public void setRolIdrol(Rol rolIdrol) {
+    public void setRolIdrol(RolDTO rolIdrol) {
         this.rolIdrol = rolIdrol;
-    } 
+    }
+    
 }

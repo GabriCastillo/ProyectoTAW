@@ -68,4 +68,18 @@ public class CompradorProductoFacade extends AbstractFacade<CompradorProducto> {
         q.setParameter("id",idproducto);
         return (CompradorProducto) q.getResultList().get(0);
     }
+    
+    public List<CompradorProducto> findSell() {
+        Query q;
+        q = this.getEntityManager().createQuery("select p from CompradorProducto p where p.precioCompra = :valor");
+        q.setParameter("valor",0);
+        return q.getResultList();
+    }
+
+    public List<CompradorProducto> findSelling() {
+        Query q;
+        q = this.getEntityManager().createQuery("select p from CompradorProducto p where p.precioCompra > :valor");
+        q.setParameter("valor",0);
+        return q.getResultList();
+    }
 }

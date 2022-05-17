@@ -5,15 +5,6 @@
  */
 package TAWapp.service;
 
-import java.util.ArrayList;
-import TAWapp.dao.RolFacade;
-import TAWapp.dao.UsuarioFacade;
-import TAWapp.entity.Rol;
-import TAWapp.entity.Usuario;
-import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import TAWapp.dto.UsuarioDTO;
 import TAWapp.dao.RolFacade;
 import TAWapp.dao.UsuarioFacade;
 import TAWapp.dto.UsuarioDTO;

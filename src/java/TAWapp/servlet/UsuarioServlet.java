@@ -30,21 +30,27 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author casti 
- * Done: 80%
- * @author Ruben 
- * Done: 20%
+ * @author casti Done: 80%
+ * @author Ruben Done: 20%
  */
 @WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
-public class UsuarioServlet extends TAWappServlet  {
-    @EJB UsuarioService usuarioService;
-    @EJB RolService rolService;
-    @EJB EstadisticaService estadisticaService;
-    @EJB ProductoService productoService;
-    @EJB CategoriaService categoriaService;
-    @EJB CompradorProductoService subastaService;
-    @EJB FavoritoService favoritoService;
-    
+public class UsuarioServlet extends TAWappServlet {
+
+    @EJB
+    UsuarioService usuarioService;
+    @EJB
+    RolService rolService;
+    @EJB
+    EstadisticaService estadisticaService;
+    @EJB
+    ProductoService productoService;
+    @EJB
+    CategoriaService categoriaService;
+    @EJB
+    CompradorProductoService subastaService;
+    @EJB
+    FavoritoService favoritoService;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -75,18 +81,18 @@ public class UsuarioServlet extends TAWappServlet  {
                     break;
                 case 2:
                     List<CategoriaDTO> listaCategorias = this.categoriaService.listarCategorias();
-             request.setAttribute("categorias", listaCategorias);
+                    request.setAttribute("categorias", listaCategorias);
                     List<ProductoDTO> productos = this.productoService.listarProductos("");
-            session.setAttribute("productos", productos);
-               request.setAttribute("productos", productos);
+                    session.setAttribute("productos", productos);
+                    request.setAttribute("productos", productos);
                     List<FavoritoDTO> listaFavoritos = this.favoritoService.listaPropiosFavoritos(user.getIdusuario());
-                request.setAttribute("favoritos", listaFavoritos);
-                 session.setAttribute("favoritos", listaFavoritos);
-                List<CompradorProductoDTO> listaSubastas = this.subastaService.listaPropiasSubastas("");
-                request.setAttribute("subastas", listaSubastas);
-                 session.setAttribute("subastas", listaSubastas);
-                request.setAttribute("productos", productos);
-                request.getRequestDispatcher("/WEB-INF/jsp/iniciado.jsp").forward(request, response);
+                    request.setAttribute("favoritos", listaFavoritos);
+                    session.setAttribute("favoritos", listaFavoritos);
+                    List<CompradorProductoDTO> listaSubastas = this.subastaService.listaPropiasSubastas("");
+                    request.setAttribute("subastas", listaSubastas);
+                    session.setAttribute("subastas", listaSubastas);
+                    request.setAttribute("productos", productos);
+                    request.getRequestDispatcher("/WEB-INF/jsp/iniciado.jsp").forward(request, response);
                     break;
                 case 3:
                     /*

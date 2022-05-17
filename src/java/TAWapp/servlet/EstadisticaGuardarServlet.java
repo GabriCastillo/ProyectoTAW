@@ -6,10 +6,6 @@
 package TAWapp.servlet;
 
 import TAWapp.dto.UsuarioDTO;
-import static TAWapp.entity.Estadistica_.descripcion;
-import static TAWapp.entity.Estadistica_.nombre;
-import static TAWapp.entity.Estadistica_.usuarioAnalista;
-import static TAWapp.entity.Estadistica_.valor;
 import TAWapp.service.EstadisticaService;
 import java.io.IOException;
 import java.io.PrintWriter;

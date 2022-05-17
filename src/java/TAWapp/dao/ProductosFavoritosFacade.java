@@ -5,7 +5,7 @@
  */
 package TAWapp.dao;
 
-import TAWapp.entity.Productosfavoritos;
+import TAWapp.entity.ProductosFavoritos;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,7 +17,7 @@ import javax.persistence.Query;
  * @author casti
  */
 @Stateless
-public class ProductosfavoritosFacade extends AbstractFacade<Productosfavoritos> {
+public class ProductosFavoritosFacade extends AbstractFacade<ProductosFavoritos>  {
 
     @PersistenceContext(unitName = "PROYECTOTAWPU")
     private EntityManager em;
@@ -27,24 +27,24 @@ public class ProductosfavoritosFacade extends AbstractFacade<Productosfavoritos>
         return em;
     }
 
-    public ProductosfavoritosFacade() {
-        super(Productosfavoritos.class);
+    public ProductosFavoritosFacade() {
+        super(ProductosFavoritos.class);
     }
-     public List<Productosfavoritos> finduser(Integer id) {
+     public List<ProductosFavoritos> finduser(Integer id) {
          Query q;
         q = this.getEntityManager().createQuery("select f from Productosfavorito f where f.usuarioComprador = :ID");
         q.setParameter("ID", id);
         return q.getResultList();
     }
-    public Productosfavoritos finduserproducto(Integer user,String producto) {
+    public ProductosFavoritos finduserproducto(Integer user,String producto) {
          Query q;
         q = this.getEntityManager().createQuery("select f from Productosfavorito f where f.usuarioComprador.idusuario = :user AND f.productoIdproducto.idproducto =:producto");
         q.setParameter("user", user);
         q.setParameter("producto", Integer.parseInt(producto));
-        return (Productosfavoritos) q.getResultList().get(0);
+        return (ProductosFavoritos) q.getResultList().get(0);
     }
 
-    public List<Productosfavoritos> findproducto(Integer id) {
+    public List<ProductosFavoritos> findproducto(Integer id) {
          Query q;
         q = this.getEntityManager().createQuery("select f from Productosfavorito f where f.productoIdproducto.idproducto =:producto");
         q.setParameter("producto", id);

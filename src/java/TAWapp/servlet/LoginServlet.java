@@ -16,12 +16,14 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author casti
- * Done: 100%
+ * @author casti Done: 100%
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends TAWappServlet {
-    @EJB UsuarioService usuarioService;
+
+    @EJB
+    UsuarioService usuarioService;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

@@ -48,7 +48,7 @@ public class EstadisticaNuevoServlet extends TAWappServlet {
                 request.setAttribute("estadistica", estadistica);
             }
 
-            request.getRequestDispatcher("/WEB-INF/jsp/analista.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/Analista.jsp").forward(request, response);
         }
     }
 
