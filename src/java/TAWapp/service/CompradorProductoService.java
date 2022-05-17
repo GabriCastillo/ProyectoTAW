@@ -36,6 +36,19 @@ public class CompradorProductoService {
     @EJB CompradorProductoFacade cpf;
     
     public List<CompradorProductoDTO> listaPropiasSubastas(String nombreUsuario){
+        if (nombreUsuario == null || nombreUsuario.isEmpty()) {
+            List<CompradorProducto> list = this.cpFacade.findAll();
+        List<CompradorProducto> listaMisSubastas = new ArrayList<>();
+        for(CompradorProducto cp : list){
+           
+                listaMisSubastas.add(cp);
+            
+            
+        }
+        
+        return this.listaEntityADTO(listaMisSubastas);
+        }
+        else{ 
         List<CompradorProducto> list = this.cpFacade.findAll();
         List<CompradorProducto> listaMisSubastas = new ArrayList<>();
         for(CompradorProducto cp : list){
@@ -43,8 +56,8 @@ public class CompradorProductoService {
                 listaMisSubastas.add(cp);
             }
         }
-        return this.listaEntityADTO(listaMisSubastas);
-    } 
+        return this.listaEntityADTO(listaMisSubastas);}
+    }  
     private List<CompradorProductoDTO> listaEntityADTO (List<CompradorProducto> lista) {
         List<CompradorProductoDTO> listaDTO = null;
         if (lista != null) {
@@ -128,8 +141,15 @@ public class CompradorProductoService {
         CompradorProducto subasta = this.cpFacade.find(Integer.parseInt(strId));
         Usuario user = this.usuarioFacade.find(comprador);
         subasta.setUsuarioComprador(user);
-        subasta.setPrecioCompra(0);
+        if(subasta.getPrecioCompra()!=Integer.parseInt(precio)){
         subasta.setPrecioSalida(Integer.parseInt(precio));
+        
+        
+            
+        }else{
+           subasta.setPrecioCompra(0);
+           subasta.setPrecioSalida(Integer.parseInt(precio));     
+                }
         
         this.cpFacade.edit(subasta);
     }
